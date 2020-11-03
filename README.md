@@ -4,7 +4,7 @@
 
 It's very easy to make some words **bold** and other words *italic* with Markdown. 
 
-Linkki komentorivi.txt [link to komentorivi.txt!](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/laskarit/viikko1/komentorivi.txt)
+komentorivi.txt [link to komentorivi.txt](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/laskarit/viikko1/komentorivi.txt)
 
 
-Linkki gitlog.txt [link to gitlog.txt!](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/laskarit/viikko1/gitlog.txt)
+gitlog.txt [link to gitlog.txt](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/laskarit/viikko1/gitlog.txt)
