@@ -1,0 +1,117 @@
+(base) mazaalto@lx9-fuxi028:~/kouluprojektit/ot_viikko1/tiedostoja$ git log --stat|cat
+commit feee0255c4aa7c1a7c3f281efc9924fcd5486260
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 13:07:36 2020 +0200
+
+    Harjoittelua
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit cbbca0682a795c14f44b1e0ca756c73e627766ea
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 13:00:16 2020 +0200
+
+    lisätään uusi repo tiedostoja ja sinne fileja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 5afaaf88d5eba679e6cd5af6adf0faf0521bedb7
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 12:50:39 2020 +0200
+
+    Muutoksia ja git add -p harjoittelua
+
+ eka.txt    | 3 ++-
+ kolmas.txt | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit 7d6a87d28a83d4ee64e731678026f5a35d0611ac
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 12:48:21 2020 +0200
+
+    uudelleen nimentä komennolla mv
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit bae68593a0a7261d1335ecf4fbe72888e704b941
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 12:46:28 2020 +0200
+
+    tiedoston poistaminen
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 8cc1f232a13dc7a653bf5684abcfdae03302fe04
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 12:05:36 2020 +0200
+
+    batmanin pahiksia, mutta poistettu Hush ja lisätty loppuun maininta mitä tehty
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 662aaca96061efbcd9746bdcca5c9e318bd68a29
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 12:04:10 2020 +0200
+
+    batmanin pahiksia
+
+ tiedosto.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 9a2774f6d6e7031fad55b24ca081e49ac42cb3b7
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 11:59:20 2020 +0200
+
+    repon siirto
+
+ stuff/neljas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit d6c397881e8e5b1eccaa43d20525ef2aefb0cf65
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 11:56:54 2020 +0200
+
+    muutokset kolmanteen ja toiseen txt tiedostoon
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit aaf1b8292b4c2946d347b52570312a72072a7c8d
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 11:55:29 2020 +0200
+
+    lisätään kolmas file
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 37230c6249a63e0ecbfb33e20f3e70d67d891aec
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 11:52:24 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 1b406c21a07f62e208051c08dde0ff0dbf8ac1f4
+Author: Matias Aalto-Setälä <matias.aaltosetala@gmail.com>
+Date:   Tue Nov 3 11:49:58 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+
+
