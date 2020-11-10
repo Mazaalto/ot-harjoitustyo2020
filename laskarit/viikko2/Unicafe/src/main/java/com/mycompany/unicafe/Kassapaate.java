@@ -6,11 +6,11 @@ public class Kassapaate {
     private int kassassaRahaa;
     private int edulliset;
     private int maukkaat;
-
+    //check
     public Kassapaate() {
         this.kassassaRahaa = 100000;
     }
-
+    
     public int syoEdullisesti(int maksu) {
         if (maksu >= 240) {
             this.kassassaRahaa = kassassaRahaa + 240;
@@ -59,15 +59,15 @@ public class Kassapaate {
             return;
         }
     }
-
+    //check
     public int kassassaRahaa() {
         return kassassaRahaa;
     }
-
+    //check
     public int maukkaitaLounaitaMyyty() {
         return maukkaat;
     }
-
+    //check
     public int edullisiaLounaitaMyyty() {
         return edulliset;
     }
