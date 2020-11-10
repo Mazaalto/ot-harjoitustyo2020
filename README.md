@@ -8,4 +8,4 @@ Laskarit on tehty kansioon laskarit. Harjoitustyö löytyy kansiosta harjoitusty
 
 [link to gitlog.txt](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/laskarit/viikko1/gitlog.txt)
 
-
+[link to määrittelydokumentti](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/maarittelydokumentti.md)
