@@ -1,6 +1,6 @@
 # Tehtävät
 
-## Viikko 1
+## Viikko 1-3
 Laskarit on tehty kansioon laskarit. Harjoitustyö löytyy kansiosta harjoitustyö. 
 
 [link to komentorivi.txt](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/laskarit/viikko1/komentorivi.txt)
