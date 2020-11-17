@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package opiskelukello.opiskelukello;
 
 /**
@@ -10,5 +6,20 @@ package opiskelukello.opiskelukello;
  * @author mazaalto
  */
 public class Timer {
+    private long timeLeft;
+    
+    public Timer(long stopTime) {
+        this.timeLeft = stopTime;
+    }
+
+    public long getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(long timeLeft) {
+        this.timeLeft = timeLeft;
+    }
+    
+     
     
 }
