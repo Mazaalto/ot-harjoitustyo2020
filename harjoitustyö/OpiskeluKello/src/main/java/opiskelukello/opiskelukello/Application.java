@@ -10,15 +10,16 @@ public class Application {
 
     public static void main(String[] args) throws InterruptedException {
         
-        boolean i = true;
+        boolean timeLeft = true;
         long displayMinutes = 0;
         long starttime = System.currentTimeMillis();
         
-        //going to add adjustable stoptime and also timestamp in the future
+        //going to add adjustable stoptime and also timestamp in the future, this is the starting point
         long stoptime = 1;
         
         System.out.println("Study Clock:");
-        while (i) {
+        
+        while (timeLeft) {
             TimeUnit.SECONDS.sleep(1);
             long timepassed = System.currentTimeMillis() - starttime;
             long displaySeconds = timepassed / 1000;
@@ -32,12 +33,13 @@ public class Application {
                 displayMinutes++;
                 // if pomodorotimer is 25 minutes then stop
                 if (displayMinutes == stoptime) {
-                    i = false;
+                    timeLeft = false;
                 }
             }
 
             System.out.println("Time passed: "+ displayMinutes + "::" + displaySeconds);
 
         }
+        System.out.println("Congratulations! Have a brake now.");
     }
 }
