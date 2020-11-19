@@ -1,25 +1,67 @@
- 
 package opiskelukello.opiskelukello;
+
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author mazaalto
  */
+//1) tavoite saada Timerin toiminnallisuus halutun laiseksi, näyttää hyvältä sitten kokeillaan
+//2) tavoite yhdistää tekstikäyttöliittymä ja toiminnallisuus pääohjelmaan
+//3) tehdä virhe kattavuus halutun laiseksi
+//4)
 public class Timer {
+
+    private boolean isThereTime;
+    private long displayMinutes;
+    private long starttime;
     private long timeLeft;
-    
-    public Timer(long stopTime) {
-        this.timeLeft = stopTime;
+
+    public Timer() {
+        this.isThereTime = true;
+        this.displayMinutes = 0;
+        this.starttime = System.currentTimeMillis();
+
+    }
+
+    //when the timer reach stoptime, there is a break
+    public void setTimeLeft(long timeLeft) {
+        if (timeLeft >= 0) {
+            this.timeLeft = timeLeft;
+        }
     }
 
     public long getTimeLeft() {
         return timeLeft;
     }
 
-    public void setTimeLeft(long timeLeft) {
-        this.timeLeft = timeLeft;
+    public void startTheClock() {
+        while (isThereTime) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Timer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            long timepassed = System.currentTimeMillis() - this.starttime;
+            long displaySeconds = timepassed / 1000;
+
+            if (displaySeconds == 60) {
+                displaySeconds = 0;
+                starttime = System.currentTimeMillis();
+            }
+            if ((displaySeconds % 60) == 0) {
+                displayMinutes++;
+                // if pomodorotimer is 25 minutes then stop
+                if (displayMinutes == timeLeft) {
+                    this.isThereTime = false;
+                }
+            }
+            System.out.println("Time passed: " + displayMinutes + ":" + displaySeconds);
+
+        }
+        System.out.println("Congratulations! Have a brake now.");
     }
-    
-     
-    
+
 }

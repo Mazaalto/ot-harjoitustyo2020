@@ -4,7 +4,7 @@
 | :----:|:-----| :-----|
 | 10.11.| 2.5  | Kurssimateriaaliin tutustumista ja harjoitustyön aloitus laskareiden jälkeen |
 |  17.11.     |6      |Projekti aloitettu, testikattavuusrapsa kunnossa, kaksi luokkaa ja toiminnallisuus sekä yksi testi  |
-|       |      | käyttäjänhallinta, tallennus tiedostoon, rakenteen refaktorointi |
+|  19.11.     |2h      | toteutan ensin pomodorotimerin helpolla teksiliittymällä, jonka upgreidaan myöhemmin tyylikkääksi, muutin sovelluslogiikkaa |
 |       |      | sovelluksen rakenteen refaktorointi |
 |       |      | määrittelydokumentti |
 |       |      | arkkitehtuurikuvaus |
