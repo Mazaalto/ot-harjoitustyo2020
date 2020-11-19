@@ -1,4 +1,4 @@
-# Alustava määrittelydokumentti
+# Määrittelydokumentti
 
 ## Sovelluksen tarkoitus
 
