@@ -15,27 +15,28 @@ import java.util.TreeMap;
  * @author mazaalto
  */
 public class timerUI {
-
     private Scanner lukija;
     private Map<String, String> komennot;
     private Timer ajastin;
 
-    public timerUI(Scanner lukija) {
+    public timerUI(Scanner lukija, Timer kello) {
         this.lukija = lukija;
-        ajastin = new Timer();
+        ajastin = kello;
 
         komennot = new TreeMap<>();
 
         komennot.put("x", "x lopeta");
-        komennot.put("1", "1 aseta opiskeluaika");
-        komennot.put("2", "2 pysäytä kello");
-        komennot.put("3", "3 lisää aihe");
-        komennot.put("4", "4 montako kertaa toistetaan ennen pidempää taukoa?");
-        komennot.put("5", "5 aseta tauon pituus");
+        komennot.put("1", "1 aseta opiskeluaika minuuteissa");
+        komennot.put("2", "2 käynnistä kello");
+        
+//        komennot.put("3", "3 pysäytä kello");
+//        komennot.put("4", "4 montako kertaa toistetaan ennen pidempää taukoa?");
+//        komennot.put("5", "5 aseta tauon pituus");
     }
 
-    public void kaynnista() {
+    public void start() {
         System.out.println("Opiskelukello");
+        printInstructions();
 
         while (true) {
             System.out.println();
@@ -49,37 +50,21 @@ public class timerUI {
             if (komento.equals("x")) {
                 break;
             } else if (komento.equals("1")) {
-                //ajastin.setTimeLeft(0);
+                System.out.println("Syötä aika minuuteissa");
+                long aika = Long.valueOf(lukija.nextLine());
+                this.ajastin.setTimeLeft(aika);
+                
             } else if (komento.equals("2")) {
-                //haeNumerot();
+                this.ajastin.startTheClock();
+                
             } else if (komento.equals("3")) {
                 //haeHenkilo();
             }
         }
     }
+    public void printInstructions(){
+        System.out.println("käytettävissä olevat komennot: \n1 aseta opiskeluaika minuuteissa \n2 käynnistä kello \nx lopeta ");
+    }
 }
 
-//    private void haeNumerot() {
-//        System.out.print("kenen: ");
-//        String nimi = lukija.nextLine();
-//       // Collection<String> numerot = palvelu.haeNumerot(nimi);
-//        if (numerot.isEmpty()) {
-//            System.out.println("  ei löytynyt");
-//            return;
-//        }
-//
-//        for (String numero : numerot) {
-//            System.out.println(" " + numero);
-//        }
-//    }
-//
-//    private void lisaaNumero() {
-//        System.out.print("kenelle: ");
-//        String nimi = lukija.nextLine();
-//        System.out.print("numero: ");
-//        String numero = lukija.nextLine();
-//        //palvelu.lisaaNumero(nimi, numero);
-//    }
-//
-//    // lisää käyttöliittymäfunktioita...
-//}
+

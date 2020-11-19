@@ -8,10 +8,7 @@ import java.util.logging.Logger;
  *
  * @author mazaalto
  */
-//1) tavoite saada Timerin toiminnallisuus halutun laiseksi, näyttää hyvältä sitten kokeillaan
-//2) tavoite yhdistää tekstikäyttöliittymä ja toiminnallisuus pääohjelmaan
-//3) tehdä virhe kattavuus halutun laiseksi
-//4)
+
 public class Timer {
 
     private boolean isThereTime;
@@ -59,7 +56,6 @@ public class Timer {
                 }
             }
             System.out.println("Time passed: " + displayMinutes + ":" + displaySeconds);
-
         }
         System.out.println("Congratulations! Have a brake now.");
     }
