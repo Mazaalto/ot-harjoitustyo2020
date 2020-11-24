@@ -6,10 +6,16 @@ Sovelluksen avulla käyttäjä voi pitää kirjaa omista opiskeluajoistaan. Sove
 25 minuutin opiskeluaikoja ja merkitä mitä ainetta on opiskellut tageinä. Sovellusta on mahdollista käyttää useamman rekisteröityneen
 käyttäjän, joilla kaikilla on oma yksilöllinen opiskelulokinsa.
 
-## Käyttäjät
-Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä. Myöhemmin sovellukseen saatetaan lisätä suuremmilla oikeuksilla varustettu pääkäyttäjä.
+## Käyttöliittymän toteutus ensiksi tekstikäyttöliittymänä "tehty"
+
+#Toiminnallisuuden toteutus: lopetus, opiskeluajan asetus ja kellon käynnistys "tehty"
+
+#Aloitettu graafisen käyttöliittymän implementointi
 
 ## Suunnitellut toiminnallisuudet 
+
+## Käyttäjät
+Alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli normaali käyttäjä. Myöhemmin sovellukseen saatetaan lisätä suuremmilla oikeuksilla varustettu pääkäyttäjä.
 
 ### Ennen kirjatumista
 Käyttäjä voi luoda järjestelmään käyttäjätunnuksen
@@ -22,6 +28,8 @@ Käyttäjä voi pitää 5 minuutin tauon pomodorojen välissä
 Käyttäjä voi muuttaa tauon tai pomodoron pituutta
 Kun pomodoro on valmis, kirjautuu tieto siitä järjestelmään
 Käyttäjä voi kirjautua ulos järjestelmästä
+
+### Graafinen käyttöliittymä
 
 ## Jatkokehitysideoita
 
