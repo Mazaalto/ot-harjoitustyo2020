@@ -1,6 +1,6 @@
 
 import org.junit.Test;
-import opiskelukello.opiskelukello.Timer;
+import studyclock.domain.Timer;
 import static org.junit.Assert.assertEquals;
 
 /*
@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
  * @author mazaalto
  */
 public class TimerTest {
+
     Timer timer;
 
     @Test

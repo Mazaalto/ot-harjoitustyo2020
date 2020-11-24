@@ -5,7 +5,7 @@
  */
 package studyclock.ui;
 
-import opiskelukello.opiskelukello.*;
+import studyclock.domain.Timer;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;

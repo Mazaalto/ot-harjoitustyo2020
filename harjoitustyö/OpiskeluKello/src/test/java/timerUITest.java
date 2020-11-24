@@ -5,23 +5,24 @@
  */
 
 import java.util.Scanner;
-import opiskelukello.opiskelukello.Timer;
-import opiskelukello.opiskelukello.timerUI;
+import studyclock.domain.Timer;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import studyclock.ui.timerUI;
 
 /**
  *
  * @author mazaalto
  */
 public class timerUITest {
-    
+
     public timerUITest() {
     }
+
     @Test
     public void vaarallaKomennollaTuleeOikeaTulos() {
         Scanner testauslukija = new Scanner("9");
@@ -30,21 +31,21 @@ public class timerUITest {
         ui.start();
         //onkohan varmasti oikein?
         assertEquals("virheellinen komento.", ui.toString());
-        
+
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }

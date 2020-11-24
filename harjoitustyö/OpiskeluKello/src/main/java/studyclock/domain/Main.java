@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package opiskelukello.opiskelukello;
+package studyclock.domain;
 
 /**
  *
  * @author mazaalto
  */
 public class Main {
+
     public static void main(String[] args) throws InterruptedException {
         StudyClock.main(args);
-        
-    } 
+
+    }
 }
