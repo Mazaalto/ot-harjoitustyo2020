@@ -1,5 +1,6 @@
 package opiskelukello.opiskelukello;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,7 +9,6 @@ import java.util.logging.Logger;
  *
  * @author mazaalto
  */
-
 public class Timer {
 
     private boolean isThereTime;
@@ -19,7 +19,6 @@ public class Timer {
     public Timer() {
         this.isThereTime = true;
         this.displayMinutes = 0;
-        this.starttime = System.currentTimeMillis();
 
     }
 
@@ -35,12 +34,18 @@ public class Timer {
     }
 
     public void startTheClock() {
+
+        this.starttime = System.currentTimeMillis();
+
         while (isThereTime) {
+
             try {
                 TimeUnit.SECONDS.sleep(1);
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(Timer.class.getName()).log(Level.SEVERE, null, ex);
             }
+
             long timepassed = System.currentTimeMillis() - this.starttime;
             long displaySeconds = timepassed / 1000;
 
@@ -55,6 +60,7 @@ public class Timer {
                     this.isThereTime = false;
                 }
             }
+
             System.out.println("Time passed: " + displayMinutes + ":" + displaySeconds);
         }
         System.out.println("Congratulations! Have a brake now.");

@@ -1,7 +1,8 @@
 package opiskelukello.opiskelukello;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import studyclock.ui.timerUI;
+
 
 
 /**
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @author mazaalto
  */
 
-public class Application {
+public class StudyClock {
 
     public static void main(String[] args) throws InterruptedException {
         Scanner lukija = new Scanner(System.in);
