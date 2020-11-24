@@ -50,7 +50,7 @@ public class Timer {
             }
             if ((displaySeconds % 60) == 0) {
                 displayMinutes++;
-                // if pomodorotimer is 25 minutes then stop
+                // if pomodoro timer is 25 minutes then stop
                 if (displayMinutes == timeLeft) {
                     this.isThereTime = false;
                 }
