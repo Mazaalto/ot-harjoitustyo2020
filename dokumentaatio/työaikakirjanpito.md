@@ -13,4 +13,4 @@
 |       |      | arkkitehtuurikuvauksen tarkennus |
 |       |      | käyttöohje |
 |       |      | testaus |
-| yht   |   24   | | 
+| yht   |   26.5   | | 
