@@ -4,7 +4,7 @@
 
 OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kurssin Ohjelmistotekniikan menetelmät-kurssille. Se perustuu opiskelussa erittäin toimivaan Pomodoro-tekniikkaan, jossa voidaan asettaa opiskelulle aika ja tauottaa sitä 25 minuutin paloihin, jolloin keskittyminen paranee ja sitä kautta myös tulokset. Lisäksi ohjelmaan on tulossa muitakin toiminnallisuuksia, kuten sitä että voi seurata mihin aika menee.
 
-#Dokumentaatio
+# Dokumentaatio
 
 [Käyttöohje]()
 
@@ -16,7 +16,7 @@ OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kur
 
 [Työaikakirjanpito](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
 
-#Komentorivitoiminnot
+# Komentorivitoiminnot
 
 ### Testaus
 
