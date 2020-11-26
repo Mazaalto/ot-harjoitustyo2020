@@ -31,11 +31,12 @@ public class timerUI {
         //testaan voiko kello saada lukija, jotta x painaessa se pysähtyy
 
         komennot = new TreeMap<>();
-        komennot.put("x", "x lopeta");
-        komennot.put("1", "1 aseta opiskeluaika minuuteissa");
-        komennot.put("2", "2 valitse aihe");
-        komennot.put("3", "3 käynnistä kello");
+        komennot.put("x", "x Lopeta");
+        komennot.put("1", "1 Aseta opiskeluaika minuuteissa");
+        komennot.put("2", "2 Valitse aihe");
+        komennot.put("3", "3 Käynnistä kello");
         komennot.put("4", "4 Näytä historia");
+        komennot.put("5", "5 Pidä tauko");
 
 //      komennot.put("3", "3 pysäytä kello");
 //      komennot.put("4", "4 montako kertaa toistetaan ennen pidempää taukoa?");
@@ -74,13 +75,19 @@ public class timerUI {
             } else if (komento.equals("4")) {
                 System.out.println("Opiskeluhistoriasi:");
                 String historia = this.history.toString();
-            }
 
+                //nyt tauko alkaa automaattisesti
+            } else if (komento.equals("5")) {
+                System.out.println("Syötä tauonpituus minuuteissa");
+                long aika = Long.valueOf(lukija.nextLine());
+                this.ajastin.setTimeLeft(aika);
+                this.ajastin.startTheClock();
+            }
         }
     }
 
     public void printInstructions() {
-        System.out.println("käytettävissä olevat komennot: " + komennot.values());
+        System.out.println("Tervetuloa käyttämään opiskelukelloa. Sinulla on saatavilla seuraavat komennot: \n " + komennot.values());
     }
 
 //    public void start(Stage arg0) throws Exception {

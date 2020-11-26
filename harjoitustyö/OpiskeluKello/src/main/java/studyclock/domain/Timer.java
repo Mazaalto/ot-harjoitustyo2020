@@ -10,6 +10,7 @@ import java.util.logging.Logger;
  * @author mazaalto
  */
 public class Timer {
+
     private boolean isThereTime;
     private long displayMinutes;
     private long starttime;
@@ -44,6 +45,7 @@ public class Timer {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Timer.class.getName()).log(Level.SEVERE, null, ex);
             }
+            //saisko tähän lopettajan väliin?
 
             long timepassed = System.currentTimeMillis() - this.starttime;
             long displaySeconds = timepassed / 1000;
