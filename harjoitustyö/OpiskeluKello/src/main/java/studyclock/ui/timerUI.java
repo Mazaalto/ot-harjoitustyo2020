@@ -12,16 +12,18 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import studyclock.domain.StudyHistory;
 
 /**
  *
  * @author mazaalto
  */
-public class timerUI extends Application {
+public class timerUI {
 
     private Scanner lukija;
     private Map<String, String> komennot;
     private Timer ajastin;
+    private StudyHistory history;
 
     public timerUI(Scanner lukija, Timer kello) {
         this.lukija = lukija;
@@ -31,7 +33,9 @@ public class timerUI extends Application {
         komennot = new TreeMap<>();
         komennot.put("x", "x lopeta");
         komennot.put("1", "1 aseta opiskeluaika minuuteissa");
-        komennot.put("2", "2 käynnistä kello");
+        komennot.put("2", "2 valitse aihe");
+        komennot.put("3", "3 käynnistä kello");
+        komennot.put("4", "4 Näytä historia");
 
 //      komennot.put("3", "3 pysäytä kello");
 //      komennot.put("4", "4 montako kertaa toistetaan ennen pidempää taukoa?");
@@ -46,11 +50,11 @@ public class timerUI extends Application {
             System.out.println();
             System.out.print("komento: ");
             String komento = lukija.nextLine();
+
             if (!komennot.keySet().contains(komento)) {
                 System.out.println("virheellinen komento.");
 
             }
-
             if (komento.equals("x")) {
                 break;
 
@@ -59,21 +63,27 @@ public class timerUI extends Application {
                 long aika = Long.valueOf(lukija.nextLine());
                 this.ajastin.setTimeLeft(aika);
 
-            } else if (komento.equals("2")) {
+            } else if (komento.equals("3")) {
                 this.ajastin.startTheClock();
 
-            } else if (komento.equals("3")) {
+            } else if (komento.equals("2")) {
+                System.out.println("Mitä aihetta aiot opiskella?");
+                String aihe = lukija.nextLine();
+                this.history.addStudyArea(aihe);
 
+            } else if (komento.equals("4")) {
+                System.out.println("Opiskeluhistoriasi:");
+                String historia = this.history.toString();
             }
+
         }
     }
 
     public void printInstructions() {
-        System.out.println("käytettävissä olevat komennot: \n1 aseta opiskeluaika minuuteissa \n2 käynnistä kello \nx lopeta ");
+        System.out.println("käytettävissä olevat komennot: " + komennot.values());
     }
 
-    @Override
-    public void start(Stage arg0) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public void start(Stage arg0) throws Exception {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }

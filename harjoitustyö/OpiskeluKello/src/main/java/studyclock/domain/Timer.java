@@ -10,7 +10,6 @@ import java.util.logging.Logger;
  * @author mazaalto
  */
 public class Timer {
-
     private boolean isThereTime;
     private long displayMinutes;
     private long starttime;
