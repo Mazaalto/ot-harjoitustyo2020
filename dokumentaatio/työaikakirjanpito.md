@@ -7,7 +7,7 @@
 |  19.11.     |4h      | toteutan ensin pomodorotimerin helpolla teksiliittymällä, jonka upgreidaan myöhemmin tyylikkääksi, muutin sovelluslogiikkaa. Lisätty UI luokka ja tehty UItesti luokka |
 |   23-24.11.    | 10h     | sovelluksen rakenteen refaktorointi, graafisen käyttöliittymän tekemisen aloittaminen, viikon 4 tavoitteiden tekeminen |
 |       |  4    | arkkitehtuurikuvaus ja muiden viikkotavoitteiden tekeminen  |
-|       |      |  |
+|  26.11.     | 2h     |Lisäsin opiskeluhistorialuokan ja toiminnallisuuden, seuraavaksi siirryn tekemään testejä  |
 |       |      | testaus |
 |       |      | koodin refaktorointia |
 |       |      | arkkitehtuurikuvauksen tarkennus |
