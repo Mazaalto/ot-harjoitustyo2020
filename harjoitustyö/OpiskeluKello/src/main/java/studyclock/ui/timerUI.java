@@ -20,74 +20,70 @@ import studyclock.domain.StudyHistory;
  */
 public class timerUI {
 
-    private Scanner lukija;
-    private Map<String, String> komennot;
-    private Timer ajastin;
+    private Scanner reader;
+    private Map<String, String> commands;
+    private Timer timer;
     private StudyHistory history;
 
-    public timerUI(Scanner lukija, Timer kello) {
-        this.lukija = lukija;
-        ajastin = kello;
-        //testaan voiko kello saada lukija, jotta x painaessa se pysähtyy
+    public timerUI(Scanner reader, Timer clock) {
+        this.reader = reader;
+        timer = clock;
 
-        komennot = new TreeMap<>();
-        komennot.put("x", "x Lopeta");
-        komennot.put("1", "1 Aseta opiskeluaika minuuteissa");
-        komennot.put("2", "2 Valitse aihe");
-        komennot.put("3", "3 Käynnistä kello");
-        komennot.put("4", "4 Näytä historia");
-        komennot.put("5", "5 Pidä tauko");
+        commands = new TreeMap<>();
+        commands.put("x", "x Stop");
+        commands.put("1", "1 Set time in minutes");
+        commands.put("2", "2 Choose a subject");
+        commands.put("3", "3 Start the timer");
+        commands.put("4", "4 Show the study history");
+        commands.put("5", "5 Have a brake");
 
-//      komennot.put("3", "3 pysäytä kello");
-//      komennot.put("4", "4 montako kertaa toistetaan ennen pidempää taukoa?");
-//      komennot.put("5", "5 aseta tauon pituus");
     }
 
     public void start() {
-        System.out.println("Opiskelukello");
+        System.out.println("The Study Timer");
         printInstructions();
 
         while (true) {
             System.out.println();
-            System.out.print("komento: ");
-            String komento = lukija.nextLine();
+            System.out.print("command: ");
+            String command = reader.nextLine();
 
-            if (!komennot.keySet().contains(komento)) {
-                System.out.println("virheellinen komento.");
+            if (!commands.keySet().contains(command)) {
+                System.out.println("The command is invalid.");
 
             }
-            if (komento.equals("x")) {
+            if (command.equals("x")) {
                 break;
 
-            } else if (komento.equals("1")) {
-                System.out.println("Syötä aika minuuteissa");
-                long aika = Long.valueOf(lukija.nextLine());
-                this.ajastin.setTimeLeft(aika);
+            } else if (command.equals("1")) {
+                System.out.println("How many minutes will you study?");
+                long time = Long.valueOf(reader.nextLine());
+                this.timer.setTimeLeft(time);
 
-            } else if (komento.equals("3")) {
-                this.ajastin.startTheClock();
+            } else if (command.equals("3")) {
+                this.timer.startTheClock();
 
-            } else if (komento.equals("2")) {
-                System.out.println("Mitä aihetta aiot opiskella?");
-                String aihe = lukija.nextLine();
-                this.history.addStudyArea(aihe);
+            } else if (command.equals("2")) {
+                System.out.println("What subject will you study?");
+                String subj = reader.nextLine();
+                this.history.addStudyArea(subj);
 
-            } else if (komento.equals("4")) {
-                System.out.println("Opiskeluhistoriasi:");
-                String historia = this.history.toString();
+            } else if (command.equals("4")) {
+                System.out.println("This is your study history:");
+                String history = this.history.toString();
 
                 //nyt tauko alkaa automaattisesti
-            } else if (komento.equals("5")) {
-                System.out.println("Syötä tauonpituus minuuteissa");
-                long aika = Long.valueOf(lukija.nextLine());
-                this.ajastin.setTimeLeft(aika);
-                this.ajastin.startTheClock();
+            } else if (command.equals("5")) {
+                System.out.println("How many minutes will you need for the break?");
+                long time = Long.valueOf(reader.nextLine());
+                this.timer.setTimeLeft(time);
+                this.timer.startTheClock();
             }
         }
     }
 
     public void printInstructions() {
-        System.out.println("Tervetuloa käyttämään opiskelukelloa. Sinulla on saatavilla seuraavat komennot: \n " + komennot.values());
+        System.out.println("Welcome to use the Study timer, these are the commands for the app: \n " + commands.values());
     }
 
 //    public void start(Stage arg0) throws Exception {
