@@ -27,12 +27,36 @@ public class StudyHistoryTest {
     public void setUp() {
         this.subjectTimestest = new StudyHistory();
     }
+    // Check that size returns 0 for new StudyHistory Maps
+    @Test
+    public void testSizeForNewStudyHistoryMap() {
+        assertEquals(0, this.subjectTimestest.getSubjectTimes().size());
+    }
+    
+    //Check that a new Study History Map returns true for isEmpty
     @Test
     public void constructorWorks(){
-       // asserThat(map, this.timer.getTimeLeft());
-       //tsekkaa onko map olemassa
+       assertTrue(this.subjectTimestest.getSubjectTimes().isEmpty());
         
     }
+    //test if adding a subject make isEmpty return "false"
+    @Test
+    public void testAddSubjectNotEmpty() {
+        this.subjectTimestest.addStudyArea("testi", 25);
+        assertFalse(this.subjectTimestest.getSubjectTimes().isEmpty());
+    }
+    // Testing if Map increases as study times are added
+    @Test
+    public void testSizeGrowsWhenAddingElements() {
+        this.subjectTimestest.addStudyArea("java", 1);
+        assertEquals(1, this.subjectTimestest.getSubjectTimes().size());
+        
+        this.subjectTimestest.addStudyArea("python", 1);
+        assertEquals(2, this.subjectTimestest.getSubjectTimes().size());
+    }
+    
+    
+    
     
     @AfterClass
     public static void tearDownClass() {

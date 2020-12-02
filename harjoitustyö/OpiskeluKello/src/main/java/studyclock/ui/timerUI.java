@@ -64,7 +64,7 @@ public class timerUI {
                 int timeInt = (int) time;
                 this.history.addStudyArea(subj, timeInt);
 
-                System.out.println("Start the timer by pressing 3");
+                System.out.println("Start the timer by pressing 2");
 
             } else if (command.equals("2")) {
                 this.timer.startClock();
@@ -80,6 +80,9 @@ public class timerUI {
                 long time = Long.valueOf(reader.nextLine());
                 this.timer.setTimeLeft(time);
                 this.timer.startClock();
+            } else {
+                System.out.println("Command was invalid");
+                continue;
             }
         }
     }
