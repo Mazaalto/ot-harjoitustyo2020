@@ -23,10 +23,11 @@ Käyttäjä voi kirjautua järjestelmään
 
 ### Kirjautumisen jälkeen
 Käyttäjä näkee oman opiskeluhistoriansa viikko tasolla
-Käyttäjä voi aloittaa uuden pomodoro-opiskeluhetken
-Käyttäjä voi pitää 5 minuutin tauon pomodorojen välissä
-Käyttäjä voi muuttaa tauon tai pomodoron pituutta
-Kun pomodoro on valmis, kirjautuu tieto siitä järjestelmään
+Käyttäjä voi aloittaa uuden pomodoro-opiskeluhetken "tehty"
+Käyttäjä voi pitää 5 minuutin tauon pomodorojen välissä "tehty"
+Käyttäjä voi muuttaa tauon tai pomodoron pituutta "tehty"
+Kun pomodoro on valmis, kirjautuu tieto siitä järjestelmään "tehty"
+Käyttäjä pystyy pyytämään opiskeluhistoriansa ja näkemään sen "tehty"
 Käyttäjä voi kirjautua ulos järjestelmästä
 
 ### Graafinen käyttöliittymä
