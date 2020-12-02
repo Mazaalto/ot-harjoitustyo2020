@@ -16,6 +16,8 @@ OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kur
 
 [Työaikakirjanpito](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
 
+[Julkaistut versiot](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/viikko5)
+
 # Komentorivitoiminnot
 
 ### Testaus
