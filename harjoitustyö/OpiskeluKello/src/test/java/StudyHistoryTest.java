@@ -47,7 +47,7 @@ public class StudyHistoryTest {
     }
     // Testing if Map increases as study times are added
     @Test
-    public void testSizeGrowsWhenAddingElements() {
+    public void testSizeGrowsWhenAddingSubjects() {
         this.subjectTimestest.addStudyArea("java", 1);
         assertEquals(1, this.subjectTimestest.getSubjectTimes().size());
         
