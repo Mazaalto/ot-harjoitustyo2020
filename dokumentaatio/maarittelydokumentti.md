@@ -8,9 +8,9 @@ käyttäjän, joilla kaikilla on oma yksilöllinen opiskelulokinsa.
 
 ## Käyttöliittymän toteutus ensiksi tekstikäyttöliittymänä "tehty"
 
-#Toiminnallisuuden toteutus: lopetus, opiskeluajan asetus ja kellon käynnistys "tehty"
+# Toiminnallisuuden toteutus: lopetus, opiskeluajan asetus ja kellon käynnistys "tehty"
 
-#Aloitettu graafisen käyttöliittymän implementointi
+# Aloitettu graafisen käyttöliittymän implementointi
 
 ## Suunnitellut toiminnallisuudet 
 
