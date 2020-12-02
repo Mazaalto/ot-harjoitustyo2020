@@ -20,13 +20,17 @@ public class StudyHistory {
         this.subjectTimes = new HashMap<>();
     }
 
-    public void addStudyArea(String subject) {
+    public Map<String, Integer> getSubjectTimes() {
+        return subjectTimes;
+    }
+
+    public void addStudyArea(String subject, int time) {
         if (this.subjectTimes.containsKey(subject)) {
-            int previous = this.subjectTimes.get(subject);
+            int previousTime = this.subjectTimes.get(subject);
             //after studying we add a study time to record
-            this.subjectTimes.put(subject, previous + 1);
+            this.subjectTimes.put(subject, previousTime + time);
         } else {
-            this.subjectTimes.put(subject, 1);
+            this.subjectTimes.put(subject, time);
         }
     }
 

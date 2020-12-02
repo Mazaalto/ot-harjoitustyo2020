@@ -28,14 +28,14 @@ public class timerUI {
     public timerUI(Scanner reader, Timer clock) {
         this.reader = reader;
         timer = clock;
+        this.history = new StudyHistory();
 
         commands = new TreeMap<>();
         commands.put("x", "x Stop");
         commands.put("1", "1 Set time in minutes");
-        commands.put("2", "2 Choose a subject");
-        commands.put("3", "3 Start the timer");
-        commands.put("4", "4 Show the study history");
-        commands.put("5", "5 Have a brake");
+        commands.put("2", "2 Start the timer");
+        commands.put("3", "3 Show the study history");
+        commands.put("4", "4 Have a brake");
 
     }
 
@@ -58,22 +58,24 @@ public class timerUI {
             } else if (command.equals("1")) {
                 System.out.println("How many minutes will you study?");
                 long time = Long.valueOf(reader.nextLine());
+                System.out.println("What subject will you study?");
                 this.timer.setTimeLeft(time);
+                String subj = reader.nextLine();
+                int timeInt = (int) time;
+                this.history.addStudyArea(subj, timeInt);
 
-            } else if (command.equals("3")) {
-                this.timer.startClock();
+                System.out.println("Start the timer by pressing 3");
 
             } else if (command.equals("2")) {
-                System.out.println("What subject will you study?");
-                String subj = reader.nextLine();
-                this.history.addStudyArea(subj);
+                this.timer.startClock();
 
-            } else if (command.equals("4")) {
+            } else if (command.equals("3")) {
                 System.out.println("This is your study history:");
                 String history = this.history.toString();
+                System.out.println(history);
 
                 //nyt tauko alkaa automaattisesti
-            } else if (command.equals("5")) {
+            } else if (command.equals("4")) {
                 System.out.println("How many minutes will you need for the break?");
                 long time = Long.valueOf(reader.nextLine());
                 this.timer.setTimeLeft(time);
