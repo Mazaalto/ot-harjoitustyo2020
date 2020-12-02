@@ -33,38 +33,28 @@ public class Timer {
         return timeLeft;
     }
 
-    public void startTheClock() {
-
+    public void startClock() throws InterruptedException {
         this.starttime = System.currentTimeMillis();
-
         while (isThereTime) {
-
-            try {
-                TimeUnit.SECONDS.sleep(1);
-
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Timer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //saisko tähän lopettajan väliin?
+            TimeUnit.SECONDS.sleep(1);
 
             long timepassed = System.currentTimeMillis() - this.starttime;
             long displaySeconds = timepassed / 1000;
-
             if (displaySeconds == 60) {
                 displaySeconds = 0;
                 starttime = System.currentTimeMillis();
             }
             if ((displaySeconds % 60) == 0) {
                 displayMinutes++;
-                // if pomodoro timer is 25 minutes then stop
                 if (displayMinutes == timeLeft) {
                     this.isThereTime = false;
                 }
             }
-
             System.out.println("Time passed: " + displayMinutes + ":" + displaySeconds);
         }
-        System.out.println("Congratulations! Have a brake now.");
     }
 
+    public void isthereTime() {
+
+    }
 }

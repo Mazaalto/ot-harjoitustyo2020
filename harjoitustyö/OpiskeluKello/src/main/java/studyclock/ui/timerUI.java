@@ -61,7 +61,7 @@ public class timerUI {
                 this.timer.setTimeLeft(time);
 
             } else if (command.equals("3")) {
-                this.timer.startTheClock();
+                this.timer.startClock();
 
             } else if (command.equals("2")) {
                 System.out.println("What subject will you study?");
@@ -77,7 +77,7 @@ public class timerUI {
                 System.out.println("How many minutes will you need for the break?");
                 long time = Long.valueOf(reader.nextLine());
                 this.timer.setTimeLeft(time);
-                this.timer.startTheClock();
+                this.timer.startClock();
             }
         }
     }

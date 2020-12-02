@@ -13,24 +13,26 @@ import java.util.Map;
  * @author mazaalto
  */
 public class StudyHistory {
-    private Map<String, Integer> SubjectTimes;
+
+    private Map<String, Integer> subjectTimes;
 
     public StudyHistory() {
-        this.SubjectTimes = new HashMap<>();
+        this.subjectTimes = new HashMap<>();
     }
-    
+
     public void addStudyArea(String subject) {
-        if (this.SubjectTimes.containsKey(subject)) {
-            int previous = this.SubjectTimes.get(subject);
+        if (this.subjectTimes.containsKey(subject)) {
+            int previous = this.subjectTimes.get(subject);
             //after studying we add a study time to record
-            this.SubjectTimes.put(subject, previous+1);
+            this.subjectTimes.put(subject, previous + 1);
         } else {
-            this.SubjectTimes.put(subject, 1);
+            this.subjectTimes.put(subject, 1);
         }
     }
+
     public Integer getStudyTimeFromSubject(String subject) {
-        if (this.SubjectTimes.containsKey(subject)) {
-            return this.SubjectTimes.get(subject);
+        if (this.subjectTimes.containsKey(subject)) {
+            return this.subjectTimes.get(subject);
         } else {
             return -1;
         }
@@ -39,14 +41,12 @@ public class StudyHistory {
     @Override
     public String toString() {
         String tostring = "";
-        
-        for (String key: SubjectTimes.keySet()) {
-            String subject = "Opiskelit: " + key + " "+ Integer.toString(SubjectTimes.get(key))+ " kertaa \n";
+
+        for (String key : subjectTimes.keySet()) {
+            String subject = "You studied: " + key + " " + Integer.toString(subjectTimes.get(key)) + " times \n";
             tostring += subject;
         }
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
 }

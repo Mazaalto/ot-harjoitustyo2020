@@ -11,10 +11,10 @@ import studyclock.ui.timerUI;
 public class StudyClock {
 
     public static void main(String[] args) throws InterruptedException {
-        Scanner lukija = new Scanner(System.in);
-        Timer ajastin = new Timer();
+        Scanner reader = new Scanner(System.in);
+        Timer timer = new Timer();
 
-        timerUI ui = new timerUI(lukija, ajastin);
+        timerUI ui = new timerUI(reader, timer);
         ui.start();
 
     }
