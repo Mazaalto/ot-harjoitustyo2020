@@ -39,7 +39,7 @@ public class timerUI {
 
     }
 
-    public void start() {
+    public void start() throws InterruptedException {
         System.out.println("The Study Timer");
         printInstructions();
 

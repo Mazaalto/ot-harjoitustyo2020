@@ -19,7 +19,19 @@ public class Timer {
     public Timer() {
         this.isThereTime = true;
         this.displayMinutes = 0;
+        this.timeLeft = 0;
 
+    }
+
+    public long getStarttime() {
+        return starttime;
+    }
+
+    public long getDisplayMinutes() {
+        return displayMinutes;
+    }
+    public boolean getIsThereTime() {
+        return this.isThereTime;
     }
 
     //when the timer reach stoptime, there is a break
@@ -54,7 +66,4 @@ public class Timer {
         }
     }
 
-    public void isthereTime() {
-
-    }
 }

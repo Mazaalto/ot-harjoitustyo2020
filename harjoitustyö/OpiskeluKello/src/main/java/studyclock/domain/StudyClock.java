@@ -13,7 +13,6 @@ public class StudyClock {
     public static void main(String[] args) throws InterruptedException {
         Scanner reader = new Scanner(System.in);
         Timer timer = new Timer();
-
         timerUI ui = new timerUI(reader, timer);
         ui.start();
 
