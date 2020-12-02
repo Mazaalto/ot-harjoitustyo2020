@@ -8,9 +8,9 @@
 |   23-24.11.    | 10h     | sovelluksen rakenteen refaktorointi, graafisen käyttöliittymän tekemisen aloittaminen, viikon 4 tavoitteiden tekeminen |
 |       |  4    | arkkitehtuurikuvaus ja muiden viikkotavoitteiden tekeminen  |
 |  26.11.     | 2h     |Lisäsin opiskeluhistorialuokan ja toiminnallisuuden, seuraavaksi siirryn tekemään testejä  |
-|     28.11.-2.12.  | 8h     | testausta ja sovelluksen päivitys labtool palautteen perusteella |
+|     28.11.-2.12.  | 12h     | testausta ja sovelluksen päivitys labtool palautteen perusteella |
 |       |      | koodin refaktorointia |
 |       |      | arkkitehtuurikuvauksen tarkennus |
 |       |      | käyttöohje |
 |       |      | testaus |
-| yht   |   34.5   | | 
+| yht   |   36.5   | | 
