@@ -53,6 +53,7 @@ public class timerUI {
 
             }
             if (command.equals("x")) {
+                this.timer.setIsThereTimeToFalse();
                 break;
 
             } else if (command.equals("1")) {
@@ -91,7 +92,5 @@ public class timerUI {
         System.out.println("Welcome to use the Study timer, these are the commands for the app: \n " + commands.values());
     }
 
-//    public void start(Stage arg0) throws Exception {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+//    
 }

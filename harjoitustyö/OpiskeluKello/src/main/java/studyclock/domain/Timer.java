@@ -23,6 +23,10 @@ public class Timer {
 
     }
 
+    public void setIsThereTimeToFalse() {
+        this.isThereTime = false;
+    }
+
     public long getStarttime() {
         return starttime;
     }
@@ -30,6 +34,7 @@ public class Timer {
     public long getDisplayMinutes() {
         return displayMinutes;
     }
+
     public boolean getIsThereTime() {
         return this.isThereTime;
     }
