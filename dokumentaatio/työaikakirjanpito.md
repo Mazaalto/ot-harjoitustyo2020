@@ -9,8 +9,8 @@
 |       |  4    | arkkitehtuurikuvaus ja muiden viikkotavoitteiden tekeminen  |
 |  26.11.     | 2h     |Lisäsin opiskeluhistorialuokan ja toiminnallisuuden, seuraavaksi siirryn tekemään testejä  |
 |     28.11.-2.12.  | 12h     | testausta ja sovelluksen päivitys labtool palautteen perusteella |
-|       |      | koodin refaktorointia |
+|    3.-4.12.   |   7h   |Sain vihdoin toteutettua JavaFX käyttiksen, seuraavaksi lähden taklaamaan Timeline olion säätämistä (nyt kun ei tekstikäyttöliittymää niin teen ajastimen Timeline-oliona |
 |       |      | arkkitehtuurikuvauksen tarkennus |
 |       |      | käyttöohje |
 |       |      | testaus |
-| yht   |   36.5   | | 
+| yht   |  43.5  | | 
