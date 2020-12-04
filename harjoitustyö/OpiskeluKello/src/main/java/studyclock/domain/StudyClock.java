@@ -13,10 +13,10 @@ public class StudyClock {
 
     public static void main(String[] args) throws InterruptedException {
         launch(timerUIJavaFX.class);
-        Scanner reader = new Scanner(System.in);
-        Timer timer = new Timer();
-//        timerUI ui = new timerUI(reader, timer);
-//        ui.start();
+//        Scanner reader = new Scanner(System.in);
+//        Timer timer = new Timer();
+////        timerUI ui = new timerUI(reader, timer);
+////        ui.start();
 
     }
 }

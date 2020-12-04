@@ -20,13 +20,13 @@ import studyclock.domain.StudyHistory;
  */
 public class timerUI {
 
-    private Scanner reader;
+    //private Scanner reader;
     private Map<String, String> commands;
     private Timer timer;
     private StudyHistory history;
 
     public timerUI(Scanner reader, Timer clock) {
-        this.reader = reader;
+        //this.reader = reader;
         timer = clock;
         this.history = new StudyHistory();
 
