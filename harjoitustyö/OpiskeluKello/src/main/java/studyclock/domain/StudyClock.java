@@ -15,8 +15,8 @@ public class StudyClock {
         launch(timerUIJavaFX.class);
         Scanner reader = new Scanner(System.in);
         Timer timer = new Timer();
-        timerUI ui = new timerUI(reader, timer);
-        ui.start();
+//        timerUI ui = new timerUI(reader, timer);
+//        ui.start();
 
     }
 }
