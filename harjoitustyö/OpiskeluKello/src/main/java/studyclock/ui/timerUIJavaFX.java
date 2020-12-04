@@ -46,7 +46,7 @@ public class timerUIJavaFX extends Application {
         Button buttonA = new Button("Set time in minutes");
         Button buttonB = new Button("Start the timer");
         Button buttonC = new Button("Show the study history");
-        Button buttonD = new Button("Have a brake");
+        Button buttonD = new Button("Have a break");
 
         HBox buttons = new HBox();
         buttons.setSpacing(15);
@@ -124,7 +124,7 @@ public class timerUIJavaFX extends Application {
 
         });
         buttonD.setOnAction((event) -> {
-            System.out.println("Have a brake");
+            System.out.println("Have a break");
             window.setScene(four);
 
         });
