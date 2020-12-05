@@ -15,7 +15,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,10 +30,10 @@ import studyclock.domain.StudyClockService;
  */
 public class timerUIJavaFX extends Application {
 
-    private static Integer STARTTIME = 20;
+    private Integer starttime = 20;
     private Timeline timeline;
     private Label timerLabel = new Label();
-    private IntegerProperty timeInSeconds = new SimpleIntegerProperty(STARTTIME);
+    private IntegerProperty timeInSeconds = new SimpleIntegerProperty(starttime);
 
     @Override
     public void start(Stage window) {
@@ -70,12 +72,16 @@ public class timerUIJavaFX extends Application {
         timerLabel.setStyle("-fx-font-size: 30em;");
 
         //Scene in Set time in minutes
+        VBox buttonsSetTime = new VBox();
+        Button setTime = new Button("Set time");
         Button backToStart = new Button("go back");
-        HBox buttonsSetTime = new HBox();
+        Label instructions = new Label("Here you can write in minutes how long will you study before break");
+        TextField minutesInText = new TextField();
         buttonsSetTime.setSpacing(15);
+        buttonsSetTime.getChildren().add(instructions);
+        buttonsSetTime.getChildren().add(minutesInText);
+        buttonsSetTime.getChildren().add(setTime);
         buttonsSetTime.getChildren().add(backToStart);
-        Label text = new Label("Here you can choose how many minutes you want to study");
-        buttonsSetTime.getChildren().add(text);
 
         Scene second = new Scene(buttonsSetTime);
 
@@ -89,13 +95,17 @@ public class timerUIJavaFX extends Application {
         Scene third = new Scene(buttonsAnalytics);
 
         //Scene where you can have a brake
+        VBox buttonsBreak = new VBox();
+        Button setTimeForBeak = new Button("Set time for break");
         Button backFromBrake = new Button("go back");
-        HBox buttonsBrake = new HBox();
-        buttonsBrake.setSpacing(15);
-        buttonsBrake.getChildren().add(backFromBrake);
-        Label text3 = new Label("Here you can have a relaxing brake");
-        buttonsBrake.getChildren().add(text3);
-        Scene four = new Scene(buttonsBrake);
+        Label instructionsOfBreak = new Label("Here you can set the time for the break");
+        TextField minutesInTextBreak = new TextField();
+        buttonsBreak.setSpacing(15);
+        buttonsBreak.getChildren().add(instructions);
+        buttonsBreak.getChildren().add(minutesInText);
+        buttonsBreak.getChildren().add(setTime);
+        buttonsBreak.getChildren().add(backToStart);
+        Scene four = new Scene(buttonsBreak);
 
         //functionalities of the buttons of main scene
         buttonA.setOnAction((event) -> {
@@ -110,10 +120,10 @@ public class timerUIJavaFX extends Application {
             if (timeline != null) {
                 timeline.stop();
             }
-            timeInSeconds.set(STARTTIME);
+            timeInSeconds.set(starttime);
             timeline = new Timeline();
             timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.seconds(STARTTIME + 1),
+                    new KeyFrame(Duration.seconds(starttime + 1),
                             new KeyValue(timeInSeconds, 0)));
             timeline.playFromStart();
 
@@ -131,6 +141,11 @@ public class timerUIJavaFX extends Application {
 
         //functionalities of the buttons of Set time in minutes scene
         backToStart.setOnAction((event) -> {
+
+            window.setScene(first);
+
+        });
+        setTime.setOnAction((event) -> {
             System.out.println("Going to the starting window");
             window.setScene(first);
 
