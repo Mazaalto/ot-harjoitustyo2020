@@ -21,8 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.File;
-import javax.swing.JLabel;
+
 
 import studyclock.domain.StudyClockService;
 
