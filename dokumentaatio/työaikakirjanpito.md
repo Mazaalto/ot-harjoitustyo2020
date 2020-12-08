@@ -10,7 +10,7 @@
 |  26.11.     | 2h     |Lisäsin opiskeluhistorialuokan ja toiminnallisuuden, seuraavaksi siirryn tekemään testejä  |
 |     28.11.-2.12.  | 12h     | testausta ja sovelluksen päivitys labtool palautteen perusteella |
 |    3.-4.12.   |   7h   |Sain vihdoin toteutettua JavaFX käyttiksen, seuraavaksi lähden taklaamaan Timeline olion säätämistä (nyt kun ei tekstikäyttöliittymää niin teen ajastimen Timeline-oliona |
-|       |      | arkkitehtuurikuvauksen tarkennus |
+|      5-8 | 14     | Koko arkkitehtuurin päivittäminen, vihdoin toiminnallisuus melkein valmiina, vielä riittää viilattavaa, onneksi kohta paljon aikaa vain tälle |
 |       |      | käyttöohje |
 |       |      | testaus |
-| yht   |  43.5  | | 
+| yht   |  57.5  | | 
