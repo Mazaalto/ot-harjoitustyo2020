@@ -21,6 +21,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.io.File;
+import javax.swing.JLabel;
 
 import studyclock.domain.StudyClockService;
 
@@ -30,10 +32,14 @@ import studyclock.domain.StudyClockService;
  */
 public class timerUIJavaFX extends Application {
 
-    private Integer starttime = 20;
+    private int starttime = 20;
+    private int minutes;
+    private int seconds;
     private Timeline timeline;
-    private Label timerLabel = new Label();
+    private Label timerLabel = new Label("0:0");
+
     private IntegerProperty timeInSeconds = new SimpleIntegerProperty(starttime);
+    private StudyClockService service;
 
     @Override
     public void start(Stage window) {
@@ -71,6 +77,8 @@ public class timerUIJavaFX extends Application {
         timerLabel.textProperty().bind(timeInSeconds.asString());
         timerLabel.setStyle("-fx-font-size: 30em;");
 
+        //set The Audioclip for completing pomodoro
+        //AudioClip money = new AudioClip("file:moneyInTheBank.wav");
         //Scene in Set time in minutes
         VBox buttonsSetTime = new VBox();
         Button setTime = new Button("Set time");
@@ -117,14 +125,19 @@ public class timerUIJavaFX extends Application {
         //starting the timer in the mainScene from start button
         buttonB.setOnAction((event) -> {
             System.out.println("Starting the timer");
+
             if (timeline != null) {
                 timeline.stop();
             }
+            //tähän tee minuutit kanssa näkyviin minuutit:sekunnit tyylillä
             timeInSeconds.set(starttime);
             timeline = new Timeline();
             timeline.getKeyFrames().add(
                     new KeyFrame(Duration.seconds(starttime + 1),
                             new KeyValue(timeInSeconds, 0)));
+//            timeline.getKeyFrames().add(
+//                    new KeyFrame(Duration.minutes(starttime + 1),
+//                            new KeyValue(timeInSeconds, 0)));
             timeline.playFromStart();
 
         });

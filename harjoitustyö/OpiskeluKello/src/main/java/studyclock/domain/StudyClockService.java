@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package studyclock.domain;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,6 +24,9 @@ public class StudyClockService {
 
     public void setTimeInMinutes(long minutes) {
         this.timer.setTimeLeft(minutes);
+    }
+    public void starTheTimer(JLabel label) throws InterruptedException {
+        this.timer.startClock(label);
     }
 
     public void setSubjectToStudy(String subject) {
