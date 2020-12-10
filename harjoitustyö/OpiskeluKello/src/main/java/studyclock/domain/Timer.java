@@ -65,6 +65,7 @@ public class Timer {
 
             long timepassed = System.currentTimeMillis() - this.starttime;
             long displaySeconds = timepassed / 1000;
+            
             if (displaySeconds == 60) {
                 displaySeconds = 0;
                 starttime = System.currentTimeMillis();

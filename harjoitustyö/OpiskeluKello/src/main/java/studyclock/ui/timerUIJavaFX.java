@@ -12,6 +12,8 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,20 +33,25 @@ import studyclock.domain.Timer;
  */
 public class timerUIJavaFX extends Application {
 
-    private int starttime = 20;
+    private int starttimeSeconds = 20;
+    private int starttimeMinutes = 1;
     private int minutes;
     private int seconds;
     private Timeline timeline;
-    private Label timerLabel = new Label("0:0");
-    private Label timerLabel2 = new Label("");
+    private Label timerLabelMinutes = new Label("00");
+    private Label timerLabelSeconds = new Label("00");
+    private Label middle = new Label(":");
 
-    private IntegerProperty timeInSeconds = new SimpleIntegerProperty(starttime);
+//    private IntegerProperty timeInSeconds = new SimpleIntegerProperty(starttimeSeconds);
+//    private IntegerProperty timeInMinutes = new SimpleIntegerProperty(starttimeMinutes);
     private StudyClockService service;
 
     @Override
     public void start(Stage window) {
         window.setTitle("the Study Clock");
-        Timer timer = new Timer();
+
+        seconds = 65;
+        this.minutes = 1;
 
         //Here is the logic of the app
         StudyClockService service = new StudyClockService();
@@ -58,31 +65,30 @@ public class timerUIJavaFX extends Application {
         Button buttonD = new Button("Have a break");
 
         HBox buttons = new HBox();
-        buttons.setSpacing(15);
+        buttons.setSpacing(180);
         buttons.getChildren().add(buttonA);
         buttons.getChildren().add(buttonB);
         buttons.getChildren().add(buttonC);
         buttons.getChildren().add(buttonD);
 
         mainScene.setTop(buttons);
-        mainScene.setLeft(timerLabel);
-        mainScene.setRight(timerLabel2);
+        mainScene.setLeft(timerLabelMinutes);
+        mainScene.setRight(timerLabelSeconds);
+        mainScene.setCenter(middle);
 
         //Scenes
         Scene first = new Scene(mainScene);
         //Get the time to study from user (esim textboxista)
-        long studyTime = 1;
-        //tähän testailen nyt ajastinta
 
         //testi timerin näytölle
-        timerLabel.setTextFill(Color.ORANGERED);
-        timerLabel2.setTextFill(Color.ORANGERED);
+        timerLabelMinutes.setTextFill(Color.AQUAMARINE);
+        timerLabelSeconds.setTextFill(Color.ORANGERED);
 
-        timerLabel.textProperty().bind(timeInSeconds.asString());
-        timerLabel2.textProperty().bind(timeInSeconds.asString());
-        timerLabel.setStyle("-fx-font-size: 30em;");
-        timerLabel2.setStyle("-fx-font-size: 30em;");
-        timerLabel2.setTextFill(Color.ORANGERED);
+//      timerLabel.textProperty().bind(timeInMinutes.asString());
+//      timerLabel2.textProperty().bind(timeInSeconds.asString());
+        timerLabelMinutes.setStyle("-fx-font-size: 30em;");
+        timerLabelSeconds.setStyle("-fx-font-size: 30em;");
+        middle.setStyle("-fx-font-size: 15em;");
 
         //set The Audioclip for completing pomodoro
         //AudioClip money = new AudioClip("file:moneyInTheBank.wav");
@@ -137,58 +143,85 @@ public class timerUIJavaFX extends Application {
                 timeline.stop();
             }
             //tähän tee minuutit kanssa näkyviin minuutit:sekunnit tyylillä
-            timeInSeconds.set(starttime);
+//            timeInMinutes.set(starttimeMinutes);
+//            timeInSeconds.set(starttimeSeconds);
 
             timeline = new Timeline();
+            timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.getKeyFrames().add(
-                    new KeyFrame(Duration.seconds(starttime + 1),
-                            new KeyValue(timeInSeconds, 0)));
-//            
+                    new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
+                        seconds--;
+
+                        // update timerLabels minutes and seconds
+                        timerLabelSeconds.setText(
+                                Integer.toString(seconds % 60));
+                        timerLabelMinutes.setText(
+                                Integer.toString(seconds / 60));
+
+                        if (seconds <= 0) {
+                            timeline.stop();
+                        }
+                    }
+                    ));
             timeline.playFromStart();
+        }
+        );
+        buttonC.setOnAction(
+                (event) -> {
+                    System.out.println("Show the study history");
+                    window.setScene(third);
 
-        });
-        buttonC.setOnAction((event) -> {
-            System.out.println("Show the study history");
-            window.setScene(third);
+                }
+        );
+        buttonD.setOnAction(
+                (event) -> {
+                    System.out.println("Have a break");
+                    window.setScene(four);
 
-        });
-        buttonD.setOnAction((event) -> {
-            System.out.println("Have a break");
-            window.setScene(four);
-
-        });
+                }
+        );
 
         //functionalities of the buttons of Set time in minutes scene
-        backToStart.setOnAction((event) -> {
+        backToStart.setOnAction(
+                (event) -> {
 
-            window.setScene(first);
+                    window.setScene(first);
 
-        });
-        setTime.setOnAction((event) -> {
-            System.out.println("Going to the starting window");
-            window.setScene(first);
+                }
+        );
+        setTime.setOnAction(
+                (event) -> {
+                    System.out.println("Going to the starting window");
+                    window.setScene(first);
 
-        });
+                }
+        );
         //functionalities of the buttons of analytics
-        backToStartAnalytics.setOnAction((event) -> {
-            System.out.println("Going to the starting window");
-            window.setScene(first);
+        backToStartAnalytics.setOnAction(
+                (event) -> {
+                    System.out.println("Going to the starting window");
+                    window.setScene(first);
 
-        });
+                }
+        );
         //functionalities of the buttons of brake window
-        backFromBrake.setOnAction((event) -> {
-            System.out.println("Going to the starting window");
-            window.setScene(first);
+        backFromBrake.setOnAction(
+                (event) -> {
+                    System.out.println("Going to the starting window");
+                    window.setScene(first);
 
-        });
+                }
+        );
 
         //here will be the scene for study analytics
         window.setScene(first);
+
         window.show();
     }
 
     public static void main(String[] args) {
-        launch(timerUIJavaFX.class);
+        launch(timerUIJavaFX.class
+        );
     }
 
 }
