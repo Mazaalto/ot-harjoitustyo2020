@@ -2,7 +2,6 @@ package studyclock.domain;
 
 import java.util.Scanner;
 import static javafx.application.Application.launch;
-import studyclock.ui.timerUI;
 import studyclock.ui.timerUIJavaFX;
 
 /**
@@ -15,8 +14,6 @@ public class StudyClock {
         launch(timerUIJavaFX.class);
 //        Scanner reader = new Scanner(System.in);
 //        Timer timer = new Timer();
-////        timerUI ui = new timerUI(reader, timer);
-////        ui.start();
 
     }
 }

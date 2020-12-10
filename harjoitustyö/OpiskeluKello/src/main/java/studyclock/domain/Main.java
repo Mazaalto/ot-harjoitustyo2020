@@ -5,6 +5,7 @@
  */
 package studyclock.domain;
 
+
 /**
  *
  * @author mazaalto

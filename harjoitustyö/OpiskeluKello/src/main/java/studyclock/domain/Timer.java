@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
+import javafx.scene.control.Label;
 
 /**
  *
@@ -16,6 +16,8 @@ public class Timer {
     private long displayMinutes;
     private long starttime;
     private long timeLeft;
+    private String minutes;
+    private String seconds;
 
     public Timer() {
         this.isThereTime = true;
@@ -56,7 +58,7 @@ public class Timer {
 //    }
 // Tässä timer olio saa parametrina label olion--> service->ui??
 
-    public void startClock(JLabel label) throws InterruptedException {
+    public void startClock(Label label) throws InterruptedException {
         this.starttime = System.currentTimeMillis();
         while (isThereTime) {
             TimeUnit.SECONDS.sleep(1);
@@ -75,6 +77,7 @@ public class Timer {
             }
 //            System.out.println("Time passed: " + displayMinutes + ":" + displaySeconds);
             label.setText(String.format("%01d : %01d", displayMinutes, displaySeconds));
+            
         }
     }
 

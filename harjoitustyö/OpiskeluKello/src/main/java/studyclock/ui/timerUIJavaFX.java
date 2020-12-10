@@ -22,8 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 import studyclock.domain.StudyClockService;
+import studyclock.domain.Timer;
 
 /**
  *
@@ -36,6 +36,7 @@ public class timerUIJavaFX extends Application {
     private int seconds;
     private Timeline timeline;
     private Label timerLabel = new Label("0:0");
+    private Label timerLabel2 = new Label("");
 
     private IntegerProperty timeInSeconds = new SimpleIntegerProperty(starttime);
     private StudyClockService service;
@@ -43,6 +44,7 @@ public class timerUIJavaFX extends Application {
     @Override
     public void start(Stage window) {
         window.setTitle("the Study Clock");
+        Timer timer = new Timer();
 
         //Here is the logic of the app
         StudyClockService service = new StudyClockService();
@@ -63,7 +65,8 @@ public class timerUIJavaFX extends Application {
         buttons.getChildren().add(buttonD);
 
         mainScene.setTop(buttons);
-        mainScene.setCenter(timerLabel);
+        mainScene.setLeft(timerLabel);
+        mainScene.setRight(timerLabel2);
 
         //Scenes
         Scene first = new Scene(mainScene);
@@ -73,8 +76,13 @@ public class timerUIJavaFX extends Application {
 
         //testi timerin näytölle
         timerLabel.setTextFill(Color.ORANGERED);
+        timerLabel2.setTextFill(Color.ORANGERED);
+
         timerLabel.textProperty().bind(timeInSeconds.asString());
+        timerLabel2.textProperty().bind(timeInSeconds.asString());
         timerLabel.setStyle("-fx-font-size: 30em;");
+        timerLabel2.setStyle("-fx-font-size: 30em;");
+        timerLabel2.setTextFill(Color.ORANGERED);
 
         //set The Audioclip for completing pomodoro
         //AudioClip money = new AudioClip("file:moneyInTheBank.wav");
@@ -130,13 +138,12 @@ public class timerUIJavaFX extends Application {
             }
             //tähän tee minuutit kanssa näkyviin minuutit:sekunnit tyylillä
             timeInSeconds.set(starttime);
+
             timeline = new Timeline();
             timeline.getKeyFrames().add(
                     new KeyFrame(Duration.seconds(starttime + 1),
                             new KeyValue(timeInSeconds, 0)));
-//            timeline.getKeyFrames().add(
-//                    new KeyFrame(Duration.minutes(starttime + 1),
-//                            new KeyValue(timeInSeconds, 0)));
+//            
             timeline.playFromStart();
 
         });

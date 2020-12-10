@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package studyclock.domain;
-import javax.swing.JLabel;
+
+import java.applet.AudioClip;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -19,15 +22,35 @@ public class StudyClockService {
         //this.reader = reader;
         this.timer = new Timer();
         this.history = new StudyHistory();
+//        this.timer.schedule(new TimerTask() {
+//            @Override
+//            AudioClip myClip = new AudioClip(getClass().getClassloader()
+//                    .getResource("Bell.mp3").toString()) {
+//                @Override
+//                public void play() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public void loop() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public void stop() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//            };
+//
+//            myClip.play ();
+//        }
+        
 
     }
 
-    public void setTimeInMinutes(long minutes) {
-        this.timer.setTimeLeft(minutes);
-    }
-    public void starTheTimer(JLabel label) throws InterruptedException {
-        this.timer.startClock(label);
-    }
+//    public void starTheTimer(JLabel label) throws InterruptedException {
+//        this.timer.startClock(label);
+//    }
 
     public void setSubjectToStudy(String subject) {
         this.history.addStudyArea(subject, 0);
