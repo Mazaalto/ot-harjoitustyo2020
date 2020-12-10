@@ -7,13 +7,9 @@ package studyclock.ui;
 
 import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -50,6 +46,7 @@ public class timerUIJavaFX extends Application {
     public void start(Stage window) {
         window.setTitle("the Study Clock");
 
+        //nämä siirretään niin että voi valita oikeasta ikkunasta niiden arvot, esim muutetaan minuutit sekunneiksi
         seconds = 65;
         this.minutes = 1;
 
