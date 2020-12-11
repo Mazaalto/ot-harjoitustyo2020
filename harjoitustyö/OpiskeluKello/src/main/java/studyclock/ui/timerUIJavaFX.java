@@ -38,75 +38,35 @@ public class timerUIJavaFX extends Application {
     @Override
     public void start(Stage window) {
         window.setTitle("the Study Clock");
-
-        //nämä siirretään niin että voi valita oikeasta ikkunasta niiden arvot, esim muutetaan minuutit sekunneiksi
-        //nyt taitaa olla niin että aika aina sekunteina, muutetaan vasta näytillä minuuteiksi ja sekunneiksi
-        //25 min on 1500 s
-        //tehdään niin että operoidaan vaan sekunneilla siis, tallenetaan ne studyserviceen talteen
         //Here is the logic of the app
         StudyClockService service = new StudyClockService();
+        //default time is one pomodoro, that is 25*60 = 1500s
         this.seconds = 1500;
 
-        //starting the commands
+        //refraktoroin koodin niin että funktionaalisuudet aina ko. kenttien alla
+        //nämä siirretään niin että voi valita oikeasta ikkunasta niiden arvot, esim muutetaan minuutit sekunneiksi
+        //nyt taitaa olla niin että aika aina sekunteina, muutetaan vasta näytillä minuuteiksi ja sekunneiksi
+        //tehdään niin että operoidaan vaan sekunneilla siis, tallenetaan ne studyserviceen talteen
+        //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
 
-        //Button buttonA = new Button("Set time in minutes");
-        Button buttonB = new Button("Start the timer");
-        Button buttonC = new Button("Show the study history");
-        Button buttonD = new Button("Set timer for studying or a break");
-
+        Button start = new Button("Start the timer");
+        Button history = new Button("Show the study history");
+        Button setup = new Button("Set timer for studying or a break");
         HBox buttons = new HBox();
         buttons.setSpacing(180);
-        //buttons.getChildren().add(buttonA);
-        buttons.getChildren().add(buttonB);
-        buttons.getChildren().add(buttonC);
-        buttons.getChildren().add(buttonD);
+        buttons.getChildren().add(start);
+        buttons.getChildren().add(history);
+        buttons.getChildren().add(setup);
 
         mainScene.setTop(buttons);
         mainScene.setLeft(timerLabelMinutes);
         mainScene.setRight(timerLabelSeconds);
         mainScene.setCenter(middle);
-
-        //Scenes
         Scene first = new Scene(mainScene);
-        //Get the time to study from user (esim textboxista)
-
-        //Setting up the timer UI
-        timerLabelMinutes.setTextFill(Color.GOLDENROD);
-        timerLabelSeconds.setTextFill(Color.SILVER);
-        timerLabelMinutes.setStyle("-fx-font-size: 30em;");
-        timerLabelSeconds.setStyle("-fx-font-size: 30em;");
-        middle.setStyle("-fx-font-size: 15em;");
-
-        //set The Audioclip for completing pomodoro
-        //Scene in Set time in minutes
-        Button setTime = new Button("Set time");
-        Button backToStart = new Button("Go back");
-        Label instructions = new Label("Here you can set the time for the studying or break");
-        TextField minutesInText = new TextField();
-        //Scene where you can set time for brake or studying
-        VBox buttonsSetTime = new VBox();
-        Button backFromSetup = new Button("go back");
-        buttonsSetTime.setSpacing(15);
-        buttonsSetTime.getChildren().add(instructions);
-        buttonsSetTime.getChildren().add(minutesInText);
-        buttonsSetTime.getChildren().add(setTime);
-        buttonsSetTime.getChildren().add(backToStart);
-        Scene four = new Scene(buttonsSetTime);
-
-        //tässä lisätään studytimeriin ja sekunneiksi timeriin aika, toteutetaan se serviisin kautta
-        //Scene where is the analytics
-        Button backToStartAnalytics = new Button("go back");
-        HBox buttonsAnalytics = new HBox();
-        buttonsAnalytics.setSpacing(15);
-        buttonsAnalytics.getChildren().add(backToStartAnalytics);
-        Label text2 = new Label("Here you will see your study history");
-        buttonsAnalytics.getChildren().add(text2);
-        Scene third = new Scene(buttonsAnalytics);
 
         //starting the timer in the mainScene from start button
-        buttonB.setOnAction((event) -> {
-            System.out.println("Starting the timer");
+        start.setOnAction((event) -> {
 
             if (timeline != null) {
                 timeline.stop();
@@ -133,49 +93,80 @@ public class timerUIJavaFX extends Application {
             timeline.playFromStart();
         }
         );
-        buttonC.setOnAction(
+
+        //Setting up the timer UI
+        timerLabelMinutes.setTextFill(Color.GOLDENROD);
+        timerLabelSeconds.setTextFill(Color.SILVER);
+        timerLabelMinutes.setStyle("-fx-font-size: 30em;");
+        timerLabelSeconds.setStyle("-fx-font-size: 30em;");
+        middle.setStyle("-fx-font-size: 15em;");
+
+        //Scene in Set time in minutes
+        Button setTime = new Button("Set time");
+        Button backToStart = new Button("Go back");
+        Label instructions = new Label("Here you can set the time for the studying or break");
+        TextField minutesInText = new TextField();
+        Label instructionsForSub = new Label("Here you can write a subject you are studying for analytics");
+        TextField subjecInText = new TextField();
+        VBox buttonsSetTime = new VBox();
+        Button backFromSetup = new Button("go back");
+        buttonsSetTime.setSpacing(15);
+        buttonsSetTime.getChildren().add(instructions);
+        buttonsSetTime.getChildren().add(minutesInText);
+        buttonsSetTime.getChildren().add(setTime);
+        buttonsSetTime.getChildren().add(instructionsForSub);
+        buttonsSetTime.getChildren().add(subjecInText);
+        buttonsSetTime.getChildren().add(backToStart);
+        Scene settingup = new Scene(buttonsSetTime);
+
+        //buttons fuctions in setTime
+        setup.setOnAction(
                 (event) -> {
-                    System.out.println("Show the study history");
-                    window.setScene(third);
+                    window.setScene(settingup);
 
                 }
         );
-        buttonD.setOnAction(
-                (event) -> {
-
-                    window.setScene(four);
-
-                }
-        );
-
-        //Set timer for studying or a break
         backToStart.setOnAction(
                 (event) -> {
-
                     window.setScene(first);
 
                 }
         );
         setTime.setOnAction(
                 (event) -> {
-                    System.out.println("Going to the starting window");
+                    //here we check the time is within limits and add it to studyclock service
                     window.setScene(first);
 
                 }
         );
-        //functionalities of the buttons of analytics
-        backToStartAnalytics.setOnAction(
-                (event) -> {
-                    System.out.println("Going to the starting window");
-                    window.setScene(first);
-
-                }
-        );
-        //functionalities of the buttons of brake window
         backFromSetup.setOnAction(
                 (event) -> {
-                    System.out.println("Going to the starting window");
                     window.setScene(first);
+                }
+        );
+
+        //Scene where is the analytics
+        Button backToStartAnalytics = new Button("go back");
+        HBox buttonsAnalytics = new HBox();
+        buttonsAnalytics.setSpacing(15);
+        buttonsAnalytics.getChildren().add(backToStartAnalytics);
+        Label text2 = new Label("Here you will see your study history");
+        buttonsAnalytics.getChildren().add(text2);
+        Scene analytics = new Scene(buttonsAnalytics);
+
+        history.setOnAction(
+                (event) -> {
+                    System.out.println("Show the study history");
+                    window.setScene(analytics);
+
+                }
+        );
+
+        //Going to the starting window
+        backToStartAnalytics.setOnAction(
+                (event) -> {
+                    window.setScene(first);
+
                 }
         );
 
