@@ -24,6 +24,14 @@ public class StudyHistory {
 
     }
 
+    public Timer getTimer() {
+        if (!list.isEmpty()) {
+            int size = this.list.size();
+            return this.list.get(size - 1);
+        }
+        return null;
+    }
+
     public ArrayList<Timer> getList() {
         return list;
     }

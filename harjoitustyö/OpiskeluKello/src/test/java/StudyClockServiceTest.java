@@ -10,12 +10,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import studyclock.domain.StudyClockService;
+import studyclock.domain.StudyHistory;
 
 /**
  *
  * @author mazaalto
  */
 public class StudyClockServiceTest {
+    StudyClockService service;
     
     public StudyClockServiceTest() {
     }
@@ -30,8 +33,20 @@ public class StudyClockServiceTest {
     
     @Before
     public void setUp() {
+        this.service = new StudyClockService();
     }
-    
+    @Test
+    public void integerCheckerWorks() {
+        assertEquals(true, this.service.checkIfInt("1"));
+    }
+    @Test
+    public void integerCheckerWorksWithBig() {
+        assertEquals(true, this.service.checkIfInt("5000"));
+    }
+    @Test
+    public void integerCheckerWorksWithReallyBig() {
+        assertEquals(true, this.service.checkIfInt("50000"));
+    }
     @After
     public void tearDown() {
     }

@@ -5,6 +5,8 @@
  */
 package studyclock.domain;
 
+import java.util.regex.Pattern;
+
 /**
  *
  * @author mazaalto
@@ -18,9 +20,18 @@ public class StudyClockService {
     private StudyHistory history;
 
     public StudyClockService() {
-
         this.history = new StudyHistory();
 
+    }
+
+    //gets string as a parameter, return value if possible else -1
+    public int getStringToInt(String fromUI) {
+        int valueInMinutes = 0;
+        if (checkIfInt(fromUI)) {
+            valueInMinutes = Integer.parseInt(fromUI);
+            return valueInMinutes;
+        }
+        return -1;
     }
 
     public StudyHistory getHistory() {
@@ -29,6 +40,20 @@ public class StudyClockService {
 
     public void addTimer(Timer timer) {
         this.history.addTimerToList(timer);
+
+    }
+
+    public Timer getTimerFromHistory() {
+        return this.history.getTimer();
+
+    }
+
+    public boolean checkIfInt(String something) {
+        Pattern intPattern = Pattern.compile("\\d+");
+        if (something == null) {
+            return false;
+        }
+        return intPattern.matcher(something).matches();
 
     }
 

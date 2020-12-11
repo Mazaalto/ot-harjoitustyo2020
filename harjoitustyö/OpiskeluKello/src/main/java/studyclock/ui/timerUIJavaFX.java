@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import studyclock.domain.StudyClockService;
+import studyclock.domain.Timer;
 
 /**
  *
@@ -32,29 +33,33 @@ public class timerUIJavaFX extends Application {
     private Timeline timeline;
     private Label timerLabelMinutes = new Label("25");
     private Label timerLabelSeconds = new Label("00");
-    private Label middle = new Label(":");
+    private final Label middle = new Label(":");
+    private Label frase = new Label("");
     private StudyClockService service;
 
     @Override
     public void start(Stage window) {
         window.setTitle("the Study Clock");
         //Here is the logic of the app
-        StudyClockService service = new StudyClockService();
+        this.service = new StudyClockService();
         //default time is one pomodoro, that is 25*60 = 1500s
         this.seconds = 1500;
 
-        //refraktoroin koodin niin että funktionaalisuudet aina ko. kenttien alla
-        //nämä siirretään niin että voi valita oikeasta ikkunasta niiden arvot, esim muutetaan minuutit sekunneiksi
-        //nyt taitaa olla niin että aika aina sekunteina, muutetaan vasta näytillä minuuteiksi ja sekunneiksi
-        //tehdään niin että operoidaan vaan sekunneilla siis, tallenetaan ne studyserviceen talteen
         //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
 
         Button start = new Button("Start the timer");
+        start.setStyle("-fx-font-size: 2em");
+        start.setTextFill(Color.GOLDENROD);
         Button history = new Button("Show the study history");
+        history.setStyle("-fx-font-size: 2em");
+        history.setTextFill(Color.GOLDENROD);
         Button setup = new Button("Set timer for studying or a break");
+        setup.setStyle("-fx-font-size: 2em");
+        setup.setTextFill(Color.GOLDENROD);
+        
         HBox buttons = new HBox();
-        buttons.setSpacing(180);
+        buttons.setSpacing(130);
         buttons.getChildren().add(start);
         buttons.getChildren().add(history);
         buttons.getChildren().add(setup);
@@ -63,6 +68,7 @@ public class timerUIJavaFX extends Application {
         mainScene.setLeft(timerLabelMinutes);
         mainScene.setRight(timerLabelSeconds);
         mainScene.setCenter(middle);
+        mainScene.setBottom(frase);
         Scene first = new Scene(mainScene);
 
         //starting the timer in the mainScene from start button
@@ -99,11 +105,13 @@ public class timerUIJavaFX extends Application {
         timerLabelSeconds.setTextFill(Color.SILVER);
         timerLabelMinutes.setStyle("-fx-font-size: 30em;");
         timerLabelSeconds.setStyle("-fx-font-size: 30em;");
+        frase.setStyle("-fx-font-size: 1em;");
         middle.setStyle("-fx-font-size: 15em;");
 
         //Scene in Set time in minutes
         Button setTime = new Button("Set time");
         Button backToStart = new Button("Go back");
+        Button setSubject = new Button("Set subject");
         Label instructions = new Label("Here you can set the time for the studying or break");
         TextField minutesInText = new TextField();
         Label instructionsForSub = new Label("Here you can write a subject you are studying for analytics");
@@ -116,12 +124,14 @@ public class timerUIJavaFX extends Application {
         buttonsSetTime.getChildren().add(setTime);
         buttonsSetTime.getChildren().add(instructionsForSub);
         buttonsSetTime.getChildren().add(subjecInText);
+        buttonsSetTime.getChildren().add(setSubject);
         buttonsSetTime.getChildren().add(backToStart);
         Scene settingup = new Scene(buttonsSetTime);
 
         //buttons fuctions in setTime
         setup.setOnAction(
                 (event) -> {
+
                     window.setScene(settingup);
 
                 }
@@ -134,9 +144,31 @@ public class timerUIJavaFX extends Application {
         );
         setTime.setOnAction(
                 (event) -> {
-                    //here we check the time is within limits and add it to studyclock service
-                    window.setScene(first);
 
+                    //here we check the time is within limits and add it to studyclock service
+                    String intString = minutesInText.getText();
+                    if (this.service.checkIfInt(intString)) {
+                        this.seconds = service.getStringToInt(intString) * 60;
+
+                        timerLabelSeconds.setText(
+                                Integer.toString(seconds % 60));
+                        timerLabelMinutes.setText(
+                                Integer.toString(seconds / 60));
+
+                    } else {
+                        instructions.setText("Input time in minutes");
+                        frase.setText("Remember to adjust time in minutes");
+                    }
+                    window.setScene(settingup);
+
+                }
+        );
+        //here we get the subject for service and analytics
+        
+        setSubject.setOnAction(
+                (event) -> {
+                    String subject = subjecInText.getText();
+                    window.setScene(settingup);
                 }
         );
         backFromSetup.setOnAction(
