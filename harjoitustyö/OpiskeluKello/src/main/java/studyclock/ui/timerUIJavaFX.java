@@ -5,7 +5,6 @@
  */
 package studyclock.ui;
 
-import java.io.File;
 import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,7 +21,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import studyclock.domain.StudyClockService;
-import studyclock.domain.Timer;
 
 /**
  *
@@ -45,22 +43,21 @@ public class timerUIJavaFX extends Application {
         //nyt taitaa olla niin että aika aina sekunteina, muutetaan vasta näytillä minuuteiksi ja sekunneiksi
         //25 min on 1500 s
         //tehdään niin että operoidaan vaan sekunneilla siis, tallenetaan ne studyserviceen talteen
-        this.seconds = 1500;
-
         //Here is the logic of the app
         StudyClockService service = new StudyClockService();
+        this.seconds = 1500;
 
         //starting the commands
         BorderPane mainScene = new BorderPane();
 
-        Button buttonA = new Button("Set time in minutes");
+        //Button buttonA = new Button("Set time in minutes");
         Button buttonB = new Button("Start the timer");
         Button buttonC = new Button("Show the study history");
-        Button buttonD = new Button("Have a break");
+        Button buttonD = new Button("Set timer for studying or a break");
 
         HBox buttons = new HBox();
         buttons.setSpacing(180);
-        buttons.getChildren().add(buttonA);
+        //buttons.getChildren().add(buttonA);
         buttons.getChildren().add(buttonB);
         buttons.getChildren().add(buttonC);
         buttons.getChildren().add(buttonD);
@@ -74,28 +71,30 @@ public class timerUIJavaFX extends Application {
         Scene first = new Scene(mainScene);
         //Get the time to study from user (esim textboxista)
 
-        //Setting up the timer
-        timerLabelMinutes.setTextFill(Color.AQUAMARINE);
-        timerLabelSeconds.setTextFill(Color.ORANGERED);
+        //Setting up the timer UI
+        timerLabelMinutes.setTextFill(Color.GOLDENROD);
+        timerLabelSeconds.setTextFill(Color.SILVER);
         timerLabelMinutes.setStyle("-fx-font-size: 30em;");
         timerLabelSeconds.setStyle("-fx-font-size: 30em;");
         middle.setStyle("-fx-font-size: 15em;");
 
         //set The Audioclip for completing pomodoro
         //Scene in Set time in minutes
-        VBox buttonsSetTime = new VBox();
         Button setTime = new Button("Set time");
-        Button backToStart = new Button("go back");
-        Label instructions = new Label("Here you can write in minutes how long will you study before break");
+        Button backToStart = new Button("Go back");
+        Label instructions = new Label("Here you can set the time for the studying or break");
         TextField minutesInText = new TextField();
+        //Scene where you can set time for brake or studying
+        VBox buttonsSetTime = new VBox();
+        Button backFromSetup = new Button("go back");
         buttonsSetTime.setSpacing(15);
         buttonsSetTime.getChildren().add(instructions);
         buttonsSetTime.getChildren().add(minutesInText);
         buttonsSetTime.getChildren().add(setTime);
         buttonsSetTime.getChildren().add(backToStart);
+        Scene four = new Scene(buttonsSetTime);
 
-        Scene second = new Scene(buttonsSetTime);
-
+        //tässä lisätään studytimeriin ja sekunneiksi timeriin aika, toteutetaan se serviisin kautta
         //Scene where is the analytics
         Button backToStartAnalytics = new Button("go back");
         HBox buttonsAnalytics = new HBox();
@@ -105,26 +104,6 @@ public class timerUIJavaFX extends Application {
         buttonsAnalytics.getChildren().add(text2);
         Scene third = new Scene(buttonsAnalytics);
 
-        //Scene where you can have a brake
-        VBox buttonsBreak = new VBox();
-        Button setTimeForBeak = new Button("Set time for break");
-        Button backFromBrake = new Button("go back");
-        Label instructionsOfBreak = new Label("Here you can set the time for the break");
-        TextField minutesInTextBreak = new TextField();
-        buttonsBreak.setSpacing(15);
-        buttonsBreak.getChildren().add(instructions);
-        buttonsBreak.getChildren().add(minutesInText);
-        buttonsBreak.getChildren().add(setTime);
-        buttonsBreak.getChildren().add(backToStart);
-        Scene four = new Scene(buttonsBreak);
-
-        //functionalities of the buttons of main scene
-        buttonA.setOnAction((event) -> {
-            System.out.println("Going to the time adjusment window");
-            window.setScene(second);
-
-        });
-
         //starting the timer in the mainScene from start button
         buttonB.setOnAction((event) -> {
             System.out.println("Starting the timer");
@@ -132,9 +111,6 @@ public class timerUIJavaFX extends Application {
             if (timeline != null) {
                 timeline.stop();
             }
-            //tähän tee minuutit kanssa näkyviin minuutit:sekunnit tyylillä
-//            timeInMinutes.set(starttimeMinutes);
-//            timeInSeconds.set(starttimeSeconds);
 
             timeline = new Timeline();
             timeline.setCycleCount(Timeline.INDEFINITE);
@@ -166,13 +142,13 @@ public class timerUIJavaFX extends Application {
         );
         buttonD.setOnAction(
                 (event) -> {
-                    System.out.println("Have a break");
+
                     window.setScene(four);
 
                 }
         );
 
-        //functionalities of the buttons of Set time in minutes scene
+        //Set timer for studying or a break
         backToStart.setOnAction(
                 (event) -> {
 
@@ -196,17 +172,15 @@ public class timerUIJavaFX extends Application {
                 }
         );
         //functionalities of the buttons of brake window
-        backFromBrake.setOnAction(
+        backFromSetup.setOnAction(
                 (event) -> {
                     System.out.println("Going to the starting window");
                     window.setScene(first);
-
                 }
         );
 
         //here will be the scene for study analytics
         window.setScene(first);
-
         window.show();
     }
 

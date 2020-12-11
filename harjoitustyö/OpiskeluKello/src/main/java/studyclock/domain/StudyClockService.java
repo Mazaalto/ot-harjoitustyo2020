@@ -5,58 +5,31 @@
  */
 package studyclock.domain;
 
-import java.applet.AudioClip;
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  *
  * @author mazaalto
  */
+//ideana on siis se että täällä operoin sekunneilla, niin että tallennan oikeat sekunti määrät
+//ja aiheet studyhistoryyn, lisäksi täältä operoin sitten historian välittymisen rapsa osioon
+//silloin ajattelin tallentaa tiedon tekstitiedostoon, josta teen sitten ArrayListan luettaessa
+//luku tapahtuu täällä
 public class StudyClockService {
 
-    private Timer timer;
     private StudyHistory history;
 
     public StudyClockService() {
-        //this.reader = reader;
-        this.timer = new Timer();
+
         this.history = new StudyHistory();
-//        this.timer.schedule(new TimerTask() {
-//            @Override
-//            AudioClip myClip = new AudioClip(getClass().getClassloader()
-//                    .getResource("Bell.mp3").toString()) {
-//                @Override
-//                public void play() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public void loop() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//
-//                @Override
-//                public void stop() {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//            };
-//
-//            myClip.play ();
-//        }
-        
 
     }
 
-//    public void starTheTimer(JLabel label) throws InterruptedException {
-//        this.timer.startClock(label);
-//    }
-
-    public void setSubjectToStudy(String subject) {
-        this.history.addStudyArea(subject, 0);
+    public StudyHistory getHistory() {
+        return history;
     }
 
-    public Integer getStudyTimeFromSubject(String subject) {
-        return this.history.getStudyTimeFromSubject(subject);
+    public void addTimer(Timer timer) {
+        this.history.addTimerToList(timer);
+
     }
+
 }
