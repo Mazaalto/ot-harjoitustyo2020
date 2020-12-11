@@ -5,8 +5,7 @@
  */
 package studyclock.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,43 +13,23 @@ import java.util.Map;
  */
 public class StudyHistory {
 
-    private Map<String, Integer> subjectTimes;
+    private ArrayList<Timer> list;
 
     public StudyHistory() {
-        this.subjectTimes = new HashMap<>();
+        this.list = new ArrayList<>();
     }
 
-    public Map<String, Integer> getSubjectTimes() {
-        return subjectTimes;
+    public void addTimerToList(Timer timer) {
+        this.list.add(timer);
+
     }
 
-    public void addStudyArea(String subject, int time) {
-        if (this.subjectTimes.containsKey(subject)) {
-            int previousTime = this.subjectTimes.get(subject);
-            //after studying we add a study time to record
-            this.subjectTimes.put(subject, previousTime + time);
-        } else {
-            this.subjectTimes.put(subject, time);
-        }
+    public ArrayList<Timer> getList() {
+        return list;
     }
 
-    public Integer getStudyTimeFromSubject(String subject) {
-        if (this.subjectTimes.containsKey(subject)) {
-            return this.subjectTimes.get(subject);
-        } else {
-            return -1;
-        }
-    }
-
-    @Override
-    public String toString() {
-        String tostring = "";
-
-        for (String key : subjectTimes.keySet()) {
-            String subject = "You studied: " + key + " " + Integer.toString(subjectTimes.get(key)) + " times \n";
-            tostring += subject;
-        }
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    public int getListSize() {
+        return this.list.size();
     }
 
 }

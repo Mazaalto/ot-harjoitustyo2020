@@ -5,6 +5,7 @@
  */
 package studyclock.ui;
 
+import java.io.File;
 import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -29,17 +30,11 @@ import studyclock.domain.Timer;
  */
 public class timerUIJavaFX extends Application {
 
-    private int starttimeSeconds = 20;
-    private int starttimeMinutes = 1;
-    private int minutes;
     private int seconds;
     private Timeline timeline;
-    private Label timerLabelMinutes = new Label("00");
+    private Label timerLabelMinutes = new Label("25");
     private Label timerLabelSeconds = new Label("00");
     private Label middle = new Label(":");
-
-//    private IntegerProperty timeInSeconds = new SimpleIntegerProperty(starttimeSeconds);
-//    private IntegerProperty timeInMinutes = new SimpleIntegerProperty(starttimeMinutes);
     private StudyClockService service;
 
     @Override
@@ -47,8 +42,10 @@ public class timerUIJavaFX extends Application {
         window.setTitle("the Study Clock");
 
         //nämä siirretään niin että voi valita oikeasta ikkunasta niiden arvot, esim muutetaan minuutit sekunneiksi
-        seconds = 65;
-        this.minutes = 1;
+        //nyt taitaa olla niin että aika aina sekunteina, muutetaan vasta näytillä minuuteiksi ja sekunneiksi
+        //25 min on 1500 s
+        //tehdään niin että operoidaan vaan sekunneilla siis, tallenetaan ne studyserviceen talteen
+        this.seconds = 1500;
 
         //Here is the logic of the app
         StudyClockService service = new StudyClockService();
@@ -77,18 +74,14 @@ public class timerUIJavaFX extends Application {
         Scene first = new Scene(mainScene);
         //Get the time to study from user (esim textboxista)
 
-        //testi timerin näytölle
+        //Setting up the timer
         timerLabelMinutes.setTextFill(Color.AQUAMARINE);
         timerLabelSeconds.setTextFill(Color.ORANGERED);
-
-//      timerLabel.textProperty().bind(timeInMinutes.asString());
-//      timerLabel2.textProperty().bind(timeInSeconds.asString());
         timerLabelMinutes.setStyle("-fx-font-size: 30em;");
         timerLabelSeconds.setStyle("-fx-font-size: 30em;");
         middle.setStyle("-fx-font-size: 15em;");
 
         //set The Audioclip for completing pomodoro
-        //AudioClip money = new AudioClip("file:moneyInTheBank.wav");
         //Scene in Set time in minutes
         VBox buttonsSetTime = new VBox();
         Button setTime = new Button("Set time");
@@ -157,6 +150,7 @@ public class timerUIJavaFX extends Application {
 
                         if (seconds <= 0) {
                             timeline.stop();
+
                         }
                     }
                     ));

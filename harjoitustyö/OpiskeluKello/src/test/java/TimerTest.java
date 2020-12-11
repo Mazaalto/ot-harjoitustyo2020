@@ -13,7 +13,6 @@ import org.junit.Before;
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.AfterAll;
 //import org.junit.jupiter.api.BeforeEach;
-
 //import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.*;
 /**
@@ -26,42 +25,26 @@ public class TimerTest {
 
     @Before
     public void setUp() {
-        timer = new Timer();
+        this.timer = new Timer(10, "testing");
     }
+
     @Test
-    public void constructorWorksTimeLeft() {
-        assertEquals(0, this.timer.getTimeLeft());
+    public void constructorWorksSubject() {
+        assertEquals("testing", this.timer.getSubject());
     }
+
     @Test
-    public void constructorWorksDisplayMin() {
-        assertEquals(0, this.timer.getDisplayMinutes());
+    public void constructorWorksTime() {
+        assertEquals(10, this.timer.getSeconds());
     }
+
     @Test
-    public void constructorWorksIsThereTime() {
-        assertEquals(true, this.timer.getIsThereTime());
+    public void changingTimeWorks() {
+        this.timer.setSeconds(14);
+        assertEquals(14, this.timer.getSeconds());
     }
-    
-    @Test
-    public void setTimeLeftWorks() {
-        this.timer.setTimeLeft(1);
-        assertEquals(1, this.timer.getTimeLeft());
-    }
-    //pajassa kysyttävä, miten saan testattua mun timeria? 
-    
 }
 
-//    @BeforeAll
-//    public static void setUpClass() {
-//    }
-//    
-//    @AfterAll
-//    public static void tearDownClass() {
-//    }
-//    
-//    @BeforeEach
-//    public void setUp() {
-//    }
-//    
 //    @AfterEach
 //    public void tearDown() {
 //    }
