@@ -21,12 +21,22 @@ public class StudyClockService {
     private StudyHistory history;
     private int seconds;
     private String unknownSubj;
+    private String type;
 
     public StudyClockService() {
         this.history = new StudyHistory();
         this.unknownSubj = "not set";
         this.seconds = 1500;
+        this.type = "study";
 
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public StudyHistory getHistory() {
@@ -40,6 +50,15 @@ public class StudyClockService {
     public String getUnknownSubj() {
         return unknownSubj;
     }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public void setSubject(String unknownSubj) {
+        this.unknownSubj = unknownSubj;
+    }
+
     //Here we can check if String can be converted to integer
     public boolean checkIfInt(String something) {
         Pattern intPattern = Pattern.compile("\\d+");
@@ -60,15 +79,20 @@ public class StudyClockService {
         return -1;
     }
 
-    public void addTimer(int seconds, String subject) {
-        int minutes = seconds / 60;
-        this.history.addTimerToList(minutes, subject);
+    //seconds are changed to minutes when they are saved to studyhistory
+    public void addTimer() {
+        int minutes = this.seconds / 60;
+        this.history.addTimerToList(minutes, this.unknownSubj);
 
     }
 
     public Timer getTimerFromHistory() {
         return this.history.getTimer();
 
+    }
+
+    public void minusSeconds() {
+        this.seconds = this.seconds - 1;
     }
 
 }

@@ -31,7 +31,6 @@ import studyclock.domain.StudyClockService;
  */
 public class timerUIJavaFX extends Application {
 
-    private int seconds;
     private Timeline timeline;
     private final Label middle = new Label(":");
     private Label timerLabelMinutes = new Label("25");
@@ -39,21 +38,16 @@ public class timerUIJavaFX extends Application {
     private Label frase = new Label("");
     private StudyClockService service;
     //type defines is the timer for studying or brake
-    private String type;
+    //private String type;
 
     @Override
     public void start(Stage window) {
         window.setTitle("the Study Clock");
-        //Here is the logic of the app
+        //Here is the logic of the app, default time is one pomodoro, that is 25*60 = 1500s
         this.service = new StudyClockService();
-        //default time is one pomodoro, that is 25*60 = 1500s
-
-        this.seconds = 1500;
-        this.type = "study";
 
         //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
-
         Button start = new Button("Start the timer");
         start.setStyle("-fx-font-size: 2em");
         start.setTextFill(Color.GOLDENROD);
@@ -64,25 +58,25 @@ public class timerUIJavaFX extends Application {
         setup.setStyle("-fx-font-size: 2em");
         setup.setTextFill(Color.GOLDENROD);
         TextField secondsInText = new TextField();
-        secondsInText.setText(Integer.toString(seconds));
+        secondsInText.setText(Integer.toString(this.service.getSeconds()));
 
         secondsInText.textProperty().addListener((change, oldValue, newValue) -> {
 
-            if (newValue.equals("-1") && this.type.equals("study")) {
+            if (newValue.equals("-1") && this.service.getType().equals("study")) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Well done");
                 alert.setHeaderText("You did it!");
                 alert.setContentText("Now you can relax for five minutes");
-                this.seconds = 300;
+                this.service.setSeconds(300);
                 timerLabelSeconds.setText(
-                        Integer.toString(seconds % 60));
+                        Integer.toString(this.service.getSeconds() % 60));
                 timerLabelMinutes.setText(
-                        Integer.toString(seconds / 60));
+                        Integer.toString(this.service.getSeconds() / 60));
 
-                this.type = "break";
+                this.service.setType("break");
                 alert.show();
 
-            } else if (newValue.equals("-1") && this.type.equals("break")) {
+            } else if (newValue.equals("-1") && this.service.getType().equals("break")) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Let's do it!");
                 alert.setHeaderText("Break is over");
@@ -113,19 +107,20 @@ public class timerUIJavaFX extends Application {
             }
 
             timeline = new Timeline();
+            this.service.addTimer();
 
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.getKeyFrames().add(
                     new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
-                        seconds--;
+                        this.service.minusSeconds();
 
                         // update timerLabels minutes and seconds
                         timerLabelSeconds.setText(
-                                Integer.toString(seconds % 60));
+                                Integer.toString(this.service.getSeconds() % 60));
                         timerLabelMinutes.setText(
-                                Integer.toString(seconds / 60));
+                                Integer.toString(this.service.getSeconds() / 60));
 
-                        if (seconds <= 0) {
+                        if (this.service.getSeconds() <= 0) {
                             timeline.stop();
                             secondsInText.setText("-1");
 
@@ -175,14 +170,14 @@ public class timerUIJavaFX extends Application {
         chooseStudy.setOnAction(
                 (event) -> {
 
-                    this.type = "study";
+                    this.service.setType("study");
 
                 }
         );
         chooseBreak.setOnAction(
                 (event) -> {
 
-                    this.type = "break";
+                    this.service.setType("break");
 
                 }
         );
@@ -206,12 +201,12 @@ public class timerUIJavaFX extends Application {
                     //here we check the time is within limits and add it to studyclock service
                     String intString = minutesInText.getText();
                     if (this.service.checkIfInt(intString)) {
-                        this.seconds = service.getStringToInt(intString) * 60;
+                        this.service.setSeconds(service.getStringToInt(intString) * 60);
 
                         timerLabelSeconds.setText(
-                                Integer.toString(seconds % 60));
+                                Integer.toString(this.service.getSeconds() % 60));
                         timerLabelMinutes.setText(
-                                Integer.toString(seconds / 60));
+                                Integer.toString(this.service.getSeconds() / 60));
 
                     } else {
                         instructions.setText("Input time in minutes");
@@ -226,6 +221,7 @@ public class timerUIJavaFX extends Application {
         setSubject.setOnAction(
                 (event) -> {
                     String subject = subjecInText.getText();
+                    this.service.setSubject(subject);
                     window.setScene(settingup);
                 }
         );

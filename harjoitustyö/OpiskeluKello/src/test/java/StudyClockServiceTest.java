@@ -37,6 +37,32 @@ public class StudyClockServiceTest {
     }
 
     @Test
+    public void setTypeWorks() {
+        this.service.setType("break");
+        assertEquals("break", this.service.getType());
+    }
+
+    @Test
+    public void minusSecondWorks() {
+        this.service.setSeconds(1);
+        this.service.minusSeconds();
+        assertEquals(0, this.service.getSeconds());
+    }
+
+    @Test
+    public void setTimeWorks() {
+        this.service.setSeconds(60);
+        assertEquals(60, this.service.getSeconds());
+    }
+
+    @Test
+    public void setSubjectWorks() {
+        this.service.setSeconds(60);
+        this.service.setSubject("abc");
+        assertEquals("abc", this.service.getUnknownSubj());
+    }
+
+    @Test
     public void integerCheckerWorks() {
         assertEquals(true, this.service.checkIfInt("1"));
     }
@@ -50,29 +76,35 @@ public class StudyClockServiceTest {
     public void integerCheckerWorksWithReallyBig() {
         assertEquals(true, this.service.checkIfInt("50000"));
     }
+
     @Test
     public void getStringToIntWorks() {
         assertEquals(1, this.service.getStringToInt("1"));
     }
+
     @Test
     public void getStringToIntWorksWithBigNumbers() {
         assertEquals(1000, this.service.getStringToInt("1000"));
     }
+
     @Test
     public void getStringToIntWorksWithNegative() {
         assertEquals(-1, this.service.getStringToInt("-1"));
     }
+
     @Test
     public void getStringToIntWorksWithNegativeBig() {
         assertEquals(-1, this.service.getStringToInt("-10000"));
     }
+    //luultavasti virhe tässä, mieti sitä, siis nyt timeria luotaessa käytetään oletusarvoja, ellei niitä muuteta
     @Test
     public void addingTimerWorks() {
-        this.service.addTimer(60, "testing");
+        this.service.setSeconds(60);
+        this.service.setSubject("testing");
+        this.service.addTimer();
         assertEquals(1, this.service.getTimerFromHistory().getMinutes());
         assertEquals("testing", this.service.getTimerFromHistory().getSubject());
     }
-    
 
     @After
     public void tearDown() {
