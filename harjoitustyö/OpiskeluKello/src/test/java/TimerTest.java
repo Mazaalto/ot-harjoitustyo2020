@@ -4,17 +4,6 @@ import studyclock.domain.Timer;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.AfterAll;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
 /**
  *
  * @author mazaalto
@@ -35,17 +24,20 @@ public class TimerTest {
 
     @Test
     public void constructorWorksTime() {
-        assertEquals(10, this.timer.getSeconds());
+        assertEquals(10, this.timer.getMinutes());
     }
 
     @Test
     public void changingTimeWorks() {
-        this.timer.setSeconds(14);
-        assertEquals(14, this.timer.getSeconds());
+        this.timer.setMinutes(14);
+        assertEquals(14, this.timer.getMinutes());
     }
+
+    @Test
+    public void changingSubjectWorks() {
+        this.timer.setSubject("moretesting");
+        assertEquals("moretesting", this.timer.getSubject());
+
+    }
+
 }
-
-//    @AfterEach
-//    public void tearDown() {
-//    }
-

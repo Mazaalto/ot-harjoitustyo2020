@@ -8,6 +8,7 @@ package studyclock.domain;
 import java.util.regex.Pattern;
 
 /**
+ * This class has all the logic that is operated in the UI (timerUIJavaFX)
  *
  * @author mazaalto
  */
@@ -18,13 +19,38 @@ import java.util.regex.Pattern;
 public class StudyClockService {
 
     private StudyHistory history;
+    private int seconds;
+    private String unknownSubj;
 
     public StudyClockService() {
         this.history = new StudyHistory();
+        this.unknownSubj = "not set";
+        this.seconds = 1500;
 
     }
 
-    //gets string as a parameter, return value if possible else -1
+    public StudyHistory getHistory() {
+        return this.history;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public String getUnknownSubj() {
+        return unknownSubj;
+    }
+    //Here we can check if String can be converted to integer
+    public boolean checkIfInt(String something) {
+        Pattern intPattern = Pattern.compile("\\d+");
+        if (something == null) {
+            return false;
+        }
+        return intPattern.matcher(something).matches();
+
+    }
+
+    //gets string as a parameter, return value in int if possible, else -1
     public int getStringToInt(String fromUI) {
         int valueInMinutes = 0;
         if (checkIfInt(fromUI)) {
@@ -34,26 +60,14 @@ public class StudyClockService {
         return -1;
     }
 
-    public StudyHistory getHistory() {
-        return history;
-    }
-
-    public void addTimer(Timer timer) {
-        this.history.addTimerToList(timer);
+    public void addTimer(int seconds, String subject) {
+        int minutes = seconds / 60;
+        this.history.addTimerToList(minutes, subject);
 
     }
 
     public Timer getTimerFromHistory() {
         return this.history.getTimer();
-
-    }
-
-    public boolean checkIfInt(String something) {
-        Pattern intPattern = Pattern.compile("\\d+");
-        if (something == null) {
-            return false;
-        }
-        return intPattern.matcher(something).matches();
 
     }
 

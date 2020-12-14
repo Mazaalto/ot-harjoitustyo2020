@@ -32,18 +32,25 @@ public class StudyHistoryTest {
 
     @Test
     public void testGetListSizeAfterAdd() {
-        Timer timeradd = new Timer(0, "new");
-        this.subjectTimestest.addTimerToList(timeradd);
+        this.subjectTimestest.addTimerToList(0, "new");
         assertEquals(1, this.subjectTimestest.getListSize());
     }
+    @Test
+    public void testToGetNull() {
+        assertEquals(null, this.subjectTimestest.getTimer());
+    }
+    @Test
+    public void testNotNull() {
+        this.subjectTimestest.addTimerToList(0, "new");
+        assertEquals("new", this.subjectTimestest.getTimer().getSubject());
+        assertEquals(0, this.subjectTimestest.getTimer().getMinutes());
+        
+    }
+    
+    
 
     @AfterClass
     public static void tearDownClass() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

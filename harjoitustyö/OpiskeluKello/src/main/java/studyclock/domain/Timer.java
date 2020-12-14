@@ -1,25 +1,29 @@
 package studyclock.domain;
 
 /**
- *
+ * Studying times are stored as timers in the StudyHistory class
  * @author mazaalto
  */
 public class Timer {
 
-    private int seconds;
+    private int minutes;
     private String subject;
 
-    public Timer(int seconds, String subject) {
-        this.seconds = seconds;
+    public Timer(int minutes, String subject) {
+        this.minutes = minutes;
         this.subject = subject;
     }
 
-    public int getSeconds() {
-        return seconds;
+    public int getMinutes() {
+        return minutes;
     }
 
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getSubject() {

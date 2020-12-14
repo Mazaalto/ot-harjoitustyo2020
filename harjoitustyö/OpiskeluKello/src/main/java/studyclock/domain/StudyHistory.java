@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package studyclock.domain;
 
 import java.util.ArrayList;
 
 /**
- *
+ * The timers are stored as StudyHistory objects
  * @author mazaalto
  */
 public class StudyHistory {
@@ -19,8 +15,9 @@ public class StudyHistory {
         this.list = new ArrayList<>();
     }
 
-    public void addTimerToList(Timer timer) {
-        this.list.add(timer);
+    public void addTimerToList(int minutes, String subject) {
+        Timer brandNew = new Timer(minutes, subject);
+        this.list.add(brandNew);
 
     }
 

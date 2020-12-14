@@ -8,7 +8,6 @@ package studyclock.ui;
 import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,18 +16,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import studyclock.domain.StudyClockService;
-import studyclock.domain.Timer;
 
 /**
  *
@@ -38,11 +33,13 @@ public class timerUIJavaFX extends Application {
 
     private int seconds;
     private Timeline timeline;
+    private final Label middle = new Label(":");
     private Label timerLabelMinutes = new Label("25");
     private Label timerLabelSeconds = new Label("00");
-    private final Label middle = new Label(":");
     private Label frase = new Label("");
     private StudyClockService service;
+    //type defines is the timer for studying or brake
+    private String type;
 
     @Override
     public void start(Stage window) {
@@ -50,8 +47,9 @@ public class timerUIJavaFX extends Application {
         //Here is the logic of the app
         this.service = new StudyClockService();
         //default time is one pomodoro, that is 25*60 = 1500s
-//        this.seconds = 1500;
-        this.seconds = 5;
+
+        this.seconds = 1500;
+        this.type = "study";
 
         //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
@@ -66,20 +64,29 @@ public class timerUIJavaFX extends Application {
         setup.setStyle("-fx-font-size: 2em");
         setup.setTextFill(Color.GOLDENROD);
         TextField secondsInText = new TextField();
-
-        //VOISKO TEHDÄ NOIHIN TIMERLABELEIHIN LISTENERIN JOKA SITTEN JOS KUMPIKIN 0 NIIN TEKEE JOTAIN?!"
-        //testaan siis sitä että tähän textfieldiin on tallennettuna siis sekunnit, en laita näkyviin, jos muuttuu "0" sitten tulee alert
         secondsInText.setText(Integer.toString(seconds));
 
-        secondsInText.textProperty().addListener((muutos, vanhaArvo, uusiArvo) -> {
-            System.out.println(vanhaArvo + " -> " + uusiArvo);
+        secondsInText.textProperty().addListener((change, oldValue, newValue) -> {
 
-            if (uusiArvo.equals("-1")) {
+            if (newValue.equals("-1") && this.type.equals("study")) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Well done");
                 alert.setHeaderText("You did it!");
-                alert.setContentText("Now you can relax for a bit or start studying");
+                alert.setContentText("Now you can relax for five minutes");
+                this.seconds = 300;
+                timerLabelSeconds.setText(
+                        Integer.toString(seconds % 60));
+                timerLabelMinutes.setText(
+                        Integer.toString(seconds / 60));
 
+                this.type = "break";
+                alert.show();
+
+            } else if (newValue.equals("-1") && this.type.equals("break")) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Let's do it!");
+                alert.setHeaderText("Break is over");
+                alert.setContentText("In pomodoro you study 25 minutes and relax 5");
                 alert.show();
 
             }
@@ -111,7 +118,6 @@ public class timerUIJavaFX extends Application {
             timeline.getKeyFrames().add(
                     new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
                         seconds--;
-                        //secondsInText.setText(Integer.toString(seconds));
 
                         // update timerLabels minutes and seconds
                         timerLabelSeconds.setText(
@@ -122,7 +128,6 @@ public class timerUIJavaFX extends Application {
                         if (seconds <= 0) {
                             timeline.stop();
                             secondsInText.setText("-1");
-                            
 
                         }
 
@@ -144,6 +149,9 @@ public class timerUIJavaFX extends Application {
         //Scene in Set time in minutes
         Button setTime = new Button("Set time");
         Button backToStart = new Button("Go back");
+        Label choose = new Label("Will you study or have a break?");
+        Button chooseStudy = new Button("Studying");
+        Button chooseBreak = new Button("Break");
         Button setSubject = new Button("Set subject");
         Label instructions = new Label("Here you can set the time for the studying or break");
         TextField minutesInText = new TextField();
@@ -152,6 +160,9 @@ public class timerUIJavaFX extends Application {
         VBox buttonsSetTime = new VBox();
         Button backFromSetup = new Button("go back");
         buttonsSetTime.setSpacing(15);
+        buttonsSetTime.getChildren().add(choose);
+        buttonsSetTime.getChildren().add(chooseStudy);
+        buttonsSetTime.getChildren().add(chooseBreak);
         buttonsSetTime.getChildren().add(instructions);
         buttonsSetTime.getChildren().add(minutesInText);
         buttonsSetTime.getChildren().add(setTime);
@@ -161,6 +172,20 @@ public class timerUIJavaFX extends Application {
         buttonsSetTime.getChildren().add(backToStart);
         Scene settingup = new Scene(buttonsSetTime);
 
+        chooseStudy.setOnAction(
+                (event) -> {
+
+                    this.type = "study";
+
+                }
+        );
+        chooseBreak.setOnAction(
+                (event) -> {
+
+                    this.type = "break";
+
+                }
+        );
         //buttons fuctions in setTime
         setup.setOnAction(
                 (event) -> {
