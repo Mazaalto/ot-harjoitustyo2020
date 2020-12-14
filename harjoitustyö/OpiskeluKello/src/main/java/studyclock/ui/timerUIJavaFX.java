@@ -19,6 +19,9 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -89,8 +92,8 @@ public class timerUIJavaFX extends Application {
         HBox buttons = new HBox();
         buttons.setSpacing(130);
         buttons.getChildren().add(start);
-        buttons.getChildren().add(history);
         buttons.getChildren().add(setup);
+        buttons.getChildren().add(history);
 
         mainScene.setTop(buttons);
         mainScene.setLeft(timerLabelMinutes);
@@ -233,17 +236,59 @@ public class timerUIJavaFX extends Application {
 
         //Scene where is the analytics
         Button backToStartAnalytics = new Button("go back");
-        HBox buttonsAnalytics = new HBox();
+        VBox buttonsAnalytics = new VBox();
         buttonsAnalytics.setSpacing(15);
-        buttonsAnalytics.getChildren().add(backToStartAnalytics);
-        Label text2 = new Label("Here you will see your study history");
+        Label text2 = new Label("Set a goal of hours to study daily");
+        TextField goalAsText = new TextField();
+        Button goal = new Button("Set the goal");
+        Button graph = new Button("Show the history as a graph");
         buttonsAnalytics.getChildren().add(text2);
+        buttonsAnalytics.getChildren().add(goalAsText);
+        buttonsAnalytics.getChildren().add(goal);
+        buttonsAnalytics.getChildren().add(graph);
+
+        buttonsAnalytics.getChildren().add(backToStartAnalytics);
         Scene analytics = new Scene(buttonsAnalytics);
 
         history.setOnAction(
                 (event) -> {
-                    System.out.println("Show the study history");
+
                     window.setScene(analytics);
+
+                }
+        );
+        goal.setOnAction(
+                (event) -> {
+                    String intString = goalAsText.getText();
+                    if (this.service.checkIfInt(intString)) {
+                        this.service.setSeconds(service.getStringToInt(intString));
+
+                    } else {
+                        instructions.setText("Input time in minutes");
+                        frase.setText("Remember to adjust time in hours");
+                    }
+
+                }
+        );
+        //Here is the setting up of the graph
+        graph.setOnAction(
+                (event) -> {
+                    NumberAxis x = new NumberAxis();
+                    NumberAxis y = new NumberAxis();
+
+                    x.setLabel("Day");
+                    y.setLabel("Hours");
+                    LineChart<Number, Number> chart = new LineChart<>(x, y);
+                    chart.setTitle("Your study history");
+
+                    XYChart.Series goalData = new XYChart.Series();
+                    goalData.setName("Goal");
+                    goalData.getData().add(new XYChart.Data(0, 8));
+                    goalData.getData().add(new XYChart.Data(1, 8));
+                    goalData.getData().add(new XYChart.Data(2, 8));
+                    chart.getData().add(goalData);
+                    Scene historyChart = new Scene(chart, 740, 540);
+                    window.setScene(historyChart);
 
                 }
         );

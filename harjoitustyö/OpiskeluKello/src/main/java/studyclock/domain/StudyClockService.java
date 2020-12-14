@@ -22,6 +22,7 @@ public class StudyClockService {
     private int seconds;
     private String unknownSubj;
     private String type;
+    private int goalHours;
 
     public StudyClockService() {
         this.history = new StudyHistory();
@@ -29,6 +30,14 @@ public class StudyClockService {
         this.seconds = 1500;
         this.type = "study";
 
+    }
+
+    public int getGoal() {
+        return goalHours;
+    }
+
+    public void setGoal(int goal) {
+        this.goalHours = goal;
     }
 
     public void setType(String type) {

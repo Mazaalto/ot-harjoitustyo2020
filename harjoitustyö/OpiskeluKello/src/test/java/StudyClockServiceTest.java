@@ -96,7 +96,12 @@ public class StudyClockServiceTest {
     public void getStringToIntWorksWithNegativeBig() {
         assertEquals(-1, this.service.getStringToInt("-10000"));
     }
-    //luultavasti virhe tässä, mieti sitä, siis nyt timeria luotaessa käytetään oletusarvoja, ellei niitä muuteta
+    @Test
+    public void getGoalWorks() {
+        this.service.setGoal(1);
+        assertEquals(1, this.service.getGoal());
+    }
+
     @Test
     public void addingTimerWorks() {
         this.service.setSeconds(60);
