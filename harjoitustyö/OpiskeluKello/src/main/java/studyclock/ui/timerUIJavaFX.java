@@ -19,6 +19,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 import studyclock.domain.StudyClockService;
 import studyclock.domain.Timer;
@@ -43,7 +50,8 @@ public class timerUIJavaFX extends Application {
         //Here is the logic of the app
         this.service = new StudyClockService();
         //default time is one pomodoro, that is 25*60 = 1500s
-        this.seconds = 1500;
+//        this.seconds = 1500;
+        this.seconds = 5;
 
         //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
@@ -57,7 +65,26 @@ public class timerUIJavaFX extends Application {
         Button setup = new Button("Set timer for studying or a break");
         setup.setStyle("-fx-font-size: 2em");
         setup.setTextFill(Color.GOLDENROD);
-        
+        TextField secondsInText = new TextField();
+
+        //VOISKO TEHDÄ NOIHIN TIMERLABELEIHIN LISTENERIN JOKA SITTEN JOS KUMPIKIN 0 NIIN TEKEE JOTAIN?!"
+        //testaan siis sitä että tähän textfieldiin on tallennettuna siis sekunnit, en laita näkyviin, jos muuttuu "0" sitten tulee alert
+        secondsInText.setText(Integer.toString(seconds));
+
+        secondsInText.textProperty().addListener((muutos, vanhaArvo, uusiArvo) -> {
+            System.out.println(vanhaArvo + " -> " + uusiArvo);
+
+            if (uusiArvo.equals("-1")) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Well done");
+                alert.setHeaderText("You did it!");
+                alert.setContentText("Now you can relax for a bit or start studying");
+
+                alert.show();
+
+            }
+        });
+
         HBox buttons = new HBox();
         buttons.setSpacing(130);
         buttons.getChildren().add(start);
@@ -79,10 +106,12 @@ public class timerUIJavaFX extends Application {
             }
 
             timeline = new Timeline();
+
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.getKeyFrames().add(
                     new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
                         seconds--;
+                        //secondsInText.setText(Integer.toString(seconds));
 
                         // update timerLabels minutes and seconds
                         timerLabelSeconds.setText(
@@ -92,11 +121,15 @@ public class timerUIJavaFX extends Application {
 
                         if (seconds <= 0) {
                             timeline.stop();
+                            secondsInText.setText("-1");
+                            
 
                         }
+
                     }
                     ));
             timeline.playFromStart();
+
         }
         );
 
@@ -164,7 +197,7 @@ public class timerUIJavaFX extends Application {
                 }
         );
         //here we get the subject for service and analytics
-        
+
         setSubject.setOnAction(
                 (event) -> {
                     String subject = subjecInText.getText();
@@ -205,6 +238,8 @@ public class timerUIJavaFX extends Application {
         //here will be the scene for study analytics
         window.setScene(first);
         window.show();
+        //Onnistui löytymään alerttilaatikko, tätä testataan
+
     }
 
     public static void main(String[] args) {
