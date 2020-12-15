@@ -14,12 +14,21 @@ public class TimerTest {
 
     @Before
     public void setUp() {
-        this.timer = new Timer(10, "testing");
+        this.timer = new Timer(10, "testing", "Tue Dec 15 13:09:18 EET 2020");
     }
 
     @Test
     public void constructorWorksSubject() {
         assertEquals("testing", this.timer.getSubject());
+    }
+    @Test
+    public void constructorWorksDate() {
+        assertEquals("Tue Dec 15 13:09:18 EET 2020", this.timer.getDate());
+    }
+    @Test
+    public void setDateWorks() {
+        this.timer.setDate("Tue Dec 16 13:09:18 EET 2020");
+        assertEquals("Tue Dec 16 13:09:18 EET 2020", this.timer.getDate());
     }
 
     @Test

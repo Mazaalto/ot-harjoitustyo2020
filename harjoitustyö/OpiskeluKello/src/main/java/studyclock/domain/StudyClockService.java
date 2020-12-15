@@ -5,6 +5,8 @@
  */
 package studyclock.domain;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
@@ -29,6 +31,7 @@ public class StudyClockService {
         this.unknownSubj = "not set";
         this.seconds = 1500;
         this.type = "study";
+        this.goalHours = 4;
 
     }
 
@@ -88,12 +91,29 @@ public class StudyClockService {
         return -1;
     }
 
-    //seconds are changed to minutes when they are saved to studyhistory
+    //seconds are changed to minutes when they are saved to studyhistory, date is stored as a string
+    //Tue Dec 15 13:09:18 EET 2020
     public void addTimer() {
         int minutes = this.seconds / 60;
-        this.history.addTimerToList(minutes, this.unknownSubj);
+        Date date = new Date();
+        String dateAsString = date.toString();
+        //tähän tulee mun testit graafia varten
+        String testi = "Mon Dec 15 13:09:18 EET 2020";
+        this.history.addTimerToList(minutes, this.unknownSubj, testi);
+        this.history.addTimerToList(minutes, this.unknownSubj, dateAsString);
+        
 
     }
+//    //Here is stored the latest seven days history
+//    public StudyHistory getTheHistory() {
+//        StudyHistory forchart = new StudyHistory();
+//        
+//        ArrayList<Timer> lista = this.history.getList();
+//        for (int i = 0; i < lista.size(); i++) {
+//            if (lista.get(i).getDate();
+//        }
+//        
+//    }
 
     public Timer getTimerFromHistory() {
         return this.history.getTimer();

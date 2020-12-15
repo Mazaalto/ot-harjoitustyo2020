@@ -15,8 +15,8 @@ public class StudyHistory {
         this.list = new ArrayList<>();
     }
 
-    public void addTimerToList(int minutes, String subject) {
-        Timer brandNew = new Timer(minutes, subject);
+    public void addTimerToList(int minutes, String subject, String date) {
+        Timer brandNew = new Timer(minutes, subject, date);
         this.list.add(brandNew);
 
     }

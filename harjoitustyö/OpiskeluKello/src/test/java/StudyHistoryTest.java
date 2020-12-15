@@ -32,7 +32,7 @@ public class StudyHistoryTest {
 
     @Test
     public void testGetListSizeAfterAdd() {
-        this.subjectTimestest.addTimerToList(0, "new");
+        this.subjectTimestest.addTimerToList(0, "new", "Tue Dec 15 13:09:18 EET 2020");
         assertEquals(1, this.subjectTimestest.getListSize());
     }
     @Test
@@ -41,7 +41,7 @@ public class StudyHistoryTest {
     }
     @Test
     public void testNotNull() {
-        this.subjectTimestest.addTimerToList(0, "new");
+        this.subjectTimestest.addTimerToList(0, "new", "Tue Dec 15 13:09:18 EET 2020");
         assertEquals("new", this.subjectTimestest.getTimer().getSubject());
         assertEquals(0, this.subjectTimestest.getTimer().getMinutes());
         
