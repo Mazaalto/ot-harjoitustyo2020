@@ -6,6 +6,7 @@
 package studyclock.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,7 +24,8 @@ import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Side;
-import javafx.scene.Group;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
@@ -97,7 +99,7 @@ public class timerUIJavaFX extends Application {
         });
 
         HBox buttons = new HBox();
-        buttons.setSpacing(130);
+        buttons.setSpacing(100);
         buttons.getChildren().add(start);
         buttons.getChildren().add(setup);
         buttons.getChildren().add(history);
@@ -262,36 +264,23 @@ public class timerUIJavaFX extends Application {
         BorderPane graphScene = new BorderPane();
         Scene scene = new Scene(graphScene);
         //the total time studied chart per day
-        NumberAxis x = new NumberAxis();
-        NumberAxis y = new NumberAxis();
-        x.setLabel("Day");
-        y.setLabel("Hours");
-        LineChart<Number, Number> chart = new LineChart<>(x, y);
-        chart.setTitle("Your study history");
 
-        XYChart.Series goalData = new XYChart.Series();
-        XYChart.Series studyData = new XYChart.Series();
-        goalData.setName("Goal");
-        studyData.setName("Study history");
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String, Number> bc
+                = new BarChart<>(xAxis, yAxis);
+        bc.setTitle("How close to goal");
+        xAxis.setLabel("");
+        yAxis.setLabel("Hours");
+        XYChart.Series series = new XYChart.Series();
+        series.setName("today");
+        series.getData().add(new XYChart.Data("goal", this.service.getGoal()));
+        series.getData().add(new XYChart.Data("done", this.service.sumOfHashMap()));
 
-        int goalInt = this.service.getGoal();
-        for (int i = 0; i < 7; i++) {
-            goalData.getData().add(new XYChart.Data(i, goalInt));
-        }
-        //tähän testinä parit eri timerit
-        this.service.addTimer();
-        ArrayList<Timer> lista = this.service.getHistory().getList();
+        //Scene scene  = new Scene(bc,800,600);
+        bc.getData().addAll(series);
+        graphScene.setLeft(bc);
 
-        for (int i2 = 0; i2 < lista.size(); i2++) {
-            //nyt pitää miettiä miten lasken samat päivät yhteen, enkä näytä vaan timereita, pitäiskö itseasiassa tehdä muualla.. esim serviisissä
-        }
-
-        chart.getData().add(goalData);
-        graphScene.setLeft(chart);
-
-//                    window.setTitle("Study History");
-//                    window.setWidth(600);
-//                    window.setHeight(600);
         ObservableList<PieChart.Data> pieChartData
                 = FXCollections.observableArrayList(
                         new PieChart.Data("Tira", 13),
@@ -299,8 +288,9 @@ public class timerUIJavaFX extends Application {
                         new PieChart.Data("Tito", 10),
                         new PieChart.Data("Ohtu", 22),
                         new PieChart.Data("Coding", 30));
-        final PieChart chartpie = new PieChart(pieChartData);
-        chartpie.setTitle("Example Subjects Studied");
+
+        PieChart chartpie = new PieChart(pieChartData);
+        chartpie.setTitle("Example Subjects of the day");
         chartpie.setLabelLineLength(30);
         chartpie.setLegendSide(Side.RIGHT);
 
@@ -312,7 +302,7 @@ public class timerUIJavaFX extends Application {
         Label text2 = new Label("Set a goal of hours to study daily");
         TextField goalAsText = new TextField();
         Button goal = new Button("Set the goal");
-        Button graph = new Button("Show the history as a graph");
+        Button graph = new Button("Update the graphs");
         buttonsAnalytics.getChildren().add(text2);
         buttonsAnalytics.getChildren().add(goalAsText);
         buttonsAnalytics.getChildren().add(goal);
@@ -350,8 +340,32 @@ public class timerUIJavaFX extends Application {
         //show the graph
         graph.setOnAction(
                 (event) -> {
-//                    //here we change the values to the correct ones
+                    //if there is not enough data, show this
+                    HashMap<String, Integer> map = this.service.calculatePercentages();
 
+                    if (map.isEmpty()) {
+                        ObservableList<PieChart.Data> notEnoughData
+                        = FXCollections.observableArrayList(
+                                new PieChart.Data("Not enough data", 100));
+                        final PieChart chart2 = new PieChart(notEnoughData);
+
+                        graphScene.setRight(chart2);
+
+                    } else {
+                        //if there is enough data, show this
+                        ObservableList<PieChart.Data> thereIsEnoughData
+                        = FXCollections.observableArrayList();
+//                    for (String key : map.keySet()) {
+//                        map.put(key, map.get(key));
+                        for (String key : map.keySet()) {
+                            PieChart.Data data = new PieChart.Data(key, (int) map.get(key));
+                            thereIsEnoughData.add(data);
+                        }
+
+                        final PieChart chart3 = new PieChart(thereIsEnoughData);
+                        graphScene.setRight(chart3);
+                    }
+                    series.getData().add(new XYChart.Data("done", this.service.sumOfHashMap()/60));
                 }
         );
 

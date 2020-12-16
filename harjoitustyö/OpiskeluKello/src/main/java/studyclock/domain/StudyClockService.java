@@ -5,8 +5,8 @@
  */
 package studyclock.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -21,17 +21,21 @@ import java.util.regex.Pattern;
 public class StudyClockService {
 
     private StudyHistory history;
+    private HashMap today;
     private int seconds;
     private String unknownSubj;
     private String type;
     private int goalHours;
+    private HashMap week;
 
     public StudyClockService() {
         this.history = new StudyHistory();
+        this.today = new HashMap<String, Integer>();
         this.unknownSubj = "not set";
         this.seconds = 1500;
         this.type = "study";
         this.goalHours = 4;
+        this.week = new HashMap<Integer, Integer>();
 
     }
 
@@ -97,23 +101,86 @@ public class StudyClockService {
         int minutes = this.seconds / 60;
         Date date = new Date();
         String dateAsString = date.toString();
-        //tähän tulee mun testit graafia varten
-        String testi = "Mon Dec 15 13:09:18 EET 2020";
-        this.history.addTimerToList(minutes, this.unknownSubj, testi);
+        int day = getToday();
         this.history.addTimerToList(minutes, this.unknownSubj, dateAsString);
-        
+        addWeek(day, minutes);
+        addTodaysPieChart(this.unknownSubj, minutes);
 
     }
-//    //Here is stored the latest seven days history
-//    public StudyHistory getTheHistory() {
-//        StudyHistory forchart = new StudyHistory();
-//        
-//        ArrayList<Timer> lista = this.history.getList();
-//        for (int i = 0; i < lista.size(); i++) {
-//            if (lista.get(i).getDate();
-//        }
-//        
-//    }
+
+    public HashMap getTodaysPieChart() {
+        return this.today;
+    }
+
+    //Here we add todays HashMap that is the base for the PieChart
+    public void addTodaysPieChart(String subj, int minutes) {
+        if (!this.today.containsKey(subj)) {
+            this.today.put(subj, minutes);
+
+        } else {
+            int value = (int) this.today.get(subj);
+            value += minutes;
+            this.today.put(subj, value);
+        }
+
+    }
+
+    //Here we calculate the percentages of the study areas and store it in Map
+    public HashMap<String, Integer> calculatePercentages() {
+        HashMap<String, Integer> percentages = new HashMap<>();
+        for (Object key : this.today.keySet()) {
+            int percent;
+            percent = getPercentageTrue((String) key);
+            percentages.put((String) key, percent);
+        }
+        return percentages;
+
+    }
+
+    public int getPercentage(int val) {
+        double value = 1;
+        value /= 2;
+        value *= 100;
+        return (int) value;
+    }
+
+    public int getPercentageTrue(String key) {
+        int nominator = (int) this.today.get(key);
+        int denominator = this.sumOfHashMap();
+
+        if (nominator != 0 && denominator != 0) {
+            double value = nominator;
+            value /= denominator;
+            value *= 100;
+            return (int) value;
+
+        }
+        return 100;
+    }
+
+    public Integer sumOfHashMap() {
+        int sum = 0;
+        for (Object value : this.today.values()) {
+            sum += (int) value;
+        }
+        return sum;
+    }
+
+    //Here we add time for the correct week
+    public void addWeek(int day, int time) {
+        if (this.week.containsKey(day)) {
+            int timeTotal = (int) this.week.get(day);
+            timeTotal += time;
+            this.week.put(day, timeTotal);
+        } else {
+            this.week.put(day, time);
+        }
+    }
+
+    public HashMap<Integer, Integer> getWeek() {
+        return this.week;
+
+    }
 
     public Timer getTimerFromHistory() {
         return this.history.getTimer();
@@ -122,6 +189,16 @@ public class StudyClockService {
 
     public void minusSeconds() {
         this.seconds = this.seconds - 1;
+    }
+
+    public int getToday() {
+        Date date = new Date();
+        String dateAsString = date.toString();
+        String[] split = dateAsString.split(" ");
+        //date is the plit[2]
+        int day = Integer.valueOf(split[2]);
+        return day;
+
     }
 
 }

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.util.Date;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -96,6 +98,7 @@ public class StudyClockServiceTest {
     public void getStringToIntWorksWithNegativeBig() {
         assertEquals(-1, this.service.getStringToInt("-10000"));
     }
+
     @Test
     public void getGoalWorks() {
         this.service.setGoal(1);
@@ -109,6 +112,104 @@ public class StudyClockServiceTest {
         this.service.addTimer();
         assertEquals(1, this.service.getTimerFromHistory().getMinutes());
         assertEquals("testing", this.service.getTimerFromHistory().getSubject());
+    }
+
+    @Test
+    public void addWeekWorks() {
+        this.service.addWeek(1, 5);
+        int value = this.service.getWeek().get(1);
+        assertEquals(5, value);
+    }
+
+    @Test
+    public void addWeekWorksAfterWeekDayIsAlready() {
+        this.service.addWeek(1, 5);
+        this.service.addWeek(1, 5);
+        int value = this.service.getWeek().get(1);
+        assertEquals(10, value);
+    }
+
+    @Test
+    public void getTodayWorks() {
+        Date date = new Date();
+        String dateAsString = date.toString();
+        String[] split = dateAsString.split(" ");
+        //date is the plit[2]
+        int day = Integer.valueOf(split[2]);
+        assertEquals(day, this.service.getToday());
+    }
+
+    @Test
+    public void addTodaysPieChartWorks() {
+        this.service.addTodaysPieChart("test", 3);
+        int time = (int) this.service.getTodaysPieChart().get("test");
+        assertEquals(3, time);
+    }
+
+    @Test
+    public void addTodaysPieChartWorksAfterAdd() {
+        this.service.addTodaysPieChart("test", 3);
+        this.service.addTodaysPieChart("a", 3);
+        int time = (int) this.service.getTodaysPieChart().get("test");
+        assertEquals(3, time);
+    }
+
+    @Test
+    public void addTodaysPieChartWorksMore() {
+        this.service.addTodaysPieChart("test", 3);
+        this.service.addTodaysPieChart("test", 3);
+        assertEquals(6, this.service.getTodaysPieChart().get("test"));
+    }
+
+    @Test
+    public void getPercentWorks() {
+        int value = this.service.getPercentage(1);
+        assertEquals(50, value);
+
+    }
+
+    @Test
+    public void getPercentTrueWorks() {
+        this.service.addTodaysPieChart("test", 1);
+        int value = this.service.getPercentageTrue("test");
+        assertEquals(100, value);
+
+    }
+
+    @Test
+    public void getPercentTrueWorks2() {
+        this.service.addTodaysPieChart("test", 1);
+        this.service.addTodaysPieChart("abc", 1);
+        int value = this.service.getPercentageTrue("test");
+        assertEquals(50, value);
+
+    }
+
+    @Test
+    public void getPercentTrueWorks3() {
+        this.service.addTodaysPieChart("test", 1);
+        this.service.addTodaysPieChart("abc", 2);
+        int value = this.service.getPercentageTrue("test");
+        assertEquals(33, value);
+
+    }
+
+    @Test
+    public void percentagesWork() {
+        this.service.addTodaysPieChart("test", 3);
+        this.service.addTodaysPieChart("abc", 3);
+        HashMap<String, Integer> calculatePercentages = this.service.calculatePercentages();
+        int percent = calculatePercentages.get("test");
+        assertEquals(50, percent);
+    }
+
+    @Test
+    public void percentagesWork2() {
+        this.service.addTodaysPieChart("test", 6);
+        this.service.addTodaysPieChart("abc", 3);
+        HashMap<String, Integer> calculatePercentages = this.service.calculatePercentages();
+        int percent = calculatePercentages.get("test");
+        assertEquals(66, percent);
     }
 
     @After
