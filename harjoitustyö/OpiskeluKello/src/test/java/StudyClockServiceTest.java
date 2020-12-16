@@ -114,20 +114,20 @@ public class StudyClockServiceTest {
         assertEquals("testing", this.service.getTimerFromHistory().getSubject());
     }
 
-    @Test
-    public void addWeekWorks() {
-        this.service.addWeek(1, 5);
-        int value = this.service.getWeek().get(1);
-        assertEquals(5, value);
-    }
-
-    @Test
-    public void addWeekWorksAfterWeekDayIsAlready() {
-        this.service.addWeek(1, 5);
-        this.service.addWeek(1, 5);
-        int value = this.service.getWeek().get(1);
-        assertEquals(10, value);
-    }
+//    @Test
+//    public void addWeekWorks() {
+//        this.service.addWeek(1, 5);
+//        int value = this.service.getWeek().get(1);
+//        assertEquals(5, value);
+//    }
+//
+//    @Test
+//    public void addWeekWorksAfterWeekDayIsAlready() {
+//        this.service.addWeek(1, 5);
+//        this.service.addWeek(1, 5);
+//        int value = this.service.getWeek().get(1);
+//        assertEquals(10, value);
+//    }
 
     @Test
     public void getTodayWorks() {

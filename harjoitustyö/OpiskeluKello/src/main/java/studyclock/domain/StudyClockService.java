@@ -14,10 +14,6 @@ import java.util.regex.Pattern;
  *
  * @author mazaalto
  */
-//ideana on siis se että täällä operoin sekunneilla, niin että tallennan oikeat sekunti määrät
-//ja aiheet studyhistoryyn, lisäksi täältä operoin sitten historian välittymisen rapsa osioon
-//silloin ajattelin tallentaa tiedon tekstitiedostoon, josta teen sitten ArrayListan luettaessa
-//luku tapahtuu täällä
 public class StudyClockService {
 
     private StudyHistory history;
@@ -103,7 +99,7 @@ public class StudyClockService {
         String dateAsString = date.toString();
         int day = getToday();
         this.history.addTimerToList(minutes, this.unknownSubj, dateAsString);
-        addWeek(day, minutes);
+//        addWeek(day, minutes);
         addTodaysPieChart(this.unknownSubj, minutes);
 
     }
@@ -166,21 +162,21 @@ public class StudyClockService {
         return sum;
     }
 
-    //Here we add time for the correct week
-    public void addWeek(int day, int time) {
-        if (this.week.containsKey(day)) {
-            int timeTotal = (int) this.week.get(day);
-            timeTotal += time;
-            this.week.put(day, timeTotal);
-        } else {
-            this.week.put(day, time);
-        }
-    }
+//    //Here we add time for the correct week
+//    public void addWeek(int day, int time) {
+//        if (this.week.containsKey(day)) {
+//            int timeTotal = (int) this.week.get(day);
+//            timeTotal += time;
+//            this.week.put(day, timeTotal);
+//        } else {
+//            this.week.put(day, time);
+//        }
+//    }
 
-    public HashMap<Integer, Integer> getWeek() {
-        return this.week;
-
-    }
+//    public HashMap<Integer, Integer> getWeek() {
+//        return this.week;
+//
+//    }
 
     public Timer getTimerFromHistory() {
         return this.history.getTimer();

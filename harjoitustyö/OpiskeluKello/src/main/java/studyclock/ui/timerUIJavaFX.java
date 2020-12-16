@@ -5,7 +5,6 @@
  */
 package studyclock.ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.scene.layout.HBox;
 import javafx.animation.KeyFrame;
@@ -26,7 +25,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -35,7 +33,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import studyclock.domain.StudyClockService;
-import studyclock.domain.Timer;
 
 /**
  *
@@ -49,8 +46,6 @@ public class timerUIJavaFX extends Application {
     private Label timerLabelSeconds = new Label("00");
     private Label frase = new Label("");
     private StudyClockService service;
-    //type defines is the timer for studying or brake
-    //private String type;
 
     @Override
     public void start(Stage window) {
@@ -157,31 +152,31 @@ public class timerUIJavaFX extends Application {
         HBox chooseStudyOrBrake = new HBox();
         chooseStudyOrBrake.setSpacing(5);
         Button setTime = new Button("Set time");
-        setTime.setStyle("-fx-font-size: 2em");
+        setTime.setStyle("-fx-font-size: 1.5em");
         setTime.setTextFill(Color.GOLDENROD);
         Button backToStart = new Button("Go back");
-        backToStart.setStyle("-fx-font-size: 2em");
+        backToStart.setStyle("-fx-font-size: 1.5em");
         backToStart.setTextFill(Color.GOLDENROD);
         Label choose = new Label("Will you study or have a break?");
         Button chooseStudy = new Button("Studying");
         chooseStudyOrBrake.getChildren().add(chooseStudy);
 
-        chooseStudy.setStyle("-fx-font-size: 2em");
+        chooseStudy.setStyle("-fx-font-size: 1.5em");
         chooseStudy.setTextFill(Color.GOLDENROD);
         Button chooseBreak = new Button("Break");
         chooseStudyOrBrake.getChildren().add(chooseBreak);
-        chooseBreak.setStyle("-fx-font-size: 2em");
+        chooseBreak.setStyle("-fx-font-size: 1.5em");
         chooseBreak.setTextFill(Color.GOLDENROD);
         Button setSubject = new Button("Set subject");
-        setSubject.setStyle("-fx-font-size: 2em");
+        setSubject.setStyle("-fx-font-size: 1.5em");
         setSubject.setTextFill(Color.GOLDENROD);
-        Label instructions = new Label("Here you can set the time for the studying or break");
+        Label instructions = new Label("Here you can set time in minutes");
         TextField minutesInText = new TextField();
         Label instructionsForSub = new Label("Here you can write a subject you are studying for analytics");
         TextField subjecInText = new TextField();
         VBox buttonsSetTime = new VBox();
         Button backFromSetup = new Button("go back");
-        backFromSetup.setStyle("-fx-font-size: 2em");
+        backFromSetup.setStyle("-fx-font-size: 1.5em");
         backFromSetup.setTextFill(Color.GOLDENROD);
 
         buttonsSetTime.setSpacing(15);
@@ -276,8 +271,6 @@ public class timerUIJavaFX extends Application {
         series.setName("today");
         series.getData().add(new XYChart.Data("goal", this.service.getGoal()));
         series.getData().add(new XYChart.Data("done", this.service.sumOfHashMap()));
-
-        //Scene scene  = new Scene(bc,800,600);
         bc.getData().addAll(series);
         graphScene.setLeft(bc);
 
@@ -298,11 +291,17 @@ public class timerUIJavaFX extends Application {
 
         VBox buttonsAnalytics = new VBox();
         Button backToStartAnalytics = new Button("go back");
+        backToStartAnalytics.setStyle("-fx-font-size: 1.5em");
+        backToStartAnalytics.setTextFill(Color.GOLDENROD);
         buttonsAnalytics.setSpacing(15);
         Label text2 = new Label("Set a goal of hours to study daily");
         TextField goalAsText = new TextField();
         Button goal = new Button("Set the goal");
+        goal.setStyle("-fx-font-size: 1.5em");
+        goal.setTextFill(Color.GOLDENROD);
         Button graph = new Button("Update the graphs");
+        graph.setStyle("-fx-font-size: 1.5em");
+        graph.setTextFill(Color.GOLDENROD);
         buttonsAnalytics.getChildren().add(text2);
         buttonsAnalytics.getChildren().add(goalAsText);
         buttonsAnalytics.getChildren().add(goal);
@@ -317,9 +316,7 @@ public class timerUIJavaFX extends Application {
 
         history.setOnAction(
                 (event) -> {
-
                     window.setScene(scene);
-
                 }
         );
         goal.setOnAction(
@@ -355,8 +352,7 @@ public class timerUIJavaFX extends Application {
                         //if there is enough data, show this
                         ObservableList<PieChart.Data> thereIsEnoughData
                         = FXCollections.observableArrayList();
-//                    for (String key : map.keySet()) {
-//                        map.put(key, map.get(key));
+
                         for (String key : map.keySet()) {
                             PieChart.Data data = new PieChart.Data(key, (int) map.get(key));
                             thereIsEnoughData.add(data);
@@ -365,7 +361,19 @@ public class timerUIJavaFX extends Application {
                         final PieChart chart3 = new PieChart(thereIsEnoughData);
                         graphScene.setRight(chart3);
                     }
-                    series.getData().add(new XYChart.Data("done", this.service.sumOfHashMap()/60));
+                    // here is if we update the goal
+                    BarChart<String, Number> bc2
+                    = new BarChart<>(xAxis, yAxis);
+                    bc2.setTitle("How close to goal");
+                    xAxis.setLabel("");
+                    yAxis.setLabel("Hours");
+                    XYChart.Series series2 = new XYChart.Series();
+                    series2.setName("today");
+                    series2.getData().add(new XYChart.Data("goal", this.service.getGoal()));
+                    series2.getData().add(new XYChart.Data("done", this.service.sumOfHashMap() / 60));
+                    bc2.getData().addAll(series2);
+                    graphScene.setLeft(bc2);
+
                 }
         );
 
@@ -377,10 +385,8 @@ public class timerUIJavaFX extends Application {
                 }
         );
 
-        //here will be the scene for study analytics
         window.setScene(first);
         window.show();
-        //Onnistui löytymään alerttilaatikko, tätä testataan
 
     }
 
