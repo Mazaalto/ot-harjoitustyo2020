@@ -56,19 +56,22 @@ public class timerUIJavaFX extends Application {
         //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
         Button start = new Button("Start the timer");
+        Button stop = new Button("Reset the timer");
         start.setStyle("-fx-font-size: 2em");
         start.setTextFill(Color.GOLDENROD);
+        stop.setStyle("-fx-font-size: 2em");
+        stop.setTextFill(Color.GOLDENROD);
         Button history = new Button("Show the study history");
         history.setStyle("-fx-font-size: 2em");
         history.setTextFill(Color.GOLDENROD);
-        Button setup = new Button("Set timer for studying or a break");
+        Button setup = new Button("Adjust the timer");
         setup.setStyle("-fx-font-size: 2em");
         setup.setTextFill(Color.GOLDENROD);
         TextField secondsInText = new TextField();
         secondsInText.setText(Integer.toString(this.service.getSeconds()));
 
         secondsInText.textProperty().addListener((change, oldValue, newValue) -> {
-
+            //when the timer is finished there is a pop up window, alert
             if (newValue.equals("-1") && this.service.getType().equals("study")) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Well done");
@@ -90,12 +93,20 @@ public class timerUIJavaFX extends Application {
                 alert.setContentText("In pomodoro you study 25 minutes and relax 5");
                 alert.show();
 
+            } else if (newValue.equals("-1") && this.service.getType().equals("stop")) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("You stopped the timer");
+                alert.setHeaderText("In pomodoro you study for 25 minutes without stop");
+                alert.setContentText("You can start a new timer in Set timer");
+                alert.show();
+
             }
         });
 
         HBox buttons = new HBox();
         buttons.setSpacing(100);
         buttons.getChildren().add(start);
+        buttons.getChildren().add(stop);
         buttons.getChildren().add(setup);
         buttons.getChildren().add(history);
 
@@ -114,8 +125,6 @@ public class timerUIJavaFX extends Application {
             }
 
             timeline = new Timeline();
-            this.service.addTimer();
-
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.getKeyFrames().add(
                     new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
@@ -129,6 +138,7 @@ public class timerUIJavaFX extends Application {
 
                         if (this.service.getSeconds() <= 0) {
                             timeline.stop();
+                            this.service.addTimer();
                             secondsInText.setText("-1");
 
                         }
@@ -136,6 +146,13 @@ public class timerUIJavaFX extends Application {
                     }
                     ));
             timeline.playFromStart();
+
+        }
+        );
+        stop.setOnAction((event) -> {
+
+            this.service.setSeconds(0);
+            this.service.setType("stop");
 
         }
         );
@@ -171,15 +188,16 @@ public class timerUIJavaFX extends Application {
         setSubject.setStyle("-fx-font-size: 1.5em");
         setSubject.setTextFill(Color.GOLDENROD);
         Label instructions = new Label("Here you can set time in minutes");
+        
         TextField minutesInText = new TextField();
         Label instructionsForSub = new Label("Here you can write a subject you are studying for analytics");
         TextField subjecInText = new TextField();
         VBox buttonsSetTime = new VBox();
-        Button backFromSetup = new Button("go back");
+        Button backFromSetup = new Button("Go back");
         backFromSetup.setStyle("-fx-font-size: 1.5em");
         backFromSetup.setTextFill(Color.GOLDENROD);
 
-        buttonsSetTime.setSpacing(15);
+        buttonsSetTime.setSpacing(5);
         buttonsSetTime.getChildren().add(choose);
         buttonsSetTime.getChildren().add(chooseStudyOrBrake);
         buttonsSetTime.getChildren().add(instructions);
@@ -193,14 +211,14 @@ public class timerUIJavaFX extends Application {
 
         chooseStudy.setOnAction(
                 (event) -> {
-
+                    choose.setText("You chose to study");
                     this.service.setType("study");
 
                 }
         );
         chooseBreak.setOnAction(
                 (event) -> {
-
+                    choose.setText("You chose to have a break");
                     this.service.setType("break");
 
                 }
@@ -233,9 +251,10 @@ public class timerUIJavaFX extends Application {
                                 Integer.toString(this.service.getSeconds() / 60));
 
                     } else {
-                        instructions.setText("Input time in minutes");
+                        instructions.setText("Remember to adjust time in minutes");
                         frase.setText("Remember to adjust time in minutes");
                     }
+                    instructions.setText("Time is set");
                     window.setScene(settingup);
 
                 }
@@ -246,6 +265,7 @@ public class timerUIJavaFX extends Application {
                 (event) -> {
                     String subject = subjecInText.getText();
                     this.service.setSubject(subject);
+                    instructionsForSub.setText("Subject is set");
                     window.setScene(settingup);
                 }
         );
@@ -324,12 +344,14 @@ public class timerUIJavaFX extends Application {
                     String intString = goalAsText.getText();
                     if (this.service.checkIfInt(intString)) {
                         this.service.setGoal(service.getStringToInt(intString));
+                        text2.setText("The goal is set");
 
                     } else {
                         instructions.setText("Input time in minutes");
+                        text2.setText("Remember to adjust time in hours");
                         frase.setText("Remember to adjust time in hours");
                     }
-
+                    
                 }
         );
         //Here is the setting up of the graph

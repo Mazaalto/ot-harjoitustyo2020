@@ -162,22 +162,6 @@ public class StudyClockService {
         return sum;
     }
 
-//    //Here we add time for the correct week
-//    public void addWeek(int day, int time) {
-//        if (this.week.containsKey(day)) {
-//            int timeTotal = (int) this.week.get(day);
-//            timeTotal += time;
-//            this.week.put(day, timeTotal);
-//        } else {
-//            this.week.put(day, time);
-//        }
-//    }
-
-//    public HashMap<Integer, Integer> getWeek() {
-//        return this.week;
-//
-//    }
-
     public Timer getTimerFromHistory() {
         return this.history.getTimer();
 
