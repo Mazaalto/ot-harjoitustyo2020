@@ -2,7 +2,7 @@
 
 ## Yleistä
 
-OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kurssin Ohjelmistotekniikan menetelmät-kurssille. Se perustuu opiskelussa erittäin toimivaan Pomodoro-tekniikkaan, jossa voidaan asettaa opiskelulle aika ja tauottaa sitä 25 minuutin paloihin, jolloin keskittyminen paranee ja sitä kautta myös tulokset. Lisäksi ohjelmaan on tulossa muitakin toiminnallisuuksia, kuten sitä että voi seurata mihin aika menee.
+OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kurssin Ohjelmistotekniikan menetelmät-kurssille. Se perustuu opiskelussa erittäin toimivaan Pomodoro-tekniikkaan, jossa voidaan asettaa opiskelulle aika ja tauottaa sitä 25 minuutin paloja, jolloin keskittyminen paranee ja sitä kautta myös tulokset. Lisäksi ohjelmassa voi seurata päivittäin mihin aika opiskelussa menee.
 
 # Dokumentaatio
 
@@ -40,7 +40,7 @@ Kattavuusraporttia voi tarkastella avaamalla selaimella tiedoston: _target/site/
 
 ### Checkstyle
 
-Tiedostoon [checkstyle.xml](https://github.com/mluukkai/OtmTodoApp/blob/master/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+Tiedostoon [checkstyle.xml](https://github.com/mazaalto/OtmTodoApp/blob/master/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
 ```
  mvn jxr:jxr checkstyle:checkstyle
