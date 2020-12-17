@@ -22,6 +22,7 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 ## Releaset
 
+[loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.0)
 [Julkaistut versiot](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/viikko5)
 
 # Komentorivitoiminnot
