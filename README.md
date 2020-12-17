@@ -10,7 +10,7 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 ## Dokumentaatio
 
-[Käyttöohje]()
+[Käyttöohje](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/kayttoohje.md)
 
 [Vaatimusmäärittely](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/maarittelydokumentti.md)
 
