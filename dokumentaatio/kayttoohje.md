@@ -1,11 +1,12 @@
 # Ohjelma Study Clockin käyttöohje
 
-Lataa tiedosto omalle koneellesi tästä [apinnimi.jar](releaseskansionoikeaversio)
+Lataa tiedosto omalle koneellesi tästä [studyclock.jar](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.0)
 
 ### Miten käynnistän ohjelman?
-Ohjelma käynnistetään yksinkertaisesti komennolla //päivitä vielä oikeat jar viitteet tähän tied.)
+Ohjelma käynnistetään yksinkertaisesti komennolla
+
 ```
-java -jar OpiskeluKello-1.0-SNAPSHOT.jar 
+java -jar studyclock.jar 
 ```
 
 ## Painettaessa Start the clock
