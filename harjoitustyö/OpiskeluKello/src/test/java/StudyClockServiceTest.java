@@ -55,6 +55,10 @@ public class StudyClockServiceTest {
         this.service.setSeconds(60);
         assertEquals(60, this.service.getSeconds());
     }
+    @Test
+    public void getPercentageWorks() {
+        assertEquals(0, this.service.getPercentageTrue("notfound"));
+    }
 
     @Test
     public void setSubjectWorks() {
@@ -72,7 +76,7 @@ public class StudyClockServiceTest {
     public void integerCheckerWorksWithBig() {
         assertEquals(true, this.service.checkIfInt("5000"));
     }
-
+    
     @Test
     public void integerCheckerWorksWithReallyBig() {
         assertEquals(true, this.service.checkIfInt("50000"));

@@ -86,11 +86,7 @@ public class StudyClockService {
      */
     public boolean checkIfInt(String something) {
         Pattern intPattern = Pattern.compile("\\d+");
-        if (something == null) {
-            return false;
-        }
         return intPattern.matcher(something).matches();
-
     }
 
     /**
@@ -181,14 +177,17 @@ public class StudyClockService {
      * @author mazaalto
      */
     public int getPercentageTrue(String key) {
-        int nominator = (int) this.today.get(key);
-        int denominator = this.sumOfHashMap();
+        if (this.today.containsKey(key)) {
+            int nominator = (int) this.today.get(key);
+            int denominator = this.sumOfHashMap();
 
-        if (nominator != 0 && denominator != 0) {
-            double value = nominator;
-            value /= denominator;
-            value *= 100;
-            return (int) value;
+            if (nominator != 0 && denominator != 0) {
+                double value = nominator;
+                value /= denominator;
+                value *= 100;
+                return (int) value;
+
+            }
 
         }
         return 0;

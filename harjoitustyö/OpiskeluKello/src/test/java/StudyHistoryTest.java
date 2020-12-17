@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import java.util.ArrayList;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,11 @@ public class StudyHistoryTest {
     @Test
     public void testConstructor() {
         assertEquals(0, this.subjectTimestest.getListSize());
+    }
+    @Test
+    public void testGetList() {
+        ArrayList<Timer> test = this.subjectTimestest.getList();
+        assertEquals(0, test.size());
     }
 
     @Test
