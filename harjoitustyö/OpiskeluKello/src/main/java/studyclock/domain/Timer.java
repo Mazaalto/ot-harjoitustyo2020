@@ -2,6 +2,7 @@ package studyclock.domain;
 
 /**
  * Studying times are stored as timers in the StudyHistory class
+ *
  * @author mazaalto
  */
 public class Timer {
@@ -9,7 +10,16 @@ public class Timer {
     private int minutes;
     private String subject;
     String date;
-    //Tue Dec 15 13:09:18 EET 2020 date is stored like this
+
+    /**
+     * This method constructs a timer
+     *
+     * @param minutes is the studied time in minutes
+     * @param subject is the studied subject as a string
+     * @param date is the date of the studied time Tue Dec 15 13:09:18 EET 2020
+     * date is stored like this
+     * @author mazaalto
+     */
     public Timer(int minutes, String subject, String date) {
         this.minutes = minutes;
         this.subject = subject;
@@ -38,6 +48,17 @@ public class Timer {
 
     public String getSubject() {
         return subject;
+    }
+
+    /**
+     * This method returns the timer in a String to be saved in a file
+     *
+     * @return the timer as a String separed with ; between data points
+     * @author mazaalto
+     */
+    public String timerToString() {
+        String toFile = this.minutes + ";" + this.subject + ";" + this.date;
+        return toFile;
     }
 
 }

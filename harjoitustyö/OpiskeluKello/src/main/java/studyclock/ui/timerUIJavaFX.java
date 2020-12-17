@@ -42,9 +42,9 @@ public class timerUIJavaFX extends Application {
 
     private Timeline timeline;
     private final Label middle = new Label(":");
-    private Label timerLabelMinutes = new Label("25");
-    private Label timerLabelSeconds = new Label("00");
-    private Label frase = new Label("");
+    private final Label timerLabelMinutes = new Label("25");
+    private final Label timerLabelSeconds = new Label("00");
+    private final Label frase = new Label("");
     private StudyClockService service;
 
     @Override
@@ -56,7 +56,7 @@ public class timerUIJavaFX extends Application {
         //Setting up the mainScene
         BorderPane mainScene = new BorderPane();
         Button start = new Button("Start the timer");
-        Button stop = new Button("Reset the timer");
+        Button stop = new Button("Give up");
         start.setStyle("-fx-font-size: 2em");
         start.setTextFill(Color.GOLDENROD);
         stop.setStyle("-fx-font-size: 2em");
@@ -97,7 +97,7 @@ public class timerUIJavaFX extends Application {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("You stopped the timer");
                 alert.setHeaderText("In pomodoro you study for 25 minutes without stop");
-                alert.setContentText("You can start a new timer in Set timer");
+                alert.setContentText("You can start a new timer in Adjust the timer");
                 alert.show();
 
             }
@@ -188,7 +188,7 @@ public class timerUIJavaFX extends Application {
         setSubject.setStyle("-fx-font-size: 1.5em");
         setSubject.setTextFill(Color.GOLDENROD);
         Label instructions = new Label("Here you can set time in minutes");
-        
+
         TextField minutesInText = new TextField();
         Label instructionsForSub = new Label("Here you can write a subject you are studying for analytics");
         TextField subjecInText = new TextField();
@@ -306,11 +306,9 @@ public class timerUIJavaFX extends Application {
         chartpie.setTitle("Example Subjects of the day");
         chartpie.setLabelLineLength(30);
         chartpie.setLegendSide(Side.RIGHT);
-
         graphScene.setRight(chartpie);
-
         VBox buttonsAnalytics = new VBox();
-        Button backToStartAnalytics = new Button("go back");
+        Button backToStartAnalytics = new Button("Go back");
         backToStartAnalytics.setStyle("-fx-font-size: 1.5em");
         backToStartAnalytics.setTextFill(Color.GOLDENROD);
         buttonsAnalytics.setSpacing(15);
@@ -322,15 +320,18 @@ public class timerUIJavaFX extends Application {
         Button graph = new Button("Update the graphs");
         graph.setStyle("-fx-font-size: 1.5em");
         graph.setTextFill(Color.GOLDENROD);
+        Label instructionsForSave = new Label("Here you can save your history");
+        Button saveTheHistory = new Button("Save the history to memory");
+        saveTheHistory.setStyle("-fx-font-size: 1.5em");
+        saveTheHistory.setTextFill(Color.GOLDENROD);
         buttonsAnalytics.getChildren().add(text2);
         buttonsAnalytics.getChildren().add(goalAsText);
         buttonsAnalytics.getChildren().add(goal);
         buttonsAnalytics.getChildren().add(graph);
-        //window.setScene(scene);
+        buttonsAnalytics.getChildren().add(instructionsForSave);
+        buttonsAnalytics.getChildren().add(saveTheHistory);
         buttonsAnalytics.getChildren().add(backToStartAnalytics);
         graphScene.setBottom(buttonsAnalytics);
-
-        //Scene analytics = new Scene(buttonsAnalytics);
         window.setScene(scene);
         window.show();
 
@@ -351,12 +352,11 @@ public class timerUIJavaFX extends Application {
                         text2.setText("Remember to adjust time in hours");
                         frase.setText("Remember to adjust time in hours");
                     }
-                    
+
                 }
         );
         //Here is the setting up of the graph
 
-        //show the graph
         graph.setOnAction(
                 (event) -> {
                     //if there is not enough data, show this
@@ -395,6 +395,17 @@ public class timerUIJavaFX extends Application {
                     series2.getData().add(new XYChart.Data("done", this.service.sumOfHashMap() / 60));
                     bc2.getData().addAll(series2);
                     graphScene.setLeft(bc2);
+
+                }
+        );
+        //Save the history to file
+        saveTheHistory.setOnAction(
+                (event) -> {
+                    boolean result = this.service.saveFile();
+                    if (result) {
+                        instructionsForSave.setText("Your history is saved");
+                    }
+                    instructionsForSave.setText("This feature is not available yet");
 
                 }
         );

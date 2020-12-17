@@ -32,7 +32,6 @@ public class StudyClockServiceTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(0, this.service.getHistory().getListSize());
         assertEquals(1500, this.service.getSeconds());
         assertEquals("not set", this.service.getUnknownSubj());
 
@@ -114,21 +113,6 @@ public class StudyClockServiceTest {
         assertEquals("testing", this.service.getTimerFromHistory().getSubject());
     }
 
-//    @Test
-//    public void addWeekWorks() {
-//        this.service.addWeek(1, 5);
-//        int value = this.service.getWeek().get(1);
-//        assertEquals(5, value);
-//    }
-//
-//    @Test
-//    public void addWeekWorksAfterWeekDayIsAlready() {
-//        this.service.addWeek(1, 5);
-//        this.service.addWeek(1, 5);
-//        int value = this.service.getWeek().get(1);
-//        assertEquals(10, value);
-//    }
-
     @Test
     public void getTodayWorks() {
         Date date = new Date();
@@ -159,13 +143,6 @@ public class StudyClockServiceTest {
         this.service.addTodaysPieChart("test", 3);
         this.service.addTodaysPieChart("test", 3);
         assertEquals(6, this.service.getTodaysPieChart().get("test"));
-    }
-
-    @Test
-    public void getPercentWorks() {
-        int value = this.service.getPercentage(1);
-        assertEquals(50, value);
-
     }
 
     @Test

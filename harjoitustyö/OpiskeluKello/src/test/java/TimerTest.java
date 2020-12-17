@@ -21,10 +21,12 @@ public class TimerTest {
     public void constructorWorksSubject() {
         assertEquals("testing", this.timer.getSubject());
     }
+
     @Test
     public void constructorWorksDate() {
         assertEquals("Tue Dec 15 13:09:18 EET 2020", this.timer.getDate());
     }
+
     @Test
     public void setDateWorks() {
         this.timer.setDate("Tue Dec 16 13:09:18 EET 2020");
@@ -46,6 +48,13 @@ public class TimerTest {
     public void changingSubjectWorks() {
         this.timer.setSubject("moretesting");
         assertEquals("moretesting", this.timer.getSubject());
+
+    }
+
+    @Test
+    public void timerToStringWorks() {
+        String test = this.timer.timerToString();
+        assertEquals("10;testing;Tue Dec 15 13:09:18 EET 2020", test);
 
     }
 

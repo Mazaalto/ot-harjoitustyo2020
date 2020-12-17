@@ -1,13 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package studyclock.domain;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * This class has all the logic that is operated in the UI (timerUIJavaFX)
@@ -22,8 +22,13 @@ public class StudyClockService {
     private String unknownSubj;
     private String type;
     private int goalHours;
-    private HashMap week;
+    private String file;
 
+    /**
+     * This method starts the Study clock and stores all the values needed
+     *
+     * @author mazaalto
+     */
     public StudyClockService() {
         this.history = new StudyHistory();
         this.today = new HashMap<String, Integer>();
@@ -31,7 +36,8 @@ public class StudyClockService {
         this.seconds = 1500;
         this.type = "study";
         this.goalHours = 4;
-        this.week = new HashMap<Integer, Integer>();
+        this.file = "memory.txt";
+        boolean readingHappened = this.loadFile();
 
     }
 
@@ -71,7 +77,13 @@ public class StudyClockService {
         this.unknownSubj = unknownSubj;
     }
 
-    //Here we can check if String can be converted to integer
+    /**
+     * This method checks if the parameter String is convertable to int
+     *
+     * @param something is the String we want to convert
+     * @return true or false if convertable to int
+     * @author mazaalto
+     */
     public boolean checkIfInt(String something) {
         Pattern intPattern = Pattern.compile("\\d+");
         if (something == null) {
@@ -81,7 +93,14 @@ public class StudyClockService {
 
     }
 
-    //gets string as a parameter, return value in int if possible, else -1
+    /**
+     * This method gets string as a parameter, return value in integer if
+     * possible, else -1
+     *
+     * @param fromUI is the String we want to convert
+     * @return integer value or -1
+     * @author mazaalto
+     */
     public int getStringToInt(String fromUI) {
         int valueInMinutes = 0;
         if (checkIfInt(fromUI)) {
@@ -91,15 +110,19 @@ public class StudyClockService {
         return -1;
     }
 
-    //seconds are changed to minutes when they are saved to studyhistory, date is stored as a string
-    //Tue Dec 15 13:09:18 EET 2020
+    /**
+     * This method stores the current timer and also updates the PieChart
+     * seconds are changed to minutes when they are saved to studyhistory, date
+     * is stored as a string Tue Dec 15 13:09:18 EET 2020
+     *
+     * @author mazaalto
+     */
     public void addTimer() {
         int minutes = this.seconds / 60;
         Date date = new Date();
         String dateAsString = date.toString();
         int day = getToday();
         this.history.addTimerToList(minutes, this.unknownSubj, dateAsString);
-//        addWeek(day, minutes);
         addTodaysPieChart(this.unknownSubj, minutes);
 
     }
@@ -108,7 +131,13 @@ public class StudyClockService {
         return this.today;
     }
 
-    //Here we add todays HashMap that is the base for the PieChart
+    /**
+     * This method adds data to todays Piechart (that is stored as Hashmap)
+     *
+     * @param subj is the studied subject
+     * @param minutes is the studied time
+     * @author mazaalto
+     */
     public void addTodaysPieChart(String subj, int minutes) {
         if (!this.today.containsKey(subj)) {
             this.today.put(subj, minutes);
@@ -121,6 +150,15 @@ public class StudyClockService {
 
     }
 
+    /**
+     * This method calculates the percentages from a HashMap to be shown as a
+     * Piechart in UI
+     *
+     *
+     * @return HashMap<String, Integer> that has all the todays subjects and
+     * their percentages
+     * @author mazaalto
+     */
     //Here we calculate the percentages of the study areas and store it in Map
     public HashMap<String, Integer> calculatePercentages() {
         HashMap<String, Integer> percentages = new HashMap<>();
@@ -133,13 +171,15 @@ public class StudyClockService {
 
     }
 
-    public int getPercentage(int val) {
-        double value = 1;
-        value /= 2;
-        value *= 100;
-        return (int) value;
-    }
-
+    /**
+     * This method calculates the percentage of a subject today
+     *
+     * @param key is the subject we want to calculate
+     *
+     * @return HashMap<String, Integer> that has all the todays subjects and
+     * their percentages or 0 if there is not subject
+     * @author mazaalto
+     */
     public int getPercentageTrue(String key) {
         int nominator = (int) this.today.get(key);
         int denominator = this.sumOfHashMap();
@@ -151,9 +191,16 @@ public class StudyClockService {
             return (int) value;
 
         }
-        return 100;
+        return 0;
     }
 
+    /**
+     * This method calculates the sum of todays HashMap to calculate the
+     * percentages
+     *
+     * @return sum that is the sum of all the studied times today
+     * @author mazaalto
+     */
     public Integer sumOfHashMap() {
         int sum = 0;
         for (Object value : this.today.values()) {
@@ -167,10 +214,21 @@ public class StudyClockService {
 
     }
 
+    /**
+     * This method updates the seconds
+     *
+     * @author mazaalto
+     */
     public void minusSeconds() {
         this.seconds = this.seconds - 1;
     }
 
+    /**
+     * This method returns the day of today (as a number)
+     *
+     * @return day the integer value of today
+     * @author mazaalto
+     */
     public int getToday() {
         Date date = new Date();
         String dateAsString = date.toString();
@@ -178,6 +236,72 @@ public class StudyClockService {
         //date is the plit[2]
         int day = Integer.valueOf(split[2]);
         return day;
+
+    }
+
+    /**
+     * This method loads the history data from file
+     *
+     * @return true if the loading was successful
+     * @author mazaalto
+     */
+    public boolean loadFile() {
+        try {
+            Scanner reader = new Scanner(new File(file));
+            loadOldTimers(reader);
+            reader.close();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method loads the timers to StudyHistory
+     *
+     * @author mazaalto
+     */
+    //timers are stored as: int minutes;String subject;String date
+    private void loadOldTimers(Scanner reader) {
+        while (reader.hasNextLine()) {
+            String line = reader.nextLine();
+            String[] partsOfTheLine = line.split(";");
+            int minutes = Integer.parseInt(partsOfTheLine[0]);
+            this.history.addTimerToList(minutes, partsOfTheLine[1], partsOfTheLine[2]);
+        }
+
+    }
+
+    /**
+     * This method saves the history data to file
+     *
+     * @return true if the loading was successful
+     * @author mazaalto
+     */
+    public boolean saveFile() {
+        try {
+            PrintWriter writer = new PrintWriter(new File(file));
+            saveBeforeExit(writer);
+            writer.close();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method saves the timers to writer
+     *
+     * @return true if the loading was successful
+     * @author mazaalto
+     */
+    private void saveBeforeExit(PrintWriter writer) throws IOException {
+        ArrayList<Timer> timers = this.history.getList();
+
+        for (int i = 0; i < timers.size(); i++) {
+            String timerAsString = timers.get(i).timerToString();
+            writer.println(timerAsString);
+        }
 
     }
 
