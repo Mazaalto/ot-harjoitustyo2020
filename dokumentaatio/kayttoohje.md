@@ -5,7 +5,7 @@ Lataa tiedosto omalle koneellesi tästä [apinnimi.jar](releaseskansionoikeavers
 ### Miten käynnistän ohjelman?
 Ohjelma käynnistetään yksinkertaisesti komennolla //päivitä vielä oikeat jar viitteet tähän tied.)
 ```
-java -jar studyclock.jar
+java -jar OpiskeluKello-1.0-SNAPSHOT.jar 
 ```
 
 ## Painettaessa Start the clock
