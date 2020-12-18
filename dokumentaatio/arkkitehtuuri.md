@@ -29,7 +29,7 @@ Toteutin analytiikan myös BorderPanen avulla. Alussa luodaan uusi scene olio (S
 # Sovelluslogiikka
 Sovelluksen tieto kulkeutuu sovelluslogiikasta timerUIJavaFX--> StudyClockServiceen ja tieto tallennetaan siitä StudyHistoryyn ja koostuu Timer olioista. Lopuksi käyttäjä voi tallentaa tiedon memory.txt -tiedostoon painamalla nappia "Save the data".
 
-//Kuva tähän! Kuva 2
+[Sekvenssikaavio](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/kuvat/Sekvenssikaavio%20kellonka%CC%88ynnistys.jpg)
 
 Kaikki toiminnallisuus, jossa käsitellään tietoa, on toteutettu StudyClockSerciven avulla. Luokassa on kaikille eri tilanteille omat metodinsa. 
 Tieto on tallennettu serviisissä seuraavasti:
@@ -61,7 +61,7 @@ Tieto tallentuu, jos käyttäjä niin haluaa. Tämä tapahtuu painamalla  nappia
 Ohjelmassa mitataan aikaa, joten esittelen seuraavaksi miten tämä tapahtuu käytännössä kätevän sekvenssikaavion avulla.
 
 ### Kellon käynistäminen oletusarvoilla
-//kuva 4 tulee tähän, toteutettu padilla
+[Sekvenssikaavio](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/kuvat/Sekvenssikaavio%20kellonka%CC%88ynnistys.jpg)
 
 Kun käyttäjä klikkaa Start-nappia niin sovellus käynnistyy automaattisesti oletusarvoilla. Käytännössä se tapahtuu kuvan esittämällä tavalla eli käyttäjä näkee vain graafisen ulkoasun ja UI-luokka operoi serviisin kanssa. Serviisissä on toteutettuna StudyHistory-olio, jonka sisältö on tallennettu Timer-olioina. Tämän jälkeen serviisi pitää UI:n ajantasalla ajankulumisesta getSeconds() metodin avulla. Lopuksi kun getSeconds saa arvokseen =>0 niin luodaan uusi TimerOlio, niin että serviisi kutsuu StudyHistorya metodilla addTimer. Tällöin Timer saa konstruktorissaan ajan sekunteina, aiheen String-muuttujana ja päivämäärän String-oliona. Tieto menee serviisiltä UI:lle ja käyttäjä saa Alert ilmoituksen että ajastin on valmis. Lisäksi serviisi lisää metodilla addTodaysPieChart(aihe, aika) tiedon toteutuneesta today hashMappiin. Jos tieto olisi ollut asetettuna käyttäjän toimesta, olisi se laitettu servicen oliomuuttujiksi seconds ja unknownSubj. Muuten timerin lisääminen tapahtuisi samalla tavalla.
 
