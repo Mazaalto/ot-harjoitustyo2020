@@ -1,13 +1,11 @@
 package studyclock.domain;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
@@ -40,7 +38,6 @@ public class StudyClockService {
         this.file = "memory.txt";
         this.history = new StudyHistory();
         this.timetosave = this.seconds;
-        
 
     }
 
@@ -275,6 +272,11 @@ public class StudyClockService {
 
     public void setTimerSeconds() {
         this.timetosave = this.seconds;
+    }
+
+    public int getTimerSeconds() {
+        return this.timetosave;
+
     }
 
 }

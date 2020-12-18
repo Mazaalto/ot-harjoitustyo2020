@@ -111,6 +111,7 @@ public class StudyClockServiceTest {
     @Test
     public void addingTimerWorks() {
         this.service.setSeconds(60);
+        this.service.setTimerSeconds();
         this.service.setSubject("testing");
         this.service.addTimer();
         assertEquals(1, this.service.getTimerFromHistory().getMinutes());
