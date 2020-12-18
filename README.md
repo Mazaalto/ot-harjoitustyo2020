@@ -16,13 +16,13 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 [Arkkitehtuurikuvaus](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/arkkitehtuuri.md)
 
-[Testausdokumentti]()
+[Testausdokumentti](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/testausdokumentaatio.md)
 
 [Työaikakirjanpito](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
 
 ## Releaset
 
-[loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.0)
+[loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/loppupalautus)
 
 [Julkaistut versiot](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/viikko5)
 
@@ -68,4 +68,4 @@ Ohjelmasta saa jar-paketin helposti suorittamalla komennon mvn package. Se luo k
 ```
 mvn package
 ```
-(Huom! Valmis jar-paketti löytyy myös täältä: [loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.0) )
+(Huom! Valmis jar-paketti löytyy myös täältä: [loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/loppupalautus) )
