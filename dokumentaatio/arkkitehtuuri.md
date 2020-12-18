@@ -29,8 +29,6 @@ Toteutin analytiikan myös BorderPanen avulla. Alussa luodaan uusi scene olio (S
 # Sovelluslogiikka
 Sovelluksen tieto kulkeutuu sovelluslogiikasta timerUIJavaFX--> StudyClockServiceen ja tieto tallennetaan siitä StudyHistoryyn ja koostuu Timer olioista. Lopuksi käyttäjä voi tallentaa tiedon memory.txt -tiedostoon painamalla nappia "Save the data".
 
-[Sekvenssikaavio](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/kuvat/Sekvenssikaavio%20kellonka%CC%88ynnistys.jpg)
-
 Kaikki toiminnallisuus, jossa käsitellään tietoa, on toteutettu StudyClockSerciven avulla. Luokassa on kaikille eri tilanteille omat metodinsa. 
 Tieto on tallennettu serviisissä seuraavasti:
 - Timer oliot, eli toteutuneet opiskeluhetket löytyvät StudyHistory oliosta
