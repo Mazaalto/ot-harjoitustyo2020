@@ -12,7 +12,7 @@ Testikattavuus on korkea. Pääset tarkastelemaan ajamalla jacoco-reportin READ.
 ## Järjestelmätestauksesta
 Sovellus on testattu käyttäjätasolla. Kahden eri käyttäjän toimesta.
 
-## Asennus ja alku konfigurointi
+## Asennus ja alku- konfigurointi
 Sovellus on asennettu ja kokeiltu eri koneilla. Toiminta oli selvitettävissä sovelluksesta ja käyttöohjeesta: [käyttöohje sovellukseen](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/kayttoohje.md)
 
 ## Toiminnallisuudet
