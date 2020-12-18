@@ -1,7 +1,13 @@
 package studyclock.domain;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
@@ -17,6 +23,8 @@ public class StudyClockService {
     private String unknownSubj;
     private String type;
     private int goalHours;
+    private String file;
+    private int timetosave;
 
     /**
      * This method starts the Study clock and stores all the values needed
@@ -24,12 +32,16 @@ public class StudyClockService {
      * @author mazaalto
      */
     public StudyClockService() {
-        this.history = new StudyHistory();
         this.today = new HashMap<String, Integer>();
         this.unknownSubj = "not set";
         this.seconds = 1500;
         this.type = "study";
         this.goalHours = 4;
+        this.file = "memory.txt";
+        this.history = new StudyHistory();
+        this.timetosave = this.seconds;
+        
+
     }
 
     public int getGoal() {
@@ -105,7 +117,7 @@ public class StudyClockService {
      * @author mazaalto
      */
     public void addTimer() {
-        int minutes = this.seconds / 60;
+        int minutes = this.timetosave / 60;
         Date date = new Date();
         String dateAsString = date.toString();
         int day = getToday();
@@ -226,7 +238,43 @@ public class StudyClockService {
         //date is the plit[2]
         int day = Integer.valueOf(split[2]);
         return day;
+    }
 
+    /**
+     * This method saves the history data to file
+     *
+     * @return true if the loading was successful
+     * @author mazaalto
+     */
+    public boolean saveFile() {
+        try {
+            PrintWriter writer = new PrintWriter(new File(file));
+            saveBeforeExit(writer);
+            writer.close();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method saves the timers to writer
+     *
+     * @return true if the loading was successful
+     * @author mazaalto
+     */
+    private void saveBeforeExit(PrintWriter writer) throws IOException {
+        ArrayList<Timer> timers = this.history.getList();
+
+        for (int i = 0; i < timers.size(); i++) {
+            String timerAsString = timers.get(i).timerToString();
+            writer.println(timerAsString);
+        }
+
+    }
+
+    public void setTimerSeconds() {
+        this.timetosave = this.seconds;
     }
 
 }

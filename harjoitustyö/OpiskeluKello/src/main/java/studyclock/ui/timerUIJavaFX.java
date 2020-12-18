@@ -123,7 +123,7 @@ public class timerUIJavaFX extends Application {
             if (timeline != null) {
                 timeline.stop();
             }
-
+            this.service.setTimerSeconds();
             timeline = new Timeline();
             timeline.setCycleCount(Timeline.INDEFINITE);
             timeline.getKeyFrames().add(
@@ -324,10 +324,15 @@ public class timerUIJavaFX extends Application {
         Button graph = new Button("Update the graphs");
         graph.setStyle("-fx-font-size: 1.5em");
         graph.setTextFill(Color.GOLDENROD);
+        Button saveData = new Button("Save the data");
+        saveData.setStyle("-fx-font-size: 1.5em");
+        saveData.setTextFill(Color.GOLDENROD);
+        
         buttonsAnalytics.getChildren().add(text2);
         buttonsAnalytics.getChildren().add(goalAsText);
         buttonsAnalytics.getChildren().add(goal);
         buttonsAnalytics.getChildren().add(graph);
+        buttonsAnalytics.getChildren().add(saveData);
         buttonsAnalytics.getChildren().add(backToStartAnalytics);
         graphScene.setBottom(buttonsAnalytics);
         window.setScene(scene);
@@ -393,6 +398,16 @@ public class timerUIJavaFX extends Application {
                     series2.getData().add(new XYChart.Data("done", this.service.sumOfHashMap() / 60));
                     bc2.getData().addAll(series2);
                     graphScene.setLeft(bc2);
+
+                }
+        );
+        //Save the data
+        saveData.setOnAction(
+                (event) -> {
+                    if (this.service.saveFile()){
+                        text2.setText("Data is saved");
+                    }
+                    window.setScene(first);
 
                 }
         );
