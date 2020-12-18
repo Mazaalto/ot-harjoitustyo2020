@@ -2,7 +2,7 @@
 
 ### Yleistä
 
-OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kurssille Ohjelmistotekniikan menetelmät (5 op). Ohjelmani perustuu opiskelussa erittäin toimivaan Pomodoro-tekniikkaan, jossa voidaan asettaa opiskelulle aika ja tauottaa sitä 25 minuutin paloja, jolloin keskittyminen paranee ja sitä kautta myös tulokset. Lisäksi ohjelmassa voi seurata päivittäin mihin aika opiskelussa menee. Valitsin aiheen, koska jouduin Koronan takia tekemään paljon töitä itseohjautuvasti ja Pomodoro tekniikka oli erittäin isossa asemassa työni jaksottamisessa ja jaksamisessa.
+OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kurssille Ohjelmistotekniikka (5 op). Ohjelmani perustuu opiskelussa erittäin toimivaan Pomodoro-tekniikkaan, jossa voidaan asettaa opiskelulle aika ja tauottaa sitä 25 minuutin paloja, jolloin keskittyminen paranee ja sitä kautta myös tulokset. Lisäksi ohjelmassa voi seurata päivittäin mihin aika opiskelussa menee. Valitsin aiheen, koska jouduin Koronan takia tekemään paljon töitä itseohjautuvasti ja Pomodoro tekniikka oli erittäin isossa asemassa työni jaksottamisessa ja jaksamisessa.
 
 ## Vaatimukset laitteistosta
 
