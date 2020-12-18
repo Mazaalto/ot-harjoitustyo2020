@@ -3,11 +3,6 @@ package studyclock.domain;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Pattern;
-import java.util.Scanner;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 /**
  * This class has all the logic that is operated in the UI (timerUIJavaFX)
@@ -22,7 +17,6 @@ public class StudyClockService {
     private String unknownSubj;
     private String type;
     private int goalHours;
-    private String file;
 
     /**
      * This method starts the Study clock and stores all the values needed
@@ -36,9 +30,6 @@ public class StudyClockService {
         this.seconds = 1500;
         this.type = "study";
         this.goalHours = 4;
-        this.file = "memory.txt";
-        boolean readingHappened = this.loadFile();
-
     }
 
     public int getGoal() {
@@ -235,72 +226,6 @@ public class StudyClockService {
         //date is the plit[2]
         int day = Integer.valueOf(split[2]);
         return day;
-
-    }
-
-    /**
-     * This method loads the history data from file
-     *
-     * @return true if the loading was successful
-     * @author mazaalto
-     */
-    public boolean loadFile() {
-        try {
-            Scanner reader = new Scanner(new File(file));
-            loadOldTimers(reader);
-            reader.close();
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * This method loads the timers to StudyHistory
-     *
-     * @author mazaalto
-     */
-    //timers are stored as: int minutes;String subject;String date
-    private void loadOldTimers(Scanner reader) {
-        while (reader.hasNextLine()) {
-            String line = reader.nextLine();
-            String[] partsOfTheLine = line.split(";");
-            int minutes = Integer.parseInt(partsOfTheLine[0]);
-            this.history.addTimerToList(minutes, partsOfTheLine[1], partsOfTheLine[2]);
-        }
-
-    }
-
-    /**
-     * This method saves the history data to file
-     *
-     * @return true if the loading was successful
-     * @author mazaalto
-     */
-    public boolean saveFile() {
-        try {
-            PrintWriter writer = new PrintWriter(new File(file));
-            saveBeforeExit(writer);
-            writer.close();
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * This method saves the timers to writer
-     *
-     * @return true if the loading was successful
-     * @author mazaalto
-     */
-    private void saveBeforeExit(PrintWriter writer) throws IOException {
-        ArrayList<Timer> timers = this.history.getList();
-
-        for (int i = 0; i < timers.size(); i++) {
-            String timerAsString = timers.get(i).timerToString();
-            writer.println(timerAsString);
-        }
 
     }
 

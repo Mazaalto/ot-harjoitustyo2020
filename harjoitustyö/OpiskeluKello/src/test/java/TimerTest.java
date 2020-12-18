@@ -11,7 +11,7 @@ import org.junit.Before;
 public class TimerTest {
 
     Timer timer;
-
+    
     @Before
     public void setUp() {
         this.timer = new Timer(10, "testing", "Tue Dec 15 13:09:18 EET 2020");

@@ -264,9 +264,13 @@ public class timerUIJavaFX extends Application {
         setSubject.setOnAction(
                 (event) -> {
                     String subject = subjecInText.getText();
-                    this.service.setSubject(subject);
-                    instructionsForSub.setText("Subject is set");
-                    window.setScene(settingup);
+                    if (!this.service.getType().equals("study")) {
+                        instructionsForSub.setText("You dont't have to give a subject for a break");
+                    } else {
+                        this.service.setSubject(subject);
+                        instructionsForSub.setText("Subject is set");
+                        window.setScene(settingup);
+                    }
                 }
         );
         backFromSetup.setOnAction(
@@ -320,16 +324,10 @@ public class timerUIJavaFX extends Application {
         Button graph = new Button("Update the graphs");
         graph.setStyle("-fx-font-size: 1.5em");
         graph.setTextFill(Color.GOLDENROD);
-        Label instructionsForSave = new Label("Here you can save your history");
-        Button saveTheHistory = new Button("Save the history to memory");
-        saveTheHistory.setStyle("-fx-font-size: 1.5em");
-        saveTheHistory.setTextFill(Color.GOLDENROD);
         buttonsAnalytics.getChildren().add(text2);
         buttonsAnalytics.getChildren().add(goalAsText);
         buttonsAnalytics.getChildren().add(goal);
         buttonsAnalytics.getChildren().add(graph);
-        buttonsAnalytics.getChildren().add(instructionsForSave);
-        buttonsAnalytics.getChildren().add(saveTheHistory);
         buttonsAnalytics.getChildren().add(backToStartAnalytics);
         graphScene.setBottom(buttonsAnalytics);
         window.setScene(scene);
@@ -395,17 +393,6 @@ public class timerUIJavaFX extends Application {
                     series2.getData().add(new XYChart.Data("done", this.service.sumOfHashMap() / 60));
                     bc2.getData().addAll(series2);
                     graphScene.setLeft(bc2);
-
-                }
-        );
-        //Save the history to file
-        saveTheHistory.setOnAction(
-                (event) -> {
-                    boolean result = this.service.saveFile();
-                    if (result) {
-                        instructionsForSave.setText("Your history is saved");
-                    }
-                    instructionsForSave.setText("This feature is not available yet");
 
                 }
         );
