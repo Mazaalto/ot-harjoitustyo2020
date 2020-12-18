@@ -16,6 +16,6 @@ Nappien toiminnallisuudet ja käyttöohjeet löytyvät täältä: [käyttöohje]
 
 
 ## Jatkokehitysideoita
-Haluaisin toteuttaa erilaisia ääniä, mutta tietenkin niin että käyttäjä voisi itse valita mitä ääniä käyttää. Olen aloittanut jo äänten nauhottamisen. Seuraavaan versioon siis.
-Visuaalisen ilmeen hiominen. Haluaisin päivittää ohjelmaa vielä hienomman näköiseksi. Nyt valitettavasti muiden kurssien takia en ehtinyt vielä.
-Lisäksi nyt ohjelma kattaa hyvin yhden päivän aikana tapahtuvan opiskelun, mutta haluan laajentaa sitä niin että tilastoja saadaan koko vuodelta. Tätä varten tarvitaan teksitiedosto, johon voidaan tallentaa Timerit tiedostoina, ja näin voidaan tarjota laajempia raportteja käyttäjälle.
+- Haluaisin toteuttaa erilaisia ääniä, mutta tietenkin niin että käyttäjä voisi itse valita mitä ääniä käyttää. Olen aloittanut jo äänten nauhottamisen seuraavaan versioon.
+- Visuaalisen ilmeen hiominen. Haluaisin päivittää ohjelmaa vielä hienomman näköiseksi. Nyt valitettavasti muiden kurssien takia en ehtinyt vielä.
+- Lisäksi nyt ohjelma kattaa hyvin yhden päivän aikana tapahtuvan opiskelun, mutta haluan laajentaa sitä niin että tilastoja saadaan koko vuodelta. Tätä varten toteutin tiedon pysyväistallennuksen tekstitiedostoksi, mutta vielä sillä tiedolla ei tehdä mitään. Seuraavassa versiossa siitä datasta saa paljon mielenkiintoisempia chartteja tehdyksi.
