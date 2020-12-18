@@ -2,7 +2,7 @@
 Ohjelmaa on testattu erilaisilla JUnit-testeillä (yksikkö testausta monipuolista) sekä käyttäjätasolla peruskäytössä sekä yrittäen saada ohjelma kaatumaan.
 
 ## JUnit-testaus ja testien sisällöstä
-Automatisoidut testit on tehty omaan testikansioonsa ja ne kattavat ohjelman sovelluslogiikkaa. Luokat on suunniteltu niin että jokaisen vastuulla olisi selkeästi omat tehtävänsä, esim. serviisissä on kaikki toimintalogiikka. Pääset katsomaan testejä täältä: [testien katselmeninen](https://github.com/Mazaalto/ot-harjoitustyo2020/tree/master/harjoitusty%C3%B6/OpiskeluKello/src/test/java)
+Automatisoidut testit on tehty omaan testikansioonsa ja ne kattavat ohjelman sovelluslogiikkaa. Luokat on suunniteltu niin että jokaisen vastuulla olisi selkeästi omat tehtävänsä, esim. serviisissä on kaikki toimintalogiikka. Pääset katsomaan testejä täältä: [testien katseleminen](https://github.com/Mazaalto/ot-harjoitustyo2020/tree/master/harjoitusty%C3%B6/OpiskeluKello/src/test/java)
 
 Omat testit on tehty kaikille luokille, paitsi käyttöliittymälle. Käyttöliittymän toiminta on testattu vain käyttäjätasolla ja suunnittelemalla käyttöliittymä taitojen puitteessa mahdollisen turvalliseksi käyttää.
 
