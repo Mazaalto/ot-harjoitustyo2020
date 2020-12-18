@@ -16,7 +16,7 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 [Arkkitehtuurikuvaus](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/arkkitehtuuri.md)
 
-[Testausdokumentti]()
+[Testausdokumentti](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/testausdokumentaatio.md)
 
 [Työaikakirjanpito](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
 
