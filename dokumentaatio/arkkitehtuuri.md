@@ -51,7 +51,8 @@ mm. nämä metodit:
 - getToday() palauttaa kuluvan päivän Date oliosta taulukon avulla
 - saveData() joka tallentaa tiedon tekstitiedostoon
 
-//tähän tulee kuva 3 eli luokka/pakkauskaavio
+Luokat löytyvät allaolevan mukaisesti pakkauskaaviosta:
+[pakkauskaavio](https://github.com/Mazaalto/ot-harjoitustyo2020/blob/master/dokumentaatio/kuvat/Note%2018.%20Dec%202020.jpg)
 
 ### Tiedostojen pysyväistallennus
 Tieto tallentuu, jos käyttäjä niin haluaa. Tämä tapahtuu painamalla  nappia "Save the data". Tieto tallentuu tällöin memory.txt -tiedostoon. 
