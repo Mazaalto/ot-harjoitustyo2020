@@ -6,7 +6,7 @@ Ohjelman Opiskelukello rakenne noudattelee kaksiosaista kerrosarkkitehtuuria, ja
 
 studyclock.ui --> studyclock.domain
 
-Toteutin ohjelman niin että kaikki ohjelmalogiikka löytyy pakkauksesta studyclock.domain ja kaikki käyttöliittymä koodi löytyy kansiosta studyclock.ui.
+Toteutin ohjelman niin että kaikki ohjelmalogiikka löytyy pakkauksesta studyclock.domain ja kaikki käyttöliittymä koodi löytyy kansiosta studyclock.ui. Lisäksi tieto tallentuu ohjelman kansiosta löytyvään memory.txt tiedostoon.
 
 ## Käyttöliittymä 
 
@@ -15,7 +15,7 @@ Toteutin käyttöliittymän kokonaan kansioon studyclock.ui. Korvasin tekstikäy
 Koska kyseessä on ajastin-ohjelma, toteutin kellon toiminnallisuudet Timeline ja Label-luokkien avulla. Käytännössä alussa asetetaan Stage oliolle, nimeltä window, päänäkymä, joka on toteutettu BorderPane luokan avulla. Tähän Borderpane olioon nimeltä mainscene on määritelty ohjelman napit (Start, Give up, Adjust the timer, Show studyhistory). Muotoilussa käytin värinä Goldenrodia ja fx- fonttikokoa 2em. Tyylin määrittelyssä on toisteisuutta, mutta en ehtinyt kasata väiren määrittelyä omaan luokkaansa.
 
 ### Start the timer-nappia painettaessa
-Alkaa kello laskemaan oletusajalle aikaa (25 min). Ajan näyttäminen onnistuu kätevän timeline-luokan avulla. Sen setCycleCount-metodilla pystyin määrittämään muutoksia Label olioille, joissa siis oli kuvattuna aika minuutteina ja sekunteina. Koska laskenta tapahtuu studyclock.domain kansiossa niin ajan sieltä saa metodissa this.service.getSeconds(). Ja koska aika täytyy näyttää minuutteina ja sekunteina jaetaan sekunnit 60 ja otetaan siitä jakojäännös. 
+Alkaa kello laskemaan oletusajalle aikaa (25 min). Ajan näyttäminen onnistuu kätevän timeline-luokan avulla. Sen setCycleCount-metodilla pystyin määrittämään muutoksia Label olioille, joissa siis oli kuvattuna aika minuutteina ja sekunteina. Koska laskenta tapahtuu studyclock.domain kansiossa niin ajan sieltä saa metodissa this.service.getSeconds(). Ja koska aika täytyy näyttää minuutteina ja sekunteina jaetaan sekunnit 60 ja otetaan siitä jakojäännös, jotta minuutit ja sekunnit näyttävät oikeita arvoja. 
 
 ### Give up-nappia painettaessa
 Kellon suoritus keskeytetään asettamalla sovelluslogiikkaan String typen arvoksi "stop". Tällöin ohjelma tietää näyttää oikean hälytyksen Alert luokan avulla. Tällöin Alert oliossa on ohjeet ohjelman loppusuoritukselle. Esimerkiksi uuden timerin saa ajastettua Adjust the timer nappia painamalla.
@@ -24,10 +24,10 @@ Kellon suoritus keskeytetään asettamalla sovelluslogiikkaan String typen arvok
 Luodaan uusi HBox olio, johon tallennetaan napit Button luokan avulla sekä ohjetekstit Label luokan avulla. Nappeja painamalla ilmoitetaan sovelluslogiikkaan tarvittavia muutoksia, kuten uuden timerin aika ja tyyppi (Study tai Break) sekä mitä ainetta opiskellaan. Näitä tietoja tarvitaan analytiikkaa varten.
 
 ### Show the studyhistory-nappia painettaessa
-Toteutin analytiikan myös BorderPanen avulla. Alussa luodaan uusi scene olio (Scene scene = new Scene(graphScene); jonka avulla toteutetaan pylväs- ja piirakkadiagrammit. Aluksi Diagrammeissa on määrittämäni demoarvot, eli XYChart series olioon tallennettuna series-luokan getData-metodilla tavoite ja toteutuneet ajat uusina XYChart.data olioina. Jos käyttäjä on opiskellut tai asettaa uuden tavoitteen Set the Goal napilla niin käyttäjä voi päivittää diagnostiikan painamalla nappia graph (jossa lukee update the graphs) piirtyy toteutunut opiskeluaika tunteina vasemmalle goal-graafin viereen sekä piirakkakaavio muuttuu vastaamaan toteutunutta.
+Toteutin analytiikan myös BorderPanen avulla. Alussa luodaan uusi scene olio (Scene scene = new Scene(graphScene); jonka avulla toteutetaan pylväs- ja piirakkadiagrammit. Aluksi Diagrammeissa on määrittämäni demoarvot, eli XYChart series olioon tallennettuna series-luokan getData-metodilla tavoite ja toteutuneet ajat uusina XYChart.data olioina. Jos käyttäjä on opiskellut tai asettaa uuden tavoitteen "Set the Goal"- napilla niin käyttäjä voi päivittää diagnostiikan painamalla nappia graph (jossa lukee update the graphs) piirtyy toteutunut opiskeluaika tunteina vasemmalle goal-graafin viereen sekä piirakkakaavio muuttuu vastaamaan toteutunutta. Käyttäjä voi tallentaa tiedon memory.txt -tiedostoon painamalla nappia "Save the data".
 
 # Sovelluslogiikka
-Sovelluksen tieto kulkeutuu sovelluslogiikasta timerUIJavaFX--> StudyClockServiceen ja tieto tallennetaan siitä StudyHistoryyn ja koostuu Timer olioista.
+Sovelluksen tieto kulkeutuu sovelluslogiikasta timerUIJavaFX--> StudyClockServiceen ja tieto tallennetaan siitä StudyHistoryyn ja koostuu Timer olioista. Lopuksi käyttäjä voi tallentaa tiedon memory.txt -tiedostoon painamalla nappia "Save the data".
 
 //Kuva tähän! Kuva 2
 
@@ -35,7 +35,7 @@ Kaikki toiminnallisuus, jossa käsitellään tietoa, on toteutettu StudyClockSer
 Tieto on tallennettu serviisissä seuraavasti:
 - Timer oliot, eli toteutuneet opiskeluhetket löytyvät StudyHistory oliosta
 - Päivän opintohetket ovat tallennettuna HashMappiin nimeltä today
-- int seconds pitää kirjaa kuluvasta ajasta
+- int seconds pitää kirjaa kuluvasta ajasta ja int timetosave tallennettavan Timerin ajasta
 - String unknownSubj pitää sisällään oletusaiheen timerille
 - String type kertoo onko kyseessä study, break vai stop
 - goalHours pitää kirjaa käyttäjän opiskelutavoitteesta
@@ -49,11 +49,12 @@ mm. nämä metodit:
 - getPercentageTrue(String key) antaa prosenttiosuuden jos päivän tiedot sisältää ko. avaimen
 - minusSeconds() päivittää ajan kulumista muuttujaan seconds
 - getToday() palauttaa kuluvan päivän Date oliosta taulukon avulla
+- saveData() joka tallentaa tiedon tekstitiedostoon
 
 //tähän tulee kuva 3 eli luokka/pakkauskaavio
 
 ### Tiedostojen pysyväistallennus
-Tässä versiossa ei ole vielä toteutettu tietojen pysyväistallennusta. Se tulee heti seuraavaan versioon.
+Tieto tallentuu, jos käyttäjä niin haluaa. Tämä tapahtuu painamalla  nappia "Save the data". Tieto tallentuu tällöin memory.txt -tiedostoon. 
 
 ## Ohjelman päätoiminnallisuudet
 
