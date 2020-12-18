@@ -15,7 +15,7 @@
 |    14.-15.   |   13   | testaus |
 |   16   |  5    | ohjelman viimeistelyä|
 |  17-18.     |    12  | testaus, ja ohjelman viimeistely JavaDoc ja pysyväistiedon tallennuksen kanssa taisteleminen |
-|       |      | palautus |
+|      18.12. |      | palautus |
 |       |      | |
 
 
