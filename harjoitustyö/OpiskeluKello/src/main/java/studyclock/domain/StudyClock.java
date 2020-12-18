@@ -5,8 +5,7 @@ import studyclock.ui.timerUIJavaFX;
 
 /**
  * In this method the software begins by starting the UI in timerUIJava.FX
- * @param timerUIJavaFX.class on ohjelman käyttöliittymän aktivaatio
- * @author mazaalto
+ * 
  */
 public class StudyClock {
 

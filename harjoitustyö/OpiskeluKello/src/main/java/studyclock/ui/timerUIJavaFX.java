@@ -34,10 +34,7 @@ import javafx.stage.Stage;
 
 import studyclock.domain.StudyClockService;
 
-/**
- *
- * @author mazaalto
- */
+
 public class timerUIJavaFX extends Application {
 
     private Timeline timeline;

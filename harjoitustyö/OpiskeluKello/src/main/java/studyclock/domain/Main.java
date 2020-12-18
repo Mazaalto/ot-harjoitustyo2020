@@ -10,7 +10,7 @@ public class Main {
     /**
      * Method starts the software from StudyClock.main
      *
-     * @author mazaalto
+     * 
      */
 
     public static void main(String[] args) throws InterruptedException {

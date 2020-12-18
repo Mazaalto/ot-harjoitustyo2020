@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * This class has all the logic that is operated in the UI (timerUIJavaFX)
  *
- * @author mazaalto
+ * 
  */
 public class StudyClockService {
 
@@ -25,9 +25,9 @@ public class StudyClockService {
     private int timetosave;
 
     /**
-     * This method starts the Study clock and stores all the values needed
+     * Method starts the Study clock and stores all the values needed
      *
-     * @author mazaalto
+     * 
      */
     public StudyClockService() {
         this.today = new HashMap<String, Integer>();
@@ -78,11 +78,10 @@ public class StudyClockService {
     }
 
     /**
-     * This method checks if the parameter String is convertable to int
+     * Method checks if the parameter String is convertable to int
      *
      * @param something is the String we want to convert
      * @return true or false if convertable to int
-     * @author mazaalto
      */
     public boolean checkIfInt(String something) {
         Pattern intPattern = Pattern.compile("\\d+");
@@ -90,12 +89,11 @@ public class StudyClockService {
     }
 
     /**
-     * This method gets string as a parameter, return value in integer if
+     * Method gets string as a parameter, return value in integer if
      * possible, else -1
      *
      * @param fromUI is the String we want to convert
      * @return integer value or -1
-     * @author mazaalto
      */
     public int getStringToInt(String fromUI) {
         int valueInMinutes = 0;
@@ -107,11 +105,9 @@ public class StudyClockService {
     }
 
     /**
-     * This method stores the current timer and also updates the PieChart
+     * Method stores the current timer and also updates the PieChart
      * seconds are changed to minutes when they are saved to studyhistory, date
      * is stored as a string Tue Dec 15 13:09:18 EET 2020
-     *
-     * @author mazaalto
      */
     public void addTimer() {
         int minutes = this.timetosave / 60;
@@ -128,11 +124,11 @@ public class StudyClockService {
     }
 
     /**
-     * This method adds data to todays Piechart (that is stored as Hashmap)
+     * Method adds data to todays Piechart (that is stored as Hashmap)
      *
-     * @param subj is the studied subject
-     * @param minutes is the studied time
-     * @author mazaalto
+     * subj is the studied subject
+     * minutes is the studied time
+     * 
      */
     public void addTodaysPieChart(String subj, int minutes) {
         if (!this.today.containsKey(subj)) {
@@ -147,13 +143,11 @@ public class StudyClockService {
     }
 
     /**
-     * This method calculates the percentages from a HashMap to be shown as a
+     * Method calculates the percentages from a HashMap to be shown as a
      * Piechart in UI
      *
      *
-     * @return HashMap<String, Integer> that has all the todays subjects and
-     * their percentages
-     * @author mazaalto
+     * @return percentages HashMap<String, Integer> that has all the todays subjects and percentages
      */
     //Here we calculate the percentages of the study areas and store it in Map
     public HashMap<String, Integer> calculatePercentages() {
@@ -168,13 +162,11 @@ public class StudyClockService {
     }
 
     /**
-     * This method calculates the percentage of a subject today
+     * Method calculates the percentage of a subject today
      *
      * @param key is the subject we want to calculate
      *
-     * @return HashMap<String, Integer> that has all the todays subjects and
-     * their percentages or 0 if there is not subject
-     * @author mazaalto
+     * @return value integer percentage value of the Hashmap.get(string)
      */
     public int getPercentageTrue(String key) {
         if (this.today.containsKey(key)) {
@@ -194,11 +186,9 @@ public class StudyClockService {
     }
 
     /**
-     * This method calculates the sum of todays HashMap to calculate the
-     * percentages
+     * Method calculates the sum of todays HashMap to calculate the percentages
      *
      * @return sum that is the sum of all the studied times today
-     * @author mazaalto
      */
     public Integer sumOfHashMap() {
         int sum = 0;
@@ -216,17 +206,17 @@ public class StudyClockService {
     /**
      * This method updates the seconds
      *
-     * @author mazaalto
+     * 
      */
     public void minusSeconds() {
         this.seconds = this.seconds - 1;
     }
 
     /**
-     * This method returns the day of today (as a number)
+     * Method returns the day of today (as a number)
      *
+     * 
      * @return day the integer value of today
-     * @author mazaalto
      */
     public int getToday() {
         Date date = new Date();
@@ -238,10 +228,9 @@ public class StudyClockService {
     }
 
     /**
-     * This method saves the history data to file
+     * Method saves the history data to file
      *
      * @return true if the loading was successful
-     * @author mazaalto
      */
     public boolean saveFile() {
         try {
@@ -255,10 +244,10 @@ public class StudyClockService {
     }
 
     /**
-     * This method saves the timers to writer
+     * Method saves the timers to writer
      *
+     * 
      * @return true if the loading was successful
-     * @author mazaalto
      */
     private void saveBeforeExit(PrintWriter writer) throws IOException {
         ArrayList<Timer> timers = this.history.getList();
