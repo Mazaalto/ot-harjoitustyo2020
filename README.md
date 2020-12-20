@@ -59,7 +59,7 @@ Tein ohjelmaa varten javaDoc dokumentaation. Dokumentaatioon pääset komennolla
 ```
  mvn javadoc:javadoc
 ```
-ja kuten jo edellisissä kohdissa, löytyy tieto samasta kansiosta (tiedoston target-kansion, site-kansiosta) nimellä index.html. Sen voi myös avata selaimeen.
+ja kuten jo edellisissä kohdissa, löytyy tieto samasta kansiosta (tiedoston target-kansion, site-kansiosta ja sieltä aidocs kansio) nimellä index.html. Sen voi myös avata selaimeen.
 
 ### Valmiin jar-tiedoston luominen
 
