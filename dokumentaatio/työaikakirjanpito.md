@@ -16,7 +16,7 @@
 |   16   |  5    | ohjelman viimeistelyä|
 |  17-18.     |    12  | testaus, ja ohjelman viimeistely JavaDoc ja pysyväistiedon tallennuksen kanssa taisteleminen |
 |      18.12. |      | palautus |
-|       |      | |
+|   20.12.    |  2    | Kaiken varmistaminen, jotta ohjelman testaaminen ja arvostelu varmasti toimii|
 
 
-| yht   |  99.5  | | 
+| yht   |  101.5  | | 
