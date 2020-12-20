@@ -34,7 +34,6 @@ import javafx.stage.Stage;
 
 import studyclock.domain.StudyClockService;
 
-
 public class timerUIJavaFX extends Application {
 
     private Timeline timeline;
@@ -246,13 +245,13 @@ public class timerUIJavaFX extends Application {
                                 Integer.toString(this.service.getSeconds() % 60));
                         timerLabelMinutes.setText(
                                 Integer.toString(this.service.getSeconds() / 60));
+                        instructions.setText("Time is set");
+                        window.setScene(settingup);
 
                     } else {
                         instructions.setText("Remember to adjust time in minutes");
                         frase.setText("Remember to adjust time in minutes");
                     }
-                    instructions.setText("Time is set");
-                    window.setScene(settingup);
 
                 }
         );
@@ -324,7 +323,7 @@ public class timerUIJavaFX extends Application {
         Button saveData = new Button("Save the data");
         saveData.setStyle("-fx-font-size: 1.5em");
         saveData.setTextFill(Color.GOLDENROD);
-        
+
         buttonsAnalytics.getChildren().add(text2);
         buttonsAnalytics.getChildren().add(goalAsText);
         buttonsAnalytics.getChildren().add(goal);
@@ -401,7 +400,7 @@ public class timerUIJavaFX extends Application {
         //Save the data
         saveData.setOnAction(
                 (event) -> {
-                    if (this.service.saveFile()){
+                    if (this.service.saveFile()) {
                         text2.setText("Data is saved");
                     }
                     window.setScene(first);
