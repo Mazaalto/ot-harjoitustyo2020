@@ -3,7 +3,8 @@
 Lataa tiedosto omalle koneellesi tästä [studyclock.jar](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.1)
 
 ### Miten käynnistän ohjelman?
-Ohjelma käynnistetään yksinkertaisesti komennolla jos ohjelma on tallennettuna studyclock.jar tiedoston nimellä.
+Ohjelma käynnistetään yksinkertaisesti komennolla jos ohjelma on tallennettuna studyclock.jar tiedoston nimellä. (jos latasit zip-tiedoston, täytyy ensiksi suorittaa mvn package-käsky samassa kansiossa missä ohjelma on eli (harjoitustyö/Opiskelukello). Tämän jälkeen löytyy kansiosta tiedosto OpiskeluKello-1.0-SNAPSHOT.jar, jonka voi ajaa samalla tavalla kuin esimerkin jar-tiedoston)
+
 
 ```
 java -jar studyclock.jar 
