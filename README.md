@@ -22,7 +22,7 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 ## Releaset
 
-[loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/loppupalautus)
+[loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.1)
 
 [Julkaistut versiot](https://github.com/Mazaalto/ot-harjoitustyo2020/releases)
 
@@ -68,4 +68,4 @@ Ohjelmasta saa jar-paketin helposti suorittamalla komennon mvn package. Se luo k
 ```
 mvn package
 ```
-(Huom! Valmis jar-paketti löytyy myös täältä: [loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/loppupalautus) )
+(Huom! Valmis jar-paketti löytyy myös täältä: [loppupalautus](https://github.com/Mazaalto/ot-harjoitustyo2020/releases/tag/1.1) )
