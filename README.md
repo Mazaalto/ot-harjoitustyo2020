@@ -6,7 +6,7 @@ OpiskeluKello on projektityö Helsingin yliopiston Tietojenkäsittelytieteen kur
 
 ## Vaatimukset laitteistosta
 
-Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovelluksen pitäisi toimia riippumatta siitä mikä Javan versio on käytössäsi. Sitä on testattu versiolla 11.
+Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovelluksen pitäisi toimia riippumatta siitä mikä Javan versio on käytössäsi. Sitä on testattu versiolla 11 (sekä uusimmalla).
 
 ## Dokumentaatio
 
@@ -30,7 +30,7 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 ### Testaus
 
-Testit voidaan suorittaa suoraan komentoriviltä. Jos latasit ohjelman zip-tiedostona se avataan unzip komennolla ennen seuraavia ohjeita. Ohjelmakoodin sisältävässä kansiossa rivikomennolla terminaalissa:
+Testit voidaan suorittaa suoraan komentoriviltä. Jos latasit ohjelman zip-tiedostona se avataan unzip komennolla ennen seuraavia ohjeita. Ohjelman kansion rakenne noudattelee ot-harjoitustyön2020:n rakennetta täällä gitissä. Eli sielä löytyy erikseen kansio harjoitustyö, jonka sisällä on itse ohjelma Opiskelukello. Ohjelmakoodin sisältävässä kansiossa rivikomennolla terminaalissa:
 
 ```
 mvn test
@@ -42,7 +42,7 @@ Testikattavuusraportti luodaan komennolla terminaalissa:
 mvn jacoco:report
 ```
 
-Kattavuusraportin pääsee näkemään tiedostonkansiosta kansion(: _target/site/jacoco/index.html_) ja avaamalla sen selaimessa.
+Kattavuusraportin pääsee näkemään tiedostonkansiosta kansion(target/site/jacoco/index.html_) ja avaamalla sen selaimessa.
 
 ### Checkstyle
 
@@ -51,7 +51,7 @@ Projektissa on käytössä Checkstyle, jonka avulla voidaan määrittää ja tar
 ```
  mvn jxr:jxr checkstyle:checkstyle
 ```
-Virheilmoitukset löytyvät vastaavalla tavalla kuin yllä oleva jacocon raportti menemällä tiedoston kansioon (tiedosto))_target/site/checkstyle.html_ ja avaamalla selaimessa sen sisältämän checkstyle.html-tiedoston. 
+Virheilmoitukset löytyvät vastaavalla tavalla kuin yllä oleva jacocon raportti menemällä tiedoston kansioon (target/site/checkstyle.html_) ja avaamalla selaimessa sen sisältämän checkstyle.html-tiedoston. 
 
 ### JavaDoc
 
