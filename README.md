@@ -30,7 +30,7 @@ Sovellus on toteutettu käyttämällä JavaFX komponentteja sovelluksessa. Sovel
 
 ### Testaus
 
-Testit voidaan suorittaa suoraan komentoriviltä. Ohjelmakoodin sisältävässä kansiossa rivikomennolla terminaalissa:
+Testit voidaan suorittaa suoraan komentoriviltä. Jos latasit ohjelman zip-tiedostona se avataan unzip komennolla ennen seuraavia ohjeita. Ohjelmakoodin sisältävässä kansiossa rivikomennolla terminaalissa:
 
 ```
 mvn test
